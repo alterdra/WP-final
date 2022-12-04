@@ -1,0 +1,14 @@
+.Header {
+    padding-top: 3vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.navIcon {
+    border: solid;
+    padding: 1vh;
+    border-color: antiquewhite !important;
+    cursor: pointer;
+}
