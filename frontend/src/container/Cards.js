@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, Paper, Modal, Typography, Stack, Box } from '@mui/material';
+import CardModal from '../components/CardModal';
+import SetModal from '../components/SetModal';
 import '../css/Cards.css'
 import axios from 'axios'
 const instance = axios.create({
@@ -13,24 +15,29 @@ const Cards = () => {
     const [cards, setCards] = useState([]);
 
     // learnset
+    const [setName, setSetName] = useState('');
     const [learnSet, setlearnSet] = useState([]);
-    const [setName, setsetName] = useState('');
-    const [showCreate, setshowCreate] = useState(false);
 
-    const handleClose = () => {
-        setshowCreate(false);
-        setsetName('');
-    };
-    const changeSetName = (event) => { setsetName(event.target.value) };
+    const [showCardModal, setShowCardModal] = useState(false);
+    const [showSetModal, setShowSetModal] = useState(false);
+
+    const changeSetName = (event) => { setSetName(event.target.value) };
     const changeVocab = (event) => { setVocab(event.target.value) };
     const changeLecture = (event) => { setLecture(event.target.value) };
     
     const createLearnSet = async () => {
-        console.log(setName);
+        // console.log(setName);
         handleClose();
         // Todo: send to DB and create a new learnset
         // setLearnset
     }
+    const handleClose = () => {
+        setShowCardModal(false);
+        setShowSetModal(false);
+        setSetName('');
+        setVocab('');
+        setLecture('');
+    };
 
     const addCard = async( lecture, vocab ) => {
         console.log(lecture, vocab)
@@ -43,17 +50,17 @@ const Cards = () => {
         )
         console.log(msg);
     }
-
     const findCards = async() => {
         const { data: { msg, contents } } = await instance.get('/cards');
         setCards(contents);
     }
 
-    const handleAdd = async () => {
+    const handleAddCard = async () => {
         await addCard(lecture, vocab);
         await findCards();
+        handleClose();
     }
-    const handleRemove = async () => {
+    const handleRemoveCard = async () => {
         await instance.delete("/cards");
         await findCards();
     }
@@ -64,46 +71,26 @@ const Cards = () => {
 
     return (
         <>
-            <Button onClick={() => (setshowCreate(true))}>建立學習集</Button>
-            <Modal
-                open={showCreate}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-            >
-                <Box className='modal'>
-                    <Box className='content'>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            請輸入新學習集名稱
-                        </Typography>
-                        <TextField 
-                            id="outlined-basic" 
-                            label="學習集名稱" 
-                            variant="outlined" 
-                            value={setName} 
-                            onChange={changeSetName} 
-                        />
-                        <Stack direction='row'>
-                            <Button onClick={createLearnSet} >確定</Button>
-                            <Button onClick={handleClose} >取消</Button>
-                        </Stack>
-                    </Box>
-                </Box>
-            </Modal>
-            <TextField 
-                id="outlined-basic" 
-                label="單字名稱" 
-                variant="outlined" 
-                value={vocab} 
-                onChange={changeVocab} 
+            <Button onClick={() => (setShowSetModal(true))}>建立學習集</Button>
+            <Button onClick={() => (setShowCardModal(true))}>新增單字組</Button>
+            <SetModal 
+                label="學習集名稱" 
+                description="請輸入新學習集名稱"
+                name={setName}
+                changeName={changeSetName}
+                createLearnSet={createLearnSet}
+                showCreate={showSetModal}
+                handleClose={handleClose}
             />
-            <TextField 
-                id="outlined-basic" 
-                label="單元名稱" 
-                variant="outlined" 
-                value={lecture} 
-                onChange={changeLecture} 
+            <CardModal 
+                description="請輸入欲新增單字及所屬單元"
+                label1="單元名稱" label2="單字名稱"
+                name1={lecture} name2={vocab}
+                changeName1={changeLecture} changeName2={changeVocab}
+                handleAddCard={handleAddCard}
+                showCreate={showCardModal}
+                handleClose={handleClose}
             />
-            <Button onClick={handleAdd}>新增單字組</Button>
             <div>
                 {
                     cards.map((item, index) => (
@@ -111,7 +98,7 @@ const Cards = () => {
                     ))
                 }
             </div>
-            <Button onClick={handleRemove}>刪除所有單字組</Button>
+            <Button onClick={handleRemoveCard}>刪除所有單字組</Button>
         </>
     );
 }
