@@ -16,7 +16,7 @@ const Cards = () => {
 
     // learnset
     const [setName, setSetName] = useState('');
-    const [learnSet, setlearnSet] = useState([]);
+    const [learnSets, setlearnSets] = useState([]);
 
     const [showCardModal, setShowCardModal] = useState(false);
     const [showSetModal, setShowSetModal] = useState(false);
@@ -25,12 +25,6 @@ const Cards = () => {
     const changeVocab = (event) => { setVocab(event.target.value) };
     const changeLecture = (event) => { setLecture(event.target.value) };
     
-    const createLearnSet = async () => {
-        // console.log(setName);
-        handleClose();
-        // Todo: send to DB and create a new learnset
-        // setLearnset
-    }
     const handleClose = () => {
         setShowCardModal(false);
         setShowSetModal(false);
@@ -38,6 +32,20 @@ const Cards = () => {
         setVocab('');
         setLecture('');
     };
+    
+    const addLearnSet = async() => {
+        console.log(setName);
+        const { data: { msg } } =  await instance.post('/lecture',
+            {
+                Name: setName,
+            }
+        )
+        console.log(msg);
+    }
+    const findLearnSets = async() => {
+        const { data: { msg, contents } } = await instance.get('/lectures');
+        setlearnSets(contents);
+    }
 
     const addCard = async( lecture, vocab ) => {
         console.log(lecture, vocab)
@@ -55,6 +63,12 @@ const Cards = () => {
         setCards(contents);
     }
 
+    const createLearnSet = async () => {
+        // Todo: send to DB and create a new learnset
+        await addLearnSet();
+        await findLearnSets();
+        handleClose();
+    }
     const handleAddCard = async () => {
         await addCard(lecture, vocab);
         await findCards();
@@ -65,9 +79,12 @@ const Cards = () => {
         await findCards();
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         findCards();
-    }, [])
+    }, []);
+    useEffect(() => {
+        findLearnSets();
+    }, []);
 
     return (
         <>
@@ -91,6 +108,13 @@ const Cards = () => {
                 showCreate={showCardModal}
                 handleClose={handleClose}
             />
+            <div>
+                {
+                    learnSets.map((item, index) => (
+                        <Paper>{item.name}</Paper>
+                    ))
+                }
+            </div>
             <div>
                 {
                     cards.map((item, index) => (

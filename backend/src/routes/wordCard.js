@@ -38,7 +38,7 @@ const findCards = async (req, res) => {
             contents: cards
         });
     } catch (err) {
-        res.status(500).send({ msg: "Fail to add/update a card." });
+        res.status(500).send({ msg: "Fail to find cards" });
     }
 }
 
