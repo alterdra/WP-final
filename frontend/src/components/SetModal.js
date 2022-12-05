@@ -1,6 +1,6 @@
 import { TextField, Button, Modal, Typography, Stack, Box } from '@mui/material';
 
-const SetModal = ( { label, description, createLearnSet, name, changeName, showCreate, handleClose } ) =>{
+const SetModal = ( { label, description, createFunc, name, changeName, showCreate, handleClose } ) =>{
     
     return (
         <Modal
@@ -21,7 +21,7 @@ const SetModal = ( { label, description, createLearnSet, name, changeName, showC
                         onChange={changeName} 
                     />
                     <Stack direction='row'>
-                        <Button onClick={createLearnSet} >確定</Button>
+                        <Button onClick={createFunc} >確定</Button>
                         <Button onClick={handleClose} >取消</Button>
                     </Stack>
                 </Box>

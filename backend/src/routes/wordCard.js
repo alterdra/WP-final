@@ -13,16 +13,17 @@ const deleteDB = async (res) => {
 }
 
 const addCard = async (req, res) => {
-    const { lecture, lectureID, vocab, vocabID } = req.body;
-    console.log(lecture, vocab);
+    const { lecture, vocab: { Japanese, Chinese } } = req.body;
+    console.log(lecture, Japanese, Chinese);
+    const vocab = { Japanese, Chinese };
     try {
         const existing = await WordCard.findOne({ lecture, vocab });
         if (!existing) {
-            const newCard = new WordCard({ lecture, lectureID, vocab, vocabID });
+            const newCard = new WordCard({ lecture, vocab });
             await newCard.save();
             res.status(200).send({ msg: "Card added." });
         } else{
-            await WordCard.updateOne({ lecture, lectureID, vocab, vocabID });
+            await WordCard.updateOne({ lecture, vocab });
             res.status(200).send({ msg: "Card updated." });
         }
     } catch (err) {
