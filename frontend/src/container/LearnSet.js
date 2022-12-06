@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Button, Paper } from '@mui/material';
+import { Button, Paper, Card, Stack } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import CardModal from '../components/CardModal';
+import '../css/LearnSet.css'
+import { v4 as uuidv4 } from 'uuid';
 
 const LearnSet = ({ lecture, instance }) => {
     // vocab
@@ -40,8 +43,9 @@ const LearnSet = ({ lecture, instance }) => {
         await findCards();
         handleClose();
     }
-    const handleRemoveCard = async () => {
-        await instance.delete("/cards");
+    const handleRemoveCard = async (Japanese, Chinese) => {
+        const {data: { msg }} = await instance.delete("/cards", { data:  { Japanese, Chinese }});
+        console.log(msg);
         await findCards();
     }
 
@@ -63,12 +67,17 @@ const LearnSet = ({ lecture, instance }) => {
                 showCreate={showCardModal}
                 handleClose={handleClose}
             />
-            <div>
+            <div className='cardContainer'>
                 {
                     cards.map((item, index) => (
-                        <Paper key={item.vocab.Japanese + item.vocab.Chinese}> 
-                            {item.vocab.Japanese} {item.vocab.Chinese} {index}
-                        </Paper>
+                        <Card key={uuidv4()} className='card'>
+                            <div className='vocab'>{item.vocab.Japanese} | {item.vocab.Chinese}</div>
+                            <div className='index'>{index}</div>
+                            <CloseIcon
+                                className='close'
+                                onClick={() => handleRemoveCard(item.vocab.Japanese, item.vocab.Chinese)}
+                            />
+                        </Card>
                     ))
                 }
             </div>

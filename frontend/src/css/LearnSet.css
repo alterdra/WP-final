@@ -1,0 +1,35 @@
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.card {
+    width: 30vh;
+    height: 20vh;
+    background-color: antiquewhite;
+    position: relative;
+}
+
+.vocab {
+    position: absolute;
+    font-style: normal;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    top: 35%;
+    left: 5%; 
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    color: brown;
+}
+
+.index {
+    position: absolute;
+    bottom: 2%;
+    right: 5%;
+}

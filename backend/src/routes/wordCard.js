@@ -3,12 +3,14 @@ import WordCard from "../models/wordCard";
 
 const router = Router();
 
-const deleteDB = async (res) => {
+const deleteCard = async (req, res) => {
+    const Japanese = req.body.Japanese;
+    const Chinese = req.body.Chinese;
     try {
-        await WordCard.deleteMany({});
-        res.status(200).send({ msg: "Database cleared." });
+        await WordCard.deleteOne({ vocab: { Chinese, Japanese } });
+        res.status(200).send({ msg: "The card is deleted." });
     } catch (err) {
-        res.status(500).send({ msg: "Fail to clear database." });
+        res.status(500).send({ msg: "Fail to clear the card." });
     }    
 }
 
@@ -44,7 +46,7 @@ const findCards = async (req, res) => {
 }
 
 router.delete("/cards",(req, res)=>{
-    deleteDB(res);
+    deleteCard(req, res);
 }); 
 router.post("/card", (req,  res) => {
     addCard(req, res);
