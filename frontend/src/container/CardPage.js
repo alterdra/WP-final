@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import SetModal from '../components/SetModal';
 import '../css/Cards.css'
 import axios from 'axios'
 import LearnSet from './LearnSet';
+import FolderSpecialRoundedIcon from '@mui/icons-material/FolderSpecialRounded';
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { v4 as uuidv4 } from 'uuid';
+import '../css/CardPage.css'
+
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
 })
@@ -52,7 +58,10 @@ const Cards = () => {
 
     return (
         <>
-            <Button onClick={() => (setShowSetModal(true))}>建立學習集</Button>
+            <Button onClick={() => (setShowSetModal(true))}>
+                <CreateNewFolderIcon />
+                建立學習集
+            </Button>
             <SetModal 
                 label="學習集名稱" 
                 description="請輸入新學習集名稱"
@@ -62,16 +71,20 @@ const Cards = () => {
                 showCreate={showSetModal}
                 handleClose={handleClose}
             />
-            <div>
+            <div className='learnsetsContainer'>
                 {
                     learnSets.map((item, index) => (
                         <>
+                            <div className='learnSet'>
+                                <FolderSpecialRoundedIcon className='folderIcon' />
+                                <DeleteIcon className='delete' onClick={() => handleRemoveSet(item.name) } />
+                                <Box className='name'>{item.name}</Box>
+                            </div>
                             <LearnSet 
-                                key={item.name}
+                                key={uuidv4()}
                                 lecture={item.name}
                                 instance={instance}
                             />
-                            <Button onClick={() => handleRemoveSet(item.name) }>刪除學習集</Button>
                         </>
                     ))
                 }
