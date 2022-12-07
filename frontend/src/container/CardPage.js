@@ -9,6 +9,7 @@ import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { v4 as uuidv4 } from 'uuid';
 import '../css/CardPage.css'
+import { useNavigate } from 'react-router-dom';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
@@ -52,6 +53,11 @@ const Cards = () => {
         await findLearnSets();
     }
 
+    const navigate = useNavigate();
+    const navigateToLearnSet = (name) => {
+        navigate('/learnSet/' + name);
+    }
+
     useEffect(() => {
         findLearnSets();
     }, []);
@@ -73,18 +79,19 @@ const Cards = () => {
             />
             <div className='learnsetsContainer'>
                 {
-                    learnSets.map((item, index) => (
+                    learnSets.map(item => (
                         <>
-                            <div className='learnSet'>
-                                <FolderSpecialRoundedIcon className='folderIcon' />
-                                <DeleteIcon className='delete' onClick={() => handleRemoveSet(item.name) } />
+                            <div className='learnSet' key={uuidv4()} >
+                                <FolderSpecialRoundedIcon 
+                                    className='folderIcon' 
+                                    onClick={() => navigateToLearnSet(item.name)}
+                                />
+                                <DeleteIcon 
+                                    className='delete'
+                                    onClick={() => handleRemoveSet(item.name)} 
+                                />
                                 <Box className='name'>{item.name}</Box>
                             </div>
-                            <LearnSet 
-                                key={uuidv4()}
-                                lecture={item.name}
-                                instance={instance}
-                            />
                         </>
                     ))
                 }

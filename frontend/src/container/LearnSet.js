@@ -4,13 +4,31 @@ import CloseIcon from '@mui/icons-material/Close';
 import CardModal from '../components/CardModal';
 import '../css/LearnSet.css'
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const LearnSet = ({ lecture, instance }) => {
-    // vocab
+import axios from 'axios';
+const instance = axios.create({
+    baseURL: 'http://localhost:4000/api'
+})
+
+const LearnSet = () => {
+
+    const { name } = useParams();
+    const lecture = name;
+    // console.log("Lecture name: " + lecture)
+
     const [vocabChinese, setVocabChinese] = useState("");
     const [vocabJapanese, setVocabJapanese] = useState("");
     const [cards, setCards] = useState([]);
     const [showCardModal, setShowCardModal] = useState(false);
+
+    const [tileMode, setTileMode] = useState(true);
+    const [cardIndex, setCardIndex] = useState(0);
+    
+    const increaseCardIndex = () => {
+        if(cardIndex === cards.length - 1) setCardIndex(0);
+        else setCardIndex(prev => prev + 1);
+    }
 
     const changeVocabJapanese = (event) => { setVocabJapanese(event.target.value) };
     const changeVocabChinese = (event) => { setVocabChinese(event.target.value) };
@@ -22,42 +40,51 @@ const LearnSet = ({ lecture, instance }) => {
     };
 
     const addCard = async( lecture, vocab ) => {
-        console.log(lecture, vocab);
-        const { data: { msg } } = await instance.post('/card',
-            { 
-                lecture,
-                vocab,
-            }
-        )
-        console.log(msg);
+        const { data: { msg } } = await instance.post('/card', { lecture, vocab })
     }
-    const findCards = async() => {
-        const { data: { msg, contents } } = await instance.get('/cards');
+    const findCards = async () => {
+        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture } });
         setCards(contents);
-        // console.log(contents);
     }
 
     const handleAddCard = async () => {
         const vocab = { Japanese: vocabJapanese, Chinese: vocabChinese };
         await addCard(lecture, vocab);
-        await findCards();
+        await findCards(lecture);
         handleClose();
     }
-    const handleRemoveCard = async (Japanese, Chinese) => {
+    const handleRemoveCard = async ( Japanese, Chinese ) => {
         const {data: { msg }} = await instance.delete("/cards", { data:  { Japanese, Chinese }});
-        console.log(msg);
-        await findCards();
+        // console.log(msg);
+        await findCards(lecture);
+        if(cardIndex === cards.length - 1) // Last card is removed;
+            setCardIndex(prev => 0);
+        console.log(cardIndex)
     }
 
     useEffect(() => {
         findCards();
     }, []);
 
+    const navigate = useNavigate();
+    const navigateToCards = () => {
+        navigate('/cards');
+    }
+
     return (
         <>
             <Paper>{lecture}</Paper>
+            <Button onClick={() => navigateToCards('/cards')}>上一頁</Button>
+            {!tileMode ? 
+                <Button onClick={() => { 
+                    setTileMode(!tileMode);
+                    setCardIndex(prev => 0);
+                }}>
+                    啟用並排模式
+                </Button>
+            :<div>點選單字卡啟用單字循環模式</div>
+            }
             <Button onClick={() => (setShowCardModal(true))}>新增單字組</Button>
-            <Button onClick={handleRemoveCard}>刪除所有單字組</Button>
             <CardModal 
                 description="請輸入欲新增單字名稱"
                 label1="單字日文名稱" label2="單字中文名稱"
@@ -67,20 +94,46 @@ const LearnSet = ({ lecture, instance }) => {
                 showCreate={showCardModal}
                 handleClose={handleClose}
             />
-            <div className='cardContainer'>
-                {
-                    cards.map((item, index) => (
-                        <Card key={uuidv4()} className='card'>
-                            <div className='vocab'>{item.vocab.Japanese} | {item.vocab.Chinese}</div>
-                            <div className='index'>{index}</div>
+            {tileMode ?
+                <div className='cardContainer'>
+                    {
+                        cards.map((item, index) => (
+                            <Card 
+                                key={uuidv4()} 
+                                className='card'
+                                onClick={() => { 
+                                    setTileMode(!tileMode);
+                                    setCardIndex(prev => index);
+                                }}
+                            >
+                                <div className='vocab'>{item.vocab.Japanese} | {item.vocab.Chinese}</div>
+                                <div className='index'>{index}</div>
+                                <CloseIcon
+                                    className='close'
+                                    onClick={() => handleRemoveCard(item.vocab.Japanese, item.vocab.Chinese)}
+                                />
+                            </Card>
+                        ))
+                    }
+                </div>
+            : 
+                cards.length > 0 ? 
+                <div className='oneCardContainer'>
+                    {
+                        <Card className='oneCard' onClick={increaseCardIndex}>
+                            <div className='oneVocab'>{cards[cardIndex].vocab.Japanese} | {cards[cardIndex].vocab.Chinese}</div>
+                            <div className='index'>{cardIndex}</div>
                             <CloseIcon
                                 className='close'
-                                onClick={() => handleRemoveCard(item.vocab.Japanese, item.vocab.Chinese)}
+                                onClick={() => handleRemoveCard(
+                                    cards[cardIndex].vocab.Japanese, 
+                                    cards[cardIndex].vocab.Chinese
+                                )}
                             />
                         </Card>
-                    ))
-                }
-            </div>
+                    }
+                </div> : null
+            }
         </>
         
     )

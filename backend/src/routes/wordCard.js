@@ -34,8 +34,10 @@ const addCard = async (req, res) => {
 }
 
 const findCards = async (req, res) => {
+    const { lecture } = req.query;
+    // console.log(lecture)
     try {
-        const cards = await WordCard.find({});
+        const cards = await WordCard.find({ lecture });
         res.status(200).send({ 
             msg: "Find cards successfully.",
             contents: cards

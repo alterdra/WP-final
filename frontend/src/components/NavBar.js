@@ -25,8 +25,6 @@ const NavBar = () => {
         navigate('/test');
     }
 
-
-
     return (
         <div className='Header'>
             <Box>
