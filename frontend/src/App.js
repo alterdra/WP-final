@@ -1,4 +1,3 @@
-import './App.css';
 import Homepage from './container/Homepage';
 import CardPage from './container/CardPage';
 import Test from './container/Test';
