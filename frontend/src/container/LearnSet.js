@@ -59,7 +59,7 @@ const LearnSet = () => {
         await findCards(lecture);
         if(cardIndex === cards.length - 1) // Last card is removed;
             setCardIndex(prev => 0);
-        console.log(cardIndex)
+        // console.log(cardIndex)
     }
 
     useEffect(() => {
@@ -69,6 +69,15 @@ const LearnSet = () => {
     const navigate = useNavigate();
     const navigateToCards = () => {
         navigate('/cards');
+    }
+
+    function stopBubbling(e) {
+        e = window.event || e;
+        if (e.stopPropagation) {
+            e.stopImmediatePropagation();
+        } else {
+            e.cancelBubble = true;   //ie
+        }
     }
 
     return (
@@ -101,7 +110,7 @@ const LearnSet = () => {
                             <Card 
                                 key={uuidv4()} 
                                 className='card'
-                                onClick={() => { 
+                                onClick={event => { 
                                     setTileMode(!tileMode);
                                     setCardIndex(prev => index);
                                 }}
@@ -110,7 +119,10 @@ const LearnSet = () => {
                                 <div className='index'>{index}</div>
                                 <CloseIcon
                                     className='close'
-                                    onClick={() => handleRemoveCard(item.vocab.Japanese, item.vocab.Chinese)}
+                                    onClick={event => {
+                                        handleRemoveCard(item.vocab.Japanese, item.vocab.Chinese);
+                                        // stopBubbling(event);
+                                    }}
                                 />
                             </Card>
                         ))
@@ -125,10 +137,13 @@ const LearnSet = () => {
                             <div className='index'>{cardIndex}</div>
                             <CloseIcon
                                 className='close'
-                                onClick={() => handleRemoveCard(
-                                    cards[cardIndex].vocab.Japanese, 
-                                    cards[cardIndex].vocab.Chinese
-                                )}
+                                onClick={event => {
+                                    handleRemoveCard(
+                                        cards[cardIndex].vocab.Japanese, 
+                                        cards[cardIndex].vocab.Chinese
+                                    );
+                                    // stopBubbling(event);
+                                }}
                             />
                         </Card>
                     }
