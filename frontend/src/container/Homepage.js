@@ -8,14 +8,14 @@ const Homepage = () => {
     2. using map to render all the 測驗紀錄
     */
     const [learnSet, setLearnSet] = useState([]);
-    const [TestSet, setTestSet] = useState([]);
+    const [testSet, setTestSet] = useState([]);
 
     useEffect(() => {
         // take the data from backend while entering
     }, [learnSet]);
     useEffect(() => {
         // take the data from backend while entering
-    }, [TestSet]);
+    }, [testSet]);
     
     const displayLearnSet = () => {
         if(learnSet.length === 0)
@@ -28,7 +28,7 @@ const Homepage = () => {
         );
     }
     const displayTestSet = () => {
-        if(TestSet.length === 0)
+        if(testSet.length === 0)
             return <></>;
         // Todo: Content includes Icon, which learnset(name), score
         return (
