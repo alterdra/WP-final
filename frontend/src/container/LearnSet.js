@@ -74,7 +74,7 @@ const LearnSet = () => {
     return (
         <>
             <Paper>{lecture}</Paper>
-            <Button onClick={() => navigateToCards('/cards')}>上一頁</Button>
+            <Button onClick={navigateToCards}>上一頁</Button>
             {!tileMode ? 
                 <Button onClick={() => { 
                     setTileMode(!tileMode);
