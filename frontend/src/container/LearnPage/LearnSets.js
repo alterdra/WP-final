@@ -53,7 +53,7 @@ const LearnSets = () => {
 
     const navigate = useNavigate();
     const navigateToCards = (name) => {
-        navigate('/cards/' + name);
+        navigate('/learnSets/' + name);
     }
 
     useEffect(() => {

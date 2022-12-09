@@ -13,7 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    width: '31.5vh',
+    width: '18.5vh',
 }));
 
 const instance = axios.create({
@@ -37,6 +37,10 @@ const Cards = () => {
     const increaseCardIndex = () => {
         if(cardIndex === cards.length - 1) setCardIndex(0);
         else setCardIndex(prev => prev + 1);
+    }
+    const decreaseCardIndex = () => {
+        if(cardIndex === 0) setCardIndex(cards.length - 1);
+        else setCardIndex(prev => prev - 1);
     }
 
     const changeVocabJapanese = (event) => { setVocabJapanese(event.target.value) };
@@ -152,11 +156,12 @@ const Cards = () => {
                                 justifyContent="center"
                                 spacing={2}
                             >
-                                <Item className='nextCard' onClick={increaseCardIndex}>下個單字卡</Item>
+                                <Item className='nextCard' onClick={increaseCardIndex}>上個單字卡</Item>
                                 <Item className='removeCard' onClick={() => handleRemoveCard(
                                         cards[cardIndex].vocab.Japanese, 
                                         cards[cardIndex].vocab.Chinese
-                                )}>刪除單字卡</Item>
+                                )}>刪除這張單字卡</Item>
+                                <Item className='nextCard' onClick={increaseCardIndex}>下個單字卡</Item>
                             </Stack>
                         </div>
                     }
