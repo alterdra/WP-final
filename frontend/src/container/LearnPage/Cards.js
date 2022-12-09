@@ -156,7 +156,7 @@ const Cards = () => {
                                 justifyContent="center"
                                 spacing={2}
                             >
-                                <Item className='nextCard' onClick={increaseCardIndex}>上個單字卡</Item>
+                                <Item className='nextCard' onClick={decreaseCardIndex}>上個單字卡</Item>
                                 <Item className='removeCard' onClick={() => handleRemoveCard(
                                         cards[cardIndex].vocab.Japanese, 
                                         cards[cardIndex].vocab.Chinese
