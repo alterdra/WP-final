@@ -1,17 +1,56 @@
-.modal {
-    width: 40%;
-    height: 40%;
-    border-radius: 20px;
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.oneCardContainer {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+}
+
+.card, .oneCard {
+    width: 30vh;
+    height: 20vh;
+    background-color: antiquewhite !important;
+    position: relative;
+}
+.oneCard {
+    width: 75vh;
+    height: 50vh;
+}
+
+.vocab, .oneVocab {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
+    font-style: normal;
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 30px;
+    top: 35%;
+    left: 5%; 
+}
+.oneVocab {
+    font-size: 75px;
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    color: brown;
+}
+.close:hover{
 
 }
-.content {
+
+
+.index {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 2%;
+    right: 5%;
+}
+
+.nextCard, .removeCard {
+    cursor: pointer;
 }

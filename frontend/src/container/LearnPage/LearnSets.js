@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Box } from '@mui/material';
-import SetModal from '../components/SetModal';
-import '../css/Cards.css'
+import SetModal from '../../components/modals/SetModal';
+import '../../css/LearnSets.css'
 import axios from 'axios'
-import LearnSet from './LearnSet';
 import FolderSpecialRoundedIcon from '@mui/icons-material/FolderSpecialRounded';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { v4 as uuidv4 } from 'uuid';
-import '../css/CardPage.css'
 import { useNavigate } from 'react-router-dom';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
 })
 
-const Cards = () => {
+const LearnSets = () => {
     const [setName, setSetName] = useState('');
     const [learnSets, setlearnSets] = useState([]);
     const [showSetModal, setShowSetModal] = useState(false);
@@ -54,8 +52,8 @@ const Cards = () => {
     }
 
     const navigate = useNavigate();
-    const navigateToLearnSet = (name) => {
-        navigate('/learnSet/' + name);
+    const navigateToCards = (name) => {
+        navigate('/cards/' + name);
     }
 
     useEffect(() => {
@@ -84,7 +82,7 @@ const Cards = () => {
                             <div className='learnSet' key={uuidv4()} >
                                 <FolderSpecialRoundedIcon 
                                     className='folderIcon' 
-                                    onClick={() => navigateToLearnSet(item.name)}
+                                    onClick={() => navigateToCards(item.name)}
                                 />
                                 <DeleteIcon 
                                     className='delete'
@@ -99,4 +97,4 @@ const Cards = () => {
         </>
     );
 }
-export default Cards;
+export default LearnSets;

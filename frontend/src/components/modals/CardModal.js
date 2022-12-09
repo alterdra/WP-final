@@ -1,7 +1,13 @@
 import { TextField, Button, Modal, Typography, Stack, Box } from '@mui/material';
+import '../../css/Modal.css';
 
-const SetModal = ( { label, description, createFunc, name, changeName, showCreate, handleClose } ) =>{
-    
+const CardModal = ( { 
+    handleAddCard, description,
+    label1, label2, 
+    name1, name2,
+    changeName1, changeName2, 
+    showCreate, handleClose 
+} ) =>{
     return (
         <Modal
             open={showCreate}
@@ -15,13 +21,20 @@ const SetModal = ( { label, description, createFunc, name, changeName, showCreat
                     </Typography>
                     <TextField 
                         id="outlined-basic" 
-                        label={label} 
+                        label={label1} 
                         variant="outlined" 
-                        value={name} 
-                        onChange={changeName} 
+                        value={name1} 
+                        onChange={changeName1} 
+                    />
+                    <TextField 
+                        id="outlined-basic" 
+                        label={label2} 
+                        variant="outlined" 
+                        value={name2} 
+                        onChange={changeName2} 
                     />
                     <Stack direction='row'>
-                        <Button onClick={createFunc} >確定</Button>
+                        <Button onClick={handleAddCard} >確定</Button>
                         <Button onClick={handleClose} >取消</Button>
                     </Stack>
                 </Box>
@@ -29,4 +42,4 @@ const SetModal = ( { label, description, createFunc, name, changeName, showCreat
         </Modal>
     )
 }
-export default SetModal;
+export default CardModal;

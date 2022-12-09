@@ -1,17 +1,26 @@
 import { useState, useEffect } from 'react';
-import { Button, Paper, Card, Stack } from '@mui/material';
+import { Button, Paper, Card, Stack, Divider, styled } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import CardModal from '../components/CardModal';
-import '../css/LearnSet.css'
+import CardModal from '../../components/modals/CardModal';
+import '../../css/Cards.css'
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import axios from 'axios';
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    width: '31.5vh',
+}));
+
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
 })
 
-const LearnSet = () => {
+const Cards = () => {
 
     const { name } = useParams();
     const lecture = name;
@@ -67,32 +76,26 @@ const LearnSet = () => {
     }, []);
 
     const navigate = useNavigate();
-    const navigateToCards = () => {
-        navigate('/cards');
+    const navigateToLearnSets = () => {
+        navigate('/learnSets');
     }
 
-    function stopBubbling(e) {
-        e = window.event || e;
-        if (e.stopPropagation) {
-            e.stopImmediatePropagation();
-        } else {
-            e.cancelBubble = true;   //ie
-        }
-    }
+    // function stopBubbling(e) {
+    //     e = window.event || e;
+    //     if (e.stopPropagation) {
+    //         e.stopPropagation();
+    //     } else {
+    //         e.cancelBubble = true;   //ie
+    //     }
+    // }
 
     return (
         <>
+            {!tileMode ? <div>註：點選單字卡啟用並排模式</div>
+            :<div>註：點選單字卡啟用單字循環模式</div>}
             <Paper>{lecture}</Paper>
-            <Button onClick={navigateToCards}>上一頁</Button>
-            {!tileMode ? 
-                <Button onClick={() => { 
-                    setTileMode(!tileMode);
-                    setCardIndex(prev => 0);
-                }}>
-                    啟用並排模式
-                </Button>
-            :<div>點選單字卡啟用單字循環模式</div>
-            }
+            <Button onClick={navigateToLearnSets}>上一頁</Button>
+            
             <Button onClick={() => (setShowCardModal(true))}>新增單字組</Button>
             <CardModal 
                 description="請輸入欲新增單字名稱"
@@ -110,7 +113,7 @@ const LearnSet = () => {
                             <Card 
                                 key={uuidv4()} 
                                 className='card'
-                                onClick={event => { 
+                                onClick={() => { 
                                     setTileMode(!tileMode);
                                     setCardIndex(prev => index);
                                 }}
@@ -121,7 +124,7 @@ const LearnSet = () => {
                                     className='close'
                                     onClick={event => {
                                         handleRemoveCard(item.vocab.Japanese, item.vocab.Chinese);
-                                        // stopBubbling(event);
+                                        event.stopPropagation();
                                     }}
                                 />
                             </Card>
@@ -132,20 +135,30 @@ const LearnSet = () => {
                 cards.length > 0 ? 
                 <div className='oneCardContainer'>
                     {
-                        <Card className='oneCard' onClick={increaseCardIndex}>
-                            <div className='oneVocab'>{cards[cardIndex].vocab.Japanese} | {cards[cardIndex].vocab.Chinese}</div>
-                            <div className='index'>{cardIndex}</div>
-                            <CloseIcon
-                                className='close'
-                                onClick={event => {
-                                    handleRemoveCard(
+                        <div>
+                            <Card 
+                                className='oneCard' 
+                                onClick={() => { 
+                                    setTileMode(!tileMode);
+                                    setCardIndex(prev => 0);
+                                }}
+                            >
+                                <div className='oneVocab'>{cards[cardIndex].vocab.Japanese} | {cards[cardIndex].vocab.Chinese}</div>
+                                <div className='index'>{cardIndex}</div>
+                            </Card>
+                            <Stack
+                                direction="row"
+                                divider={<Divider orientation="vertical" flexItem />}
+                                justifyContent="center"
+                                spacing={2}
+                            >
+                                <Item className='nextCard' onClick={increaseCardIndex}>下個單字卡</Item>
+                                <Item className='removeCard' onClick={() => handleRemoveCard(
                                         cards[cardIndex].vocab.Japanese, 
                                         cards[cardIndex].vocab.Chinese
-                                    );
-                                    // stopBubbling(event);
-                                }}
-                            />
-                        </Card>
+                                )}>刪除單字卡</Item>
+                            </Stack>
+                        </div>
                     }
                 </div> : null
             }
@@ -153,4 +166,4 @@ const LearnSet = () => {
         
     )
 }
-export default LearnSet;
+export default Cards;

@@ -18,8 +18,8 @@ const NavBar = () => {
     const navigateToHome = () => {
         navigate('/');
     }
-    const navigateToVocab = () => {
-        navigate('/cards');
+    const navigateToLearnSets = () => {
+        navigate('/learnSets');
     }
     const navigateToTest = () => {
         navigate('/test');
@@ -32,7 +32,7 @@ const NavBar = () => {
             </Box>
             <Stack direction="row" className='navIcon' spacing={5}>
                 <Item onClick={navigateToHome}>Home</Item>
-                <Item onClick={navigateToVocab}>Vocabulary</Item>
+                <Item onClick={navigateToLearnSets}>Vocabulary</Item>
                 <Item onClick={navigateToTest}>Test</Item>
             </Stack>
         </div>
