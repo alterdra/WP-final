@@ -55,7 +55,7 @@ const deleteLearnSet = async (req, res) => {
             msg: "Delete set successfully.",
         });
     } catch (err) {
-        res.status(500).send({ msg: "Fail to find sets" });
+        res.status(500).send({ msg: "Fail to delete the set" });
     }
 }
 

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Button, Paper, Card, Stack, Divider, styled, TextField } from '@mui/material';
+import { Button, Paper, Card, Stack, Divider, styled, TextField, Typography } from '@mui/material';
 import ResultModal from '../../components/modals/ResultModal'
 import '../../css/Cards.css'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -22,6 +23,8 @@ const Cards = () => {
 
     const { name } = useParams();
     const lecture = name;
+    const location = useLocation();
+    const amount = location.state.amount;
 
     const [cards, setCards] = useState([]);
     const [cardIndex, setCardIndex] = useState(0);
@@ -52,10 +55,21 @@ const Cards = () => {
         });
     }
 
+    const randomSubarray = (arr, size) => {
+        let shuffled = arr.slice(0), i = arr.length, temp, index;
+        while (i--) {
+            index = Math.floor((i + 1) * Math.random());
+            temp = shuffled[index];
+            shuffled[index] = shuffled[i];
+            shuffled[i] = temp;
+        }
+        return shuffled.slice(0, size);
+    }
 
     const findCards = async () => {
         const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture } });
-        setCards(contents);
+        let slice = randomSubarray(contents, amount);
+        setCards(slice);
     }
 
     useEffect(()=> {
@@ -74,25 +88,33 @@ const Cards = () => {
     const navigateToTest = () => navigate('/test');
     const navigateToCur = () => window.location.reload();
 
+    const saveResult = async (lecture, score) => {
+        const id = uuidv4();
+        const { data: { msg } } = await instance.post('/test', { lecture, score, id });
+        console.log(msg);
+    }
+
     const calScore = () => {
         let score = 0;
         for(let i = 0; i < cards.length; i++){
             // console.log(`Q${i} Answer:`,cards[i].vocab.Japanese);
             // console.log(`Q${i}:`,answers[i]);
             if(cards[i].vocab.Japanese == answers[i])
-                score+=1;
+                score += 1;
         }
         score /= cards.length;
         score *= 100;
         // console.log(score);
         setScore(score);
+        saveResult(lecture, score);
     }
 
     return (
         <>
             <Button onClick={navigateToTest}>回到測驗首頁</Button>
             <ResultModal 
-                description={`您的分數：${score}/100`}
+                lecture={lecture}
+                score={score}
                 showCreate={showResultModal}
                 back={navigateToTest}
                 reset={navigateToCur}
@@ -133,7 +155,7 @@ const Cards = () => {
                         </Stack>
                     </div>
                 }
-            </div> : null}
+            </div> : <Typography>你還沒新增題目誒...</Typography>}
         </>
         
     )

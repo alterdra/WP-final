@@ -3,6 +3,7 @@ import { Box, Button, Menu, MenuItem, Typography, List, ListItem, ListItemText, 
 import '../../css/LearnSets.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
@@ -11,8 +12,9 @@ const instance = axios.create({
 const Test = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [learnSets, setlearnSets] = useState([]);
-    const [selectedIndex, setSelectedIndex] = useState(1);
-    const [amount, setAmount] = useState(0);
+    const [testRecords, setTestRecords] = useState([]);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [amount, setAmount] = useState(1);
     
     const handleClickListItem = (event) => {
         setAnchorEl(event.currentTarget);
@@ -31,22 +33,50 @@ const Test = () => {
         setAmount(e.target.value);
     }
 
-    const findLearnSets = async() => {
+    const findLearnSets = async () => {
         const { data: { msg, contents } } = await instance.get('/lectures');
         setlearnSets(contents.map((item) => item.name));
     };
 
+    const findTestRecords = async () => {
+        const { data: { msg, contents } } = await instance.get('/tests');
+        setTestRecords(contents);
+    }
+
+    const deleteTestRecord = async (id) => {
+        await instance.delete('/test', { data: { id } });
+        await findTestRecords();
+    }
+
     const navigate = useNavigate();
-    const navigateToCards = (name) => {
-        navigate('/test/' + name);
+    const navigateToCards = (name, amount) => {
+        navigate('/test/' + name, { state: { amount : amount }});
     };
 
     useEffect(() => {
         findLearnSets();
     }, []);
 
+    useEffect(() => {
+        findTestRecords();
+    }, []);
+
+    const displayTest = () => {
+        return (
+            testRecords.map((test) => (
+                <Box key={uuidv4()}>
+                    <Typography>{test.lecture}</Typography>
+                    <Typography>{test.score}</Typography>
+                    <Button onClick={() => deleteTestRecord(test.id)}>刪除紀錄</Button>
+                </Box>
+            ))
+        )
+    };
+
     return (
         <>
+            <Typography>歷史成績</Typography>
+            {testRecords.length !== 0 ? displayTest() : <Typography>目前還沒有成績喔...</Typography>}
             <Box>
                 <Typography>選擇要考試的學習集</Typography>
                 <List component="nav" aria-label="Device settings">
@@ -85,18 +115,16 @@ const Test = () => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
+                        defaultValue={1}
                         value={amount}
                         label="Amount"
                         onChange={handleAmountChange}
                     >
+                        <MenuItem value={1}>1</MenuItem>
                         <MenuItem value={5}>5</MenuItem>
                         <MenuItem value={10}>10</MenuItem>
                         <MenuItem value={15}>15</MenuItem>
                         <MenuItem value={20}>20</MenuItem>
-                        <MenuItem value={25}>25</MenuItem>
-                        <MenuItem value={30}>30</MenuItem>
-                        <MenuItem value={35}>35</MenuItem>
-                        <MenuItem value={40}>40</MenuItem>
                     </Select>
                 </FormControl>
                 <Button onClick={() => navigateToCards(learnSets[selectedIndex], amount)}>確定</Button>

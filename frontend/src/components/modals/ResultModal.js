@@ -1,7 +1,7 @@
 import { TextField, Button, Modal, Typography, Stack, Box } from '@mui/material';
 import '../../css/Modal.css';
 
-const SetModal = ( { description, showCreate, handleClose, back, reset } ) =>{
+const SetModal = ( { score, showCreate, handleClose, back, reset } ) =>{
     
     return (
         <Modal
@@ -12,7 +12,7 @@ const SetModal = ( { description, showCreate, handleClose, back, reset } ) =>{
             <Box className='modal'>
                 <Box className='content'>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        {description}
+                        {`您的分數：${score}/100`}
                     </Typography>
                     <Stack direction='row'>
                         <Button onClick={back} >回到測驗首頁</Button>
