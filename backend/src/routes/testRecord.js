@@ -9,7 +9,7 @@ const addTestRecord = async (req, res) => {
     const id = req.body.id;
     console.log(lecture, score, id);
     try {
-        const newTestRecord = TestRecord({ lecture, score, id });
+        const newTestRecord = new TestRecord({ lecture, score, id });
         await newTestRecord.save();
         res.status(200).send({ msg: "Testrecord added."});
     } catch (err) {

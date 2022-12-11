@@ -10,28 +10,16 @@ const instance = axios.create({
 })
 
 const Test = () => {
-    const [anchorEl, setAnchorEl] = useState(null);
     const [learnSets, setlearnSets] = useState([]);
     const [testRecords, setTestRecords] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const [amount, setAmount] = useState(1);
+    const [learnSetName, setLearnSetName] = useState("")
+    const [amount, setAmount] = useState(5);
+    const [testType, setTestType] = useState("選擇題")
     
-    const handleClickListItem = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const handleMenuItemClick = (event, index) => {
-        setSelectedIndex(index);
-        setAnchorEl(null);
-    };
-
-    const handleAmountChange = (e) => {
-        setAmount(e.target.value);
-    }
+    const handleLearnSetChange = (e) => setLearnSetName(e.currentTarget);
+    const handleAmountChange = (e) => setAmount(e.target.value);
+    const handleTestType = (e) => setTestType(e.target.value);
 
     const findLearnSets = async () => {
         const { data: { msg, contents } } = await instance.get('/lectures');
@@ -49,8 +37,11 @@ const Test = () => {
     }
 
     const navigate = useNavigate();
-    const navigateToCards = (name, amount) => {
-        navigate('/test/' + name, { state: { amount : amount }});
+    const navigateToChoice = (name, amount) => {
+        navigate('/test/choice/' + name, { state: { amount : amount }});
+    };
+    const navigateToCloze = (name, amount) => {
+        navigate('/test/cloze/' + name, { state: { amount : amount }});
     };
 
     useEffect(() => {
@@ -78,38 +69,21 @@ const Test = () => {
             <Typography>歷史成績</Typography>
             {testRecords.length !== 0 ? displayTest() : <Typography>目前還沒有成績喔...</Typography>}
             <Box>
-                <Typography>選擇要考試的學習集</Typography>
-                <List component="nav" aria-label="Device settings">
-                    <ListItem
-                      button
-                      aria-haspopup="true"
-                      aria-controls="lock-menu"
-                      aria-label="選擇學習集"
-                      onClick={handleClickListItem}
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">選擇要考試的學習集</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        defaultValue={learnSets.length > 0 ?learnSets[0]:""}
+                        value={learnSetName}
+                        label="Amount"
+                        onChange={handleLearnSetChange}
                     >
-                        <ListItemText
-                            primary="學習集"
-                            secondary={learnSets[selectedIndex]}
-                        />
-                    </ListItem>
-                </List>
-                <Menu
-                    id="lock-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                >
-                    {learnSets.map((option, index) => (
-                        <MenuItem
-                            key={option}
-                            selected={index === selectedIndex}
-                            onClick={(event) => handleMenuItemClick(event, index)}
-                        >
-                            {option}
-                        </MenuItem>
-                    ))}
-                </Menu>
+                        {learnSets.map(option => (
+                            <MenuItem value={option}>{option}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
                 <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">題數</InputLabel>
                     <Select
@@ -127,7 +101,26 @@ const Test = () => {
                         <MenuItem value={20}>20</MenuItem>
                     </Select>
                 </FormControl>
-                <Button onClick={() => navigateToCards(learnSets[selectedIndex], amount)}>確定</Button>
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">考試方式</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        defaultValue="填充題"
+                        value={testType}
+                        label="TestType"
+                        onChange={handleTestType}
+                    >
+                        <MenuItem value="選擇題">選擇題</MenuItem>
+                        <MenuItem value="填充題">填充題</MenuItem>
+                    </Select>
+                </FormControl>
+                <Button onClick={() => {
+                    if(testType === "選擇題")
+                        navigateToChoice(learnSets[selectedIndex], amount)
+                    else
+                        navigateToCloze(learnSets[selectedIndex], amount)
+                }}>確定</Button>
             </Box>
         </>
     );

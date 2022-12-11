@@ -16,7 +16,8 @@ function App() {
         <Route path='/learnSets' element={<LearnSets />} />
         <Route path='/learnSets/:name' element={<LearnSetCards />} />
         <Route path='/test' element={<Test />} />
-        <Route path='/test/:name' element={<TestCards />} />
+        <Route path='/test/choice/:name' element={<TestCards />} />
+        <Route path='/test/cloze/:name' element={<TestCards />} />
       </Routes>
       <Footer />
     </Router>
