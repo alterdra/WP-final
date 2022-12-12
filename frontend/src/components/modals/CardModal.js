@@ -7,7 +7,7 @@ const CardModal = ( {
     name1, name2,
     changeName1, changeName2, 
     showCreate, handleClose 
-} ) =>{
+} ) => {
     return (
         <Modal
             open={showCreate}
@@ -42,4 +42,5 @@ const CardModal = ( {
         </Modal>
     )
 }
+
 export default CardModal;

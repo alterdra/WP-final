@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Box } from '@mui/material';
 import SetModal from '../../components/modals/SetModal';
 import '../../css/LearnSets.css'
@@ -97,4 +97,5 @@ const LearnSets = () => {
         </>
     );
 }
+
 export default LearnSets;

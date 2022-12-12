@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
 
 const Homepage = () => {
@@ -54,4 +54,5 @@ const Homepage = () => {
         </>
     );
 }
+
 export default Homepage;

@@ -1,8 +1,7 @@
 import { TextField, Button, Modal, Typography, Stack, Box } from '@mui/material';
 import '../../css/Modal.css';
 
-const SetModal = ( { score, showCreate, handleClose, back, reset } ) =>{
-    
+const ResultModal = ( { score, showCreate, handleClose, back, reset } ) => {
     return (
         <Modal
             open={showCreate}
@@ -23,4 +22,5 @@ const SetModal = ( { score, showCreate, handleClose, back, reset } ) =>{
         </Modal>
     )
 }
-export default SetModal;
+
+export default ResultModal;

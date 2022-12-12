@@ -20,7 +20,6 @@ const instance = axios.create({
 })
 
 const Cards = () => {
-
     const { name } = useParams();
     const lecture = name;
     const location = useLocation();
@@ -132,8 +131,8 @@ const Cards = () => {
                                     variant="standard" 
                                     value={inputAnswer}
                                     onChange={changeInputAnswer}
-                                />
-                                 | {cards[cardIndex].vocab.Chinese}</div>
+                                /> | {cards[cardIndex].vocab.Chinese}
+                            </div>
                             <div className='index'>{cardIndex}</div>
                         </Card>
                         <Stack
@@ -157,7 +156,7 @@ const Cards = () => {
                 }
             </div> : <Typography>你還沒新增題目誒...</Typography>}
         </>
-        
     )
 }
+
 export default Cards;

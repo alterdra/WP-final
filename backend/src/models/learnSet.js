@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+
 const Schema = mongoose.Schema; 
 
 const LearnSetSchema = new Schema({
@@ -6,4 +7,5 @@ const LearnSetSchema = new Schema({
     cards: [{ type: mongoose.Types.ObjectId, ref: 'WordCard' }],
 });
 const LearnSet = mongoose.model('LearnSet', LearnSetSchema); 
+
 export default LearnSet;

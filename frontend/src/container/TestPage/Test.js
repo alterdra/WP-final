@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Button, Menu, MenuItem, Typography, List, ListItem, ListItemText, Select, FormControl, InputLabel } from '@mui/material';
 import '../../css/LearnSets.css'
 import axios from 'axios'
@@ -13,10 +13,12 @@ const Test = () => {
     const [learnSets, setlearnSets] = useState([]);
     const [testRecords, setTestRecords] = useState([]);
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const [learnSetName, setLearnSetName] = useState("")
+    const [learnSetName, setLearnSetName] = useState("");
     const [amount, setAmount] = useState(5);
-    const [testType, setTestType] = useState("選擇題")
+    const [testType, setTestType] = useState("選擇題");
     
+    const questionNum = [1, 5, 10, 15, 20];
+
     const handleLearnSetChange = (e) => setLearnSetName(e.currentTarget);
     const handleAmountChange = (e) => setAmount(e.target.value);
     const handleTestType = (e) => setTestType(e.target.value);
@@ -94,11 +96,7 @@ const Test = () => {
                         label="Amount"
                         onChange={handleAmountChange}
                     >
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={10}>10</MenuItem>
-                        <MenuItem value={15}>15</MenuItem>
-                        <MenuItem value={20}>20</MenuItem>
+                        {questionNum.map(item => <MenuItem value={item}>{item}</MenuItem>)}
                     </Select>
                 </FormControl>
                 <FormControl fullWidth>
@@ -117,9 +115,9 @@ const Test = () => {
                 </FormControl>
                 <Button onClick={() => {
                     if(testType === "選擇題")
-                        navigateToChoice(learnSets[selectedIndex], amount)
+                        navigateToChoice(learnSets[selectedIndex], amount);
                     else
-                        navigateToCloze(learnSets[selectedIndex], amount)
+                        navigateToCloze(learnSets[selectedIndex], amount);
                 }}>確定</Button>
             </Box>
         </>

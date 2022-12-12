@@ -1,4 +1,3 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Box, Stack, Paper } from '@mui/material';
 import { styled } from "@mui/material/styles";
@@ -38,4 +37,5 @@ const NavBar = () => {
         </div>
     );
 }
+
 export default NavBar;

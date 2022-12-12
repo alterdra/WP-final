@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+
 const Schema = mongoose.Schema; 
 
 const TestRecordSchema = new Schema({
@@ -7,4 +8,5 @@ const TestRecordSchema = new Schema({
   score: Number
 });
 const TestRecord = mongoose.model('TestRecord', TestRecordSchema); 
+
 export default TestRecord;

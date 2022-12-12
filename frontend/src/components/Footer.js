@@ -1,4 +1,3 @@
-import React from 'react'
 import { Box, Stack, Paper } from '@mui/material';
 import '../css/Footer.css'
 
