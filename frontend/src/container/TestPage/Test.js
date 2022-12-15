@@ -19,7 +19,10 @@ const Test = () => {
     
     const questionNum = [1, 5, 10, 15, 20];
 
-    const handleLearnSetChange = (e) => setLearnSetName(e.currentTarget);
+    const handleLearnSetChange = (e) => {
+        setLearnSetName(e.target.value);
+        setSelectedIndex(learnSets.findIndex(ele=>ele === e.target.value));
+    }
     const handleAmountChange = (e) => setAmount(e.target.value);
     const handleTestType = (e) => setTestType(e.target.value);
 
@@ -76,9 +79,9 @@ const Test = () => {
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        defaultValue={learnSets.length > 0 ?learnSets[0]:""}
+                        // defaultValue={learnSets.length > 0 ?learnSets[0]:""}
                         value={learnSetName}
-                        label="Amount"
+                        label="LearnSet"
                         onChange={handleLearnSetChange}
                     >
                         {learnSets.map(option => (
@@ -114,6 +117,8 @@ const Test = () => {
                     </Select>
                 </FormControl>
                 <Button onClick={() => {
+                    if(learnSetName === "")
+                        return;
                     if(testType === "選擇題")
                         navigateToChoice(learnSets[selectedIndex], amount);
                     else

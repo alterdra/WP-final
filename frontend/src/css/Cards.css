@@ -40,9 +40,6 @@
     right: 2%;
     color: brown;
 }
-.close:hover{
-
-}
 
 
 .index {
@@ -51,6 +48,9 @@
     right: 5%;
 }
 
-.nextCard, .removeCard {
+.nextCard, .removeCard, .choice {
     cursor: pointer;
+}
+.choice{
+    height: 8vh;
 }
