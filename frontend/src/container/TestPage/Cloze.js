@@ -104,6 +104,7 @@ const Cards = () => {
         score /= cards.length;
         score *= 100;
         // console.log(score);
+        score = parseInt(score,10);
         setScore(score);
         saveResult(lecture, score);
     }

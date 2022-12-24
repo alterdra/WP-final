@@ -34,8 +34,7 @@ const Cards = () => {
     const [answers, setAnswers] = useState([]);
     const [questionList, setQuestionList] = useState([]);
     const [myChoices, setMyChoices] = useState([]);
-
-    const [choiceFlag, setChoiceFlag] = useState(false)
+    const [selected, setSelected] = useState(Array(4).fill(false));
 
     const [showResultModal, setShowResultModal] = useState(false);
     const [score, setScore] = useState(0);
@@ -53,11 +52,18 @@ const Cards = () => {
         else setCardIndex(prev => prev - 1);
     }
     const changeMyChoices = (index) => { 
-        setMyChoices(prev => {
-            prev[cardIndex] = index;
-            return prev;
-        });
+        const prev = myChoices;
+        prev[cardIndex] = index;
+        setMyChoices(prev);
         console.log(myChoices)
+
+        setSelected(
+            prev => {
+                prev = Array(4).fill(false);
+                prev[index] = true;
+                return prev;
+            }
+        )
     }
 
     const randomSubarray = (arr, size) => {
@@ -102,10 +108,17 @@ const Cards = () => {
     useEffect(() => {
         findCards();
     }, []);
-
-    useEffect(()=>{
-        setChoiceFlag(true);
-    }, [myChoices])
+    useEffect(() => {
+        findCards();
+        setSelected(
+            prev => {
+                prev = Array(4).fill(false);
+                prev[myChoices[cardIndex]] = true;
+                return prev;
+            }
+        )
+        // console.log(selected);
+    }, [cardIndex]);
 
     const navigate = useNavigate();
     const navigateToTest = () => navigate('/test');
@@ -125,7 +138,7 @@ const Cards = () => {
         }
         score /= questionList.length;
         score *= 100;
-        // console.log(score);
+        score = parseInt(score,10);
         setScore(score);
         saveResult(lecture, score);
     }
@@ -156,8 +169,10 @@ const Cards = () => {
                             {questionIndexs.map((ele, index) => 
                                 <Button 
                                     className='choice'
-                                    variant={myChoices[cardIndex] === index ? "contained":"outlined"}
-                                    color={myChoices[cardIndex] === index ? "success":"secondary"}
+                                    // variant={myChoices[cardIndex] === index ? "contained":"outlined"}
+                                    // color={myChoices[cardIndex] === index ? "success":"secondary"}
+                                    variant={selected[index] ? "contained":"outlined"}
+                                    color={selected[index] ? "success":"secondary"}
                                     onClick={() => changeMyChoices(index)}
                                 >
                                     {index}: {questionList[cardIndex].choices[index]}
