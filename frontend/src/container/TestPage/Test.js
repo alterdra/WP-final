@@ -27,26 +27,36 @@ const Test = () => {
     const handleTestType = (e) => setTestType(e.target.value);
 
     const findLearnSets = async () => {
-        const { data: { msg, contents } } = await instance.get('/lectures');
+        const { data: { msg, contents } } = await instance.get('/lectures',
+        {
+            params: {
+                User: "Benny",
+            }
+        });
         setlearnSets(contents.map((item) => item.name));
     };
 
     const findTestRecords = async () => {
-        const { data: { msg, contents } } = await instance.get('/tests');
+        const { data: { msg, contents } } = await instance.get('/tests', 
+        {
+            params: {
+                User: "Benny",
+            }
+        });
         setTestRecords(contents);
     }
 
     const deleteTestRecord = async (id) => {
-        await instance.delete('/test', { data: { id } });
+        await instance.delete('/test', { data: { id, User: "Benny" } });
         await findTestRecords();
     }
 
     const navigate = useNavigate();
     const navigateToChoice = (name, amount) => {
-        navigate('/test/choice/' + name, { state: { amount : amount }});
+        navigate('/test/choice/' + name, { state: { amount }});
     };
     const navigateToCloze = (name, amount) => {
-        navigate('/test/cloze/' + name, { state: { amount : amount }});
+        navigate('/test/cloze/' + name, { state: { amount }});
     };
 
     useEffect(() => {

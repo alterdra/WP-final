@@ -1,16 +1,30 @@
 import { Router } from "express";
 import TestRecord from "../models/testRecord";
+import User from "../models/user";
 
 const router = Router();
+
+const validateUser = async (name) => {
+    const user = await User.findOne({ name });
+    if(!user){
+        const newUser = new User({ name });
+        await newUser.save();
+    }
+    return user.populate(["learnSets", "tests"]);
+}
 
 const addTestRecord = async (req, res) => {
     const lecture = req.body.lecture;
     const score = req.body.score;
     const id = req.body.id;
-    console.log(lecture, score, id);
+    const userName = req.body.User;
+    console.log(lecture, score, id, userName);
     try {
         const newTestRecord = new TestRecord({ lecture, score, id });
         await newTestRecord.save();
+        const user = await validateUser(userName);
+        user.tests.push(newTestRecord);
+        await user.save();
         res.status(200).send({ msg: "Testrecord added."});
     } catch (err) {
         res.status(500).send({ msg: "Fail to add testrecord." });
@@ -18,8 +32,10 @@ const addTestRecord = async (req, res) => {
 }
 
 const findTestRecord = async (req, res) => {
+    const userName = req.query.User;
     try {
-        const allTestRecords = await TestRecord.find({});
+        const user = await validateUser(userName);
+        const allTestRecords = user.tests;
         if(!allTestRecords){
             res.status(200).send({ 
                 msg: "Currently no TestRecord",
@@ -39,9 +55,13 @@ const findTestRecord = async (req, res) => {
 
 const deleteTestRecord = async (req, res) => {
     const id = req.body.id;
+    const userName = req.body.User;
     // console.log(req)
     try {
         const tests = await TestRecord.deleteOne({ id });
+        const user = await validateUser(userName);
+        user.tests = user.tests.filter(ele => ele.id !== id);
+        await user.save();
         if (!tests) {
             res.status(500).send({ msg: "Fail to delete testrecord" });
             return;

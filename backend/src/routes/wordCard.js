@@ -1,13 +1,32 @@
 import { Router } from "express";
 import WordCard from "../models/wordCard";
+import LearnSet from "../models/learnSet";
+import User from "../models/user";
 
 const router = Router();
+
+const validateUser = async (name) => {
+    const user = await User.findOne({ name });
+    if(!user){
+        const newUser = new User({ name });
+        await newUser.save();
+    }
+    return user.populate(["learnSets", "tests"]);
+}
 
 const deleteCard = async (req, res) => {
     const Japanese = req.body.Japanese;
     const Chinese = req.body.Chinese;
+    const userName = req.body.userName;
+    const learnsetName = req.body.lecture;
     try {
-        await WordCard.deleteOne({ vocab: { Chinese, Japanese } });
+        const user = await validateUser(userName);
+        let learnSet = user.learnSets.find(ele => ele.name === learnsetName);
+        learnSet = await learnSet.populate(["cards"]);
+        const wordCard = learnSet.cards.find(ele => ele.Chinese === Chinese && ele.Japanese === Japanese);
+        await WordCard.deleteOne({ _id: wordCard._id });
+        learnSet.cards = learnSet.cards.filter(ele => ele._id !== wordCard._id);
+        await learnSet.save();
         res.status(200).send({ msg: "The card is deleted." });
     } catch (err) {
         res.status(500).send({ msg: "Fail to clear the card." });
@@ -15,32 +34,39 @@ const deleteCard = async (req, res) => {
 }
 
 const addCard = async (req, res) => {
-    const { lecture, vocab: { Japanese, Chinese } } = req.body;
-    console.log(lecture, Japanese, Chinese);
-    const vocab = { Japanese, Chinese };
+    const { lecture, Japanese, Chinese, userName } = req.body;
+    console.log(lecture, Japanese, Chinese, userName);
     try {
-        const existing = await WordCard.findOne({ lecture, vocab });
-        if (!existing) {
-            const newCard = new WordCard({ lecture, vocab });
+        const user = await validateUser(userName);
+        let learnSet = user.learnSets.find(ele => ele.name === lecture);
+        learnSet = await learnSet.populate(["cards"]);
+        console.log(learnSet);
+        const card = learnSet.cards.find(ele => ele.Chinese === Chinese && ele.Japanese === Japanese);
+        if (!card) {
+            const newCard = new WordCard({ Chinese, Japanese });
             await newCard.save();
+            learnSet.cards.push(newCard);
+            await learnSet.save();
             res.status(200).send({ msg: "Card added." });
         } else{
-            await WordCard.updateOne({ lecture, vocab });
-            res.status(200).send({ msg: "Card updated." });
-        }
+            res.status(200).send({ msg: "Card already existed." });
+        }    
     } catch (err) {
         res.status(500).send({ msg: "Fail to add/update a card." });
     }
 }
 
 const findCards = async (req, res) => {
-    const { lecture } = req.query;
+    const lectureName = req.query.lecture;
+    const userName = req.query.userName;
     // console.log(lecture)
     try {
-        const cards = await WordCard.find({ lecture });
+        const user = await validateUser(userName);
+        let learnSet = user.learnSets.find(ele => ele.name === lectureName);
+        learnSet = await learnSet.populate(["cards"]);
         res.status(200).send({ 
             msg: "Find cards successfully.",
-            contents: cards
+            contents: learnSet.cards
         });
     } catch (err) {
         res.status(500).send({ msg: "Fail to find cards" });

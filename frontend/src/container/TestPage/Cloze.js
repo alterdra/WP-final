@@ -66,7 +66,7 @@ const Cards = () => {
     }
 
     const findCards = async () => {
-        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture } });
+        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: "Benny" } });
         let slice = randomSubarray(contents, amount);
         setCards(slice);
     }
@@ -89,16 +89,14 @@ const Cards = () => {
 
     const saveResult = async (lecture, score) => {
         const id = uuidv4();
-        const { data: { msg } } = await instance.post('/test', { lecture, score, id });
+        const { data: { msg } } = await instance.post('/test', { lecture, score, id, User: "Benny" });
         console.log(msg);
     }
 
     const calScore = () => {
         let score = 0;
         for(let i = 0; i < cards.length; i++){
-            // console.log(`Q${i} Answer:`,cards[i].vocab.Japanese);
-            // console.log(`Q${i}:`,answers[i]);
-            if(cards[i].vocab.Japanese == answers[i])
+            if(cards[i].Japanese == answers[i])
                 score += 1;
         }
         score /= cards.length;
@@ -132,7 +130,7 @@ const Cards = () => {
                                     variant="standard" 
                                     value={inputAnswer}
                                     onChange={changeInputAnswer}
-                                /> | {cards[cardIndex].vocab.Chinese}
+                                /> | {cards[cardIndex].Chinese}
                             </div>
                             <div className='index'>{cardIndex}</div>
                         </Card>

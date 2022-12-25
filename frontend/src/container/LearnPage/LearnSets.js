@@ -30,12 +30,19 @@ const LearnSets = () => {
         const { data: { msg } } =  await instance.post('/lecture',
             {
                 Name: setName,
+                User: "Benny",
             }
         )
         console.log(msg);
     }
     const findLearnSets = async() => {
-        const { data: { msg, contents } } = await instance.get('/lectures');
+        const { data: { msg, contents } } = await instance.get('/lectures',
+            {
+                params: {
+                    User: "Benny"
+                }
+            }
+        );
         setlearnSets(contents);
     }
 
@@ -47,7 +54,8 @@ const LearnSets = () => {
     }
 
     const handleRemoveSet = async (Name) => {
-        await instance.delete("/lecture", { data: { Name } });
+        const { data: { msg } } = await instance.delete("/lecture", { data: { Name, User: "Benny" } });
+        console.log(msg)
         await findLearnSets();
     }
 

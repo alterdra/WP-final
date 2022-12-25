@@ -52,22 +52,21 @@ const Cards = () => {
         setVocabJapanese('');
     };
 
-    const addCard = async( lecture, vocab ) => {
-        const { data: { msg } } = await instance.post('/card', { lecture, vocab })
+    const addCard = async( lecture, Japanese, Chinese ) => {
+        const { data: { msg } } = await instance.post('/card', { lecture, Japanese, Chinese, userName: "Benny" })
     }
     const findCards = async () => {
-        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture } });
+        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: "Benny" } });
         setCards(contents);
     }
 
     const handleAddCard = async () => {
-        const vocab = { Japanese: vocabJapanese, Chinese: vocabChinese };
-        await addCard(lecture, vocab);
+        await addCard(lecture, vocabJapanese, vocabChinese);
         await findCards(lecture);
         handleClose();
     }
     const handleRemoveCard = async ( Japanese, Chinese ) => {
-        const {data: { msg }} = await instance.delete("/cards", { data:  { Japanese, Chinese }});
+        const {data: { msg }} = await instance.delete("/cards", { data:  { lecture, Japanese, Chinese, userName: "Benny" }});
         // console.log(msg);
         await findCards(lecture);
         if(cardIndex === cards.length - 1) // Last card is removed;
@@ -122,12 +121,12 @@ const Cards = () => {
                                     setCardIndex(prev => index);
                                 }}
                             >
-                                <div className='vocab'>{item.vocab.Japanese} | {item.vocab.Chinese}</div>
+                                <div className='vocab'>{item.Japanese} | {item.Chinese}</div>
                                 <div className='index'>{index}</div>
                                 <CloseIcon
                                     className='close'
                                     onClick={event => {
-                                        handleRemoveCard(item.vocab.Japanese, item.vocab.Chinese);
+                                        handleRemoveCard(item.Japanese, item.Chinese);
                                         event.stopPropagation();
                                     }}
                                 />
@@ -147,7 +146,7 @@ const Cards = () => {
                                     setCardIndex(prev => 0);
                                 }}
                             >
-                                <div className='oneVocab'>{cards[cardIndex].vocab.Japanese} | {cards[cardIndex].vocab.Chinese}</div>
+                                <div className='oneVocab'>{cards[cardIndex].Japanese} | {cards[cardIndex].Chinese}</div>
                                 <div className='index'>{cardIndex}</div>
                             </Card>
                             <Stack
@@ -158,8 +157,8 @@ const Cards = () => {
                             >
                                 <Item className='nextCard' onClick={decreaseCardIndex}>上個單字卡</Item>
                                 <Item className='removeCard' onClick={() => handleRemoveCard(
-                                        cards[cardIndex].vocab.Japanese, 
-                                        cards[cardIndex].vocab.Chinese
+                                        cards[cardIndex].Japanese, 
+                                        cards[cardIndex].Chinese
                                 )}>刪除這張單字卡</Item>
                                 <Item className='nextCard' onClick={increaseCardIndex}>下個單字卡</Item>
                             </Stack>

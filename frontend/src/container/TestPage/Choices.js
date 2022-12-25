@@ -78,7 +78,7 @@ const Cards = () => {
     }
 
     const findCards = async () => {
-        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture } });
+        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: "Benny" } });
 
         const questionArr = [];
         const answersArr = [];
@@ -87,11 +87,11 @@ const Cards = () => {
         }
         for(let i = 0; i < amount; i++){
             let slice = randomSubarray(contents, 4);
-            console.log(slice)
+            // console.log(slice)
             const range = slice.length >= 4 ? 4: slice.length;
             const answerIndex = getRandomInt(range);
-            const question = slice[answerIndex].vocab.Chinese;
-            slice = slice.map(ele => ele.vocab.Japanese);
+            const question = slice[answerIndex].Chinese;
+            slice = slice.map(ele => ele.Japanese);
             questionArr.push({
                 question, 
                 choices: slice 
@@ -109,7 +109,6 @@ const Cards = () => {
         findCards();
     }, []);
     useEffect(() => {
-        findCards();
         setSelected(
             prev => {
                 prev = Array(4).fill(false);
@@ -126,7 +125,7 @@ const Cards = () => {
 
     const saveResult = async (lecture, score) => {
         const id = uuidv4();
-        const { data: { msg } } = await instance.post('/test', { lecture, score, id });
+        const { data: { msg } } = await instance.post('/test', { lecture, score, id, User: "Benny" });
         console.log(msg);
     }
 
@@ -136,6 +135,7 @@ const Cards = () => {
             if(myChoices[i] == answers[i])
                 score += 1;
         }
+        console.log(myChoices, answers);
         score /= questionList.length;
         score *= 100;
         score = parseInt(score,10);
