@@ -7,7 +7,8 @@ import FolderSpecialRoundedIcon from '@mui/icons-material/FolderSpecialRounded';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useResolvedPath } from 'react-router-dom';
+import { useUserName } from '../hook/useUserName';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
@@ -17,6 +18,7 @@ const LearnSets = () => {
     const [setName, setSetName] = useState('');
     const [learnSets, setlearnSets] = useState([]);
     const [showSetModal, setShowSetModal] = useState(false);
+    const { user } = useUserName();
 
     const changeSetName = (event) => { setSetName(event.target.value) };
     
@@ -30,7 +32,7 @@ const LearnSets = () => {
         const { data: { msg } } =  await instance.post('/lecture',
             {
                 Name: setName,
-                User: "Benny",
+                User: user,
             }
         )
         console.log(msg);
@@ -39,7 +41,7 @@ const LearnSets = () => {
         const { data: { msg, contents } } = await instance.get('/lectures',
             {
                 params: {
-                    User: "Benny"
+                    User: user
                 }
             }
         );
@@ -54,7 +56,7 @@ const LearnSets = () => {
     }
 
     const handleRemoveSet = async (Name) => {
-        const { data: { msg } } = await instance.delete("/lecture", { data: { Name, User: "Benny" } });
+        const { data: { msg } } = await instance.delete("/lecture", { data: { Name, User: user } });
         console.log(msg)
         await findLearnSets();
     }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import { Button, Paper, Card, Stack, Divider, styled } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import CardModal from '../../components/modals/CardModal';
@@ -6,6 +6,7 @@ import '../../css/Cards.css'
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useUserName } from '../hook/useUserName';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -33,6 +34,7 @@ const Cards = () => {
 
     const [tileMode, setTileMode] = useState(true);
     const [cardIndex, setCardIndex] = useState(0);
+    const { user } = useUserName();
     
     const increaseCardIndex = () => {
         if(cardIndex === cards.length - 1) setCardIndex(0);
@@ -53,10 +55,10 @@ const Cards = () => {
     };
 
     const addCard = async( lecture, Japanese, Chinese ) => {
-        const { data: { msg } } = await instance.post('/card', { lecture, Japanese, Chinese, userName: "Benny" })
+        const { data: { msg } } = await instance.post('/card', { lecture, Japanese, Chinese, userName: user})
     }
     const findCards = async () => {
-        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: "Benny" } });
+        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: user } });
         setCards(contents);
     }
 
@@ -66,7 +68,7 @@ const Cards = () => {
         handleClose();
     }
     const handleRemoveCard = async ( Japanese, Chinese ) => {
-        const {data: { msg }} = await instance.delete("/cards", { data:  { lecture, Japanese, Chinese, userName: "Benny" }});
+        const {data: { msg }} = await instance.delete("/cards", { data:  { lecture, Japanese, Chinese, userName: user }});
         // console.log(msg);
         await findCards(lecture);
         if(cardIndex === cards.length - 1) // Last card is removed;

@@ -5,6 +5,7 @@ import '../../css/Cards.css'
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { useUserName } from '../hook/useUserName';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -33,6 +34,7 @@ const Cards = () => {
 
     const [showResultModal, setShowResultModal] = useState(false);
     const [score, setScore] = useState(0);
+    const { user } = useUserName();
     const handleClose = () => {
         setShowResultModal(false);
     };
@@ -66,7 +68,7 @@ const Cards = () => {
     }
 
     const findCards = async () => {
-        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: "Benny" } });
+        const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: user } });
         let slice = randomSubarray(contents, amount);
         setCards(slice);
     }
@@ -89,7 +91,7 @@ const Cards = () => {
 
     const saveResult = async (lecture, score) => {
         const id = uuidv4();
-        const { data: { msg } } = await instance.post('/test', { lecture, score, id, User: "Benny" });
+        const { data: { msg } } = await instance.post('/test', { lecture, score, id, User: user });
         console.log(msg);
     }
 

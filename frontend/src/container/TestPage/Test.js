@@ -4,6 +4,7 @@ import '../../css/LearnSets.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { useUserName } from '../hook/useUserName';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
@@ -16,6 +17,7 @@ const Test = () => {
     const [learnSetName, setLearnSetName] = useState("");
     const [amount, setAmount] = useState(5);
     const [testType, setTestType] = useState("選擇題");
+    const { user } = useUserName();
     
     const questionNum = [1, 5, 10, 15, 20];
 
@@ -30,7 +32,7 @@ const Test = () => {
         const { data: { msg, contents } } = await instance.get('/lectures',
         {
             params: {
-                User: "Benny",
+                User: user,
             }
         });
         setlearnSets(contents.map((item) => item.name));
@@ -40,14 +42,14 @@ const Test = () => {
         const { data: { msg, contents } } = await instance.get('/tests', 
         {
             params: {
-                User: "Benny",
+                User: user,
             }
         });
         setTestRecords(contents);
     }
 
     const deleteTestRecord = async (id) => {
-        await instance.delete('/test', { data: { id, User: "Benny" } });
+        await instance.delete('/test', { data: { id, User: user } });
         await findTestRecords();
     }
 
