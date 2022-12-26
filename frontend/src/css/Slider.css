@@ -1,4 +1,4 @@
-.App {
+/* .App {
     font-family: sans-serif;
     text-align: center;
 }
@@ -7,5 +7,24 @@
 }
 h3 {
     text-align: center;
+} */
+img {
+    margin: auto;
+    /* height: 10%; */
+    width: 45vw;
+    height: 50vh;
 }
+  
+.slick-slide > div {
+    display: grid;
+    place-items: center;
+    width: 45vw;
+    height: 50vh;
+    /* margin-top: 50px; */
+    margin: auto;
+    padding: 1vmin;
+    background: green;
+}
+
+/* ref: https://stackoverflow.com/questions/60440138/centering-slides-with-react-slick */
   

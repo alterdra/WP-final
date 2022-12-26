@@ -1,11 +1,15 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { lazy, useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import * as fs from 'fs';
-import img1 from '../Japan-photo/pexels-chelsea-tey-706976.jpg';
+import img1 from '../Japan-photo/1.jpg';
+import { v4 as uuidv4 } from 'uuid';
+import useImage from '../container/hook/useImage';
+import "../css/Slider.css"
+
 
 const SliderSlick = () => {
+    const {imgList, loading , error} = useImage();
     const settings = {
         dots: true,
         infinite: true,
@@ -13,24 +17,21 @@ const SliderSlick = () => {
         slidesToShow: 1,
         slidesToScroll: 1
     };
-    // const files = fs.readdirSync();
-    // console.log(files)
-    const dirName = '../../Japan-photo/';
+    // useEffect(() => {
+    //     console.log(imgList)
+    // })
+    
     return (
         <div className="reactSlick">
             <Slider {...settings}>
-                <div>
-                <   h3>1</h3>
-                </div>
-                <div>
-                    <h3>2</h3>
-                </div>
-                <div>
-                    <img 
-                        width={'50%'}
-                        src={img1}
-                    />
-                </div>
+                {imgList.map((ele, index) =>
+                    <div key={uuidv4()}>
+                        <img 
+                            width={'50%'}
+                            src={loading?img1:ele}
+                        />
+                    </div>
+                )}
             </Slider>
         </div>
     );
