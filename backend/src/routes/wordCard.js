@@ -6,10 +6,10 @@ import User from "../models/user";
 const router = Router();
 
 const validateUser = async (name) => {
-    const user = await User.findOne({ name });
+    let user = await User.findOne({ name });
     if(!user){
-        const newUser = new User({ name });
-        await newUser.save();
+        user = new User({ name });
+        await user.save();
     }
     return user.populate(["learnSets", "tests"]);
 }
