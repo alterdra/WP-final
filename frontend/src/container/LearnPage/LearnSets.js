@@ -88,19 +88,17 @@ const LearnSets = () => {
             <div className='learnsetsContainer'>
                 {
                     learnSets.map(item => (
-                        <>
-                            <div className='learnSet' key={uuidv4()} >
-                                <FolderSpecialRoundedIcon 
-                                    className='folderIcon' 
-                                    onClick={() => navigateToCards(item.name)}
-                                />
-                                <DeleteIcon 
-                                    className='delete'
-                                    onClick={() => handleRemoveSet(item.name)} 
-                                />
-                                <Box className='name'>{item.name}</Box>
-                            </div>
-                        </>
+                        <div className='learnSet' key={uuidv4()} >
+                            <FolderSpecialRoundedIcon 
+                                className='folderIcon' 
+                                onClick={() => navigateToCards(item.name)}
+                            />
+                            <DeleteIcon 
+                                className='delete'
+                                onClick={() => handleRemoveSet(item.name)} 
+                            />
+                            <Box className='name'>{item.name}</Box>
+                        </div>
                     ))
                 }
             </div>

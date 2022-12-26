@@ -176,6 +176,7 @@ const Cards = () => {
                                     variant={selected[index] ? "contained":"outlined"}
                                     color={selected[index] ? "success":"secondary"}
                                     onClick={() => changeMyChoices(index)}
+                                    key={uuidv4()} 
                                 >
                                     {index}: {questionList[cardIndex].choices[index]}
                                 </Button>

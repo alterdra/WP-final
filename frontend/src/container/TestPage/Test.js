@@ -97,7 +97,12 @@ const Test = () => {
                         onChange={handleLearnSetChange}
                     >
                         {learnSets.map(option => (
-                            <MenuItem value={option}>{option}</MenuItem>
+                            <MenuItem 
+                                key={uuidv4()} 
+                                value={option}
+                            >
+                                {option}
+                            </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
@@ -111,7 +116,14 @@ const Test = () => {
                         label="Amount"
                         onChange={handleAmountChange}
                     >
-                        {questionNum.map(item => <MenuItem value={item}>{item}</MenuItem>)}
+                        {questionNum.map(item => 
+                            <MenuItem 
+                                value={item}
+                                key={uuidv4()} 
+                            >
+                                {item}
+                            </MenuItem>
+                        )}
                     </Select>
                 </FormControl>
                 <FormControl fullWidth>
