@@ -1,5 +1,7 @@
-import { useState, useEffect, useReducer } from 'react';
-import { Button, Paper, Card, Stack, Divider, styled } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { Button, Paper, Card, Stack, Divider, styled, Checkbox, FormControlLabel } from '@mui/material';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CloseIcon from '@mui/icons-material/Close';
 import CardModal from '../../components/modals/CardModal';
 import '../../css/Cards.css'
@@ -34,6 +36,7 @@ const Cards = () => {
 
     const [tileMode, setTileMode] = useState(true);
     const [cardIndex, setCardIndex] = useState(0);
+    const [unlearnedMode, setMode] = useState(false);
     const { user } = useUserName();
     
     const increaseCardIndex = () => {
@@ -54,16 +57,25 @@ const Cards = () => {
         setVocabJapanese('');
     };
 
-    const addCard = async( lecture, Japanese, Chinese ) => {
-        const { data: { msg } } = await instance.post('/card', { lecture, Japanese, Chinese, userName: user})
+    const addCard = async( Japanese, Chinese ) => {
+        const { data: { msg } } = await instance.post('/card', { lecture, Japanese, Chinese, userName: user })
     }
     const findCards = async () => {
         const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: user } });
-        setCards(contents);
+        console.log(unlearnedMode);
+        if(unlearnedMode)
+            setCards(contents.filter(ele => ele.Learned === false));
+        else
+            setCards(contents);
+    }
+    const updateCardStatus = async (Japanese, Chinese) => {
+        const { data: { msg } } = await instance.post('/learn', { lecture, Japanese, Chinese, userName: user } );
+        console.log('changed success!');
+        await findCards();
     }
 
     const handleAddCard = async () => {
-        await addCard(lecture, vocabJapanese, vocabChinese);
+        await addCard(vocabJapanese, vocabChinese);
         await findCards(lecture);
         handleClose();
     }
@@ -77,8 +89,9 @@ const Cards = () => {
     }
 
     useEffect(() => {
+        console.log(unlearnedMode);
         findCards();
-    }, []);
+    }, [unlearnedMode]);
 
     const navigate = useNavigate();
     const navigateToLearnSets = () => {
@@ -111,6 +124,7 @@ const Cards = () => {
                 showCreate={showCardModal}
                 handleClose={handleClose}
             />
+            <FormControlLabel control={<Checkbox />} label="未學習模式" onClick={() => setMode(prev => !prev)} />
             {tileMode ?
                 <div className='cardContainer'>
                     {
@@ -129,6 +143,15 @@ const Cards = () => {
                                     className='close'
                                     onClick={event => {
                                         handleRemoveCard(item.Japanese, item.Chinese);
+                                        event.stopPropagation();
+                                    }}
+                                />
+                                <Checkbox
+                                    className='learned'
+                                    icon={item.Learned ? <BookmarkIcon style={{ color: 'lime' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
+                                    checkedIcon={item.Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'lime' }}/>}
+                                    onClick={event => {
+                                        updateCardStatus(item.Japanese, item.Chinese);
                                         event.stopPropagation();
                                     }}
                                 />

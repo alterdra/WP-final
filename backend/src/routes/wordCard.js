@@ -43,7 +43,7 @@ const addCard = async (req, res) => {
         console.log(learnSet);
         const card = learnSet.cards.find(ele => ele.Chinese === Chinese && ele.Japanese === Japanese);
         if (!card) {
-            const newCard = new WordCard({ Chinese, Japanese });
+            const newCard = new WordCard({ Chinese, Japanese, Learned: false });
             await newCard.save();
             learnSet.cards.push(newCard);
             await learnSet.save();
@@ -73,6 +73,27 @@ const findCards = async (req, res) => {
     }
 }
 
+const updateCard = async (req, res) => {
+    const Japanese = req.body.Japanese;
+    const Chinese = req.body.Chinese;
+    const userName = req.body.userName;
+    const lecture = req.body.lecture;
+    try {
+        const user = await validateUser(userName);
+        let learnSet = user.learnSets.find(ele => ele.name === lecture);
+        learnSet = await learnSet.populate(["cards"]);
+        const card = learnSet.cards.find(ele => ele.Chinese === Chinese && ele.Japanese === Japanese);
+        if (!card) {
+            res.status(200).send({ msg: "error!!" });
+        } else{
+            await WordCard.updateOne({ _id: card._id }, { Learned: !card.Learned });
+            res.status(200).send({ msg: "Card updated" });
+        }   
+    } catch (err) {
+        res.status(500).send({ msg: "Fail to update a card." });
+    }
+}
+
 router.delete("/cards",(req, res)=>{
     deleteCard(req, res);
 }); 
@@ -82,5 +103,8 @@ router.post("/card", (req,  res) => {
 router.get("/cards", (req, res)=>{
     findCards(req, res);
 });
+router.post("/learn", (req, res) => {
+    updateCard(req, res);
+})
 
 export default router;

@@ -54,3 +54,11 @@
 .choice{
     height: 8vh;
 }
+
+.learned{
+    cursor: pointer;
+    position: absolute;
+    top: 70%;
+    right: 4%;
+    color: lime;
+}
