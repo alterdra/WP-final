@@ -23,6 +23,7 @@ const LoginBar = () => {
     // Password
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = event => event.preventDefault();
+    console.log(signedIn)
 	
     return (
         <>

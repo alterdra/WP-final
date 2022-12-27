@@ -37,6 +37,7 @@ const Cards = () => {
     const [tileMode, setTileMode] = useState(true);
     const [cardIndex, setCardIndex] = useState(0);
     const [unlearnedMode, setMode] = useState(false);
+    const [isLearned, setIsLearned] = useState(false);
     const { user } = useUserName();
     
     const increaseCardIndex = () => {
@@ -67,9 +68,10 @@ const Cards = () => {
         unlearnedMode ? contents.filter(ele => ele.Learned === false)
         : contents;
 
-        if(cardIndex.length > 0){
-            const newIndex = tmpCards.findIndex(ele => ele._id === cards[cardIndex]._id);
-            setCardIndex(newIndex === -1 ? 0:newIndex);
+        if(cards.length > 0){
+            let newIndex = tmpCards.findIndex(ele => ele._id === cards[cardIndex]._id);
+            newIndex =  newIndex === -1 ? cardIndex >= tmpCards.length ? 0 : cardIndex : newIndex;
+            setCardIndex(newIndex);
         }
         else {
             setCardIndex(0);
@@ -80,24 +82,31 @@ const Cards = () => {
         const { data: { msg } } = await instance.post('/learn', { lecture, Japanese, Chinese, userName: user } );
         console.log('changed success!');
         await findCards();
-        if(!tileMode && unlearnedMode){
-            if(cardIndex === cards.length - 1) setCardIndex(0);
-        }
     }
 
     const handleAddCard = async () => {
         await addCard(vocabJapanese, vocabChinese);
-        await findCards(lecture);
+        await findCards();
         handleClose();
     }
     const handleRemoveCard = async ( Japanese, Chinese ) => {
         const {data: { msg }} = await instance.delete("/cards", { data:  { lecture, Japanese, Chinese, userName: user }});
         // console.log(msg);
-        await findCards(lecture);
+        await findCards();
         if(cardIndex === cards.length - 1) // Last card is removed;
             setCardIndex(prev => 0);
         // console.log(cardIndex)
     }
+
+    useEffect(() => {
+        console.log(cards);
+        console.log(cardIndex);
+        if(cards.length > 0)
+            setIsLearned(cards[cardIndex].Learned === true);
+    }, [cards])
+    useEffect(() => {
+        console.log(isLearned)
+    }, [isLearned])
 
     useEffect(() => {
         console.log(unlearnedMode);
@@ -185,15 +194,6 @@ const Cards = () => {
                             >
                                 <div className='oneVocab'>{cards[cardIndex].Japanese} | {cards[cardIndex].Chinese}</div>
                                 <div className='index'>{cardIndex}</div>
-                                <Checkbox
-                                    // className='learned'
-                                    icon={cards[cardIndex].Learned ? <BookmarkIcon style={{ color: 'lime' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
-                                    checkedIcon={cards[cardIndex].Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'lime' }}/>}
-                                    onClick={event => {
-                                        updateCardStatus(cards[cardIndex].Japanese, cards[cardIndex].Chinese);
-                                        event.stopPropagation();
-                                    }}
-                                />
                             </Card>
                             <Stack
                                 direction="row"
@@ -202,7 +202,8 @@ const Cards = () => {
                                 spacing={2}
                             >
                                 <Item className='nextCard' onClick={decreaseCardIndex}>上個單字卡</Item>
-                                {/* <Item className='learnCard' onClick={() => updateCardStatus(cards[cardIndex].Japanese, cards[cardIndex].Chinese)}>我學會了</Item> */}
+
+                                {unlearnedMode && <Item className='learnCard' onClick={() => updateCardStatus(cards[cardIndex].Japanese, cards[cardIndex].Chinese)}>我學會了</Item>}
                                 <Item className='removeCard' onClick={() => handleRemoveCard(
                                         cards[cardIndex].Japanese, 
                                         cards[cardIndex].Chinese
