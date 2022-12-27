@@ -1,18 +1,22 @@
 import { useState } from 'react';
 import { useUserName } from '../container/hook/useUserName';
 import { Box, InputAdornment, TextField, IconButton, Button } from '@mui/material'
-import { AccountCircle, VisibilityOff , Visibility, Password } from '@mui/icons-material'
+import { AccountCircle, VisibilityOff , Visibility } from '@mui/icons-material'
 
 const LoginBar = () => {
-    const { user, setUser, password, setPassword } = useUserName();
+    const { user, setUser, password, setPassword, signedIn, handleLogin, handleLogout } = useUserName();
     const [showPassword, setShowPassword] = useState(false);
-	const [login, setLogin] = useState(false);
+    const [show, setShow] = useState(false);
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = event => event.preventDefault();
-	const handleLogin = () => setLogin(true);
-	const handleLogout = () => setLogin(false);
+    const handleRegister = () => {
+        
+    }
+	
     return (
-        !login ? 
+        <>
+        <Button onClick={() => handleRegister()}>註冊帳號</Button>
+        {!signedIn ? 
         (<>
             <div>請登入帳號密碼</div>
             <Box sx={{ '& > :not(style)': { m: 1 } }}>
@@ -64,7 +68,7 @@ const LoginBar = () => {
             歡迎回來, {user}
             <Button onClick={() => handleLogout()}>登出</Button>
         </div>)
-    );
+    }</>);
 }
 
 export default LoginBar;

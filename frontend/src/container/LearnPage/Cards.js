@@ -58,7 +58,7 @@ const Cards = () => {
     };
 
     const addCard = async( Japanese, Chinese ) => {
-        const { data: { msg } } = await instance.post('/card', { lecture, Japanese, Chinese, userName: user })
+        const { data: { msg } } = await instance.post('/card', { lecture, Japanese, Chinese, userName: user });
     }
     const findCards = async () => {
         const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: user } });
@@ -72,6 +72,9 @@ const Cards = () => {
         const { data: { msg } } = await instance.post('/learn', { lecture, Japanese, Chinese, userName: user } );
         console.log('changed success!');
         await findCards();
+        if(!tileMode && unlearnedMode){
+            if(cardIndex === cards.length - 1) setCardIndex(0);
+        }
     }
 
     const handleAddCard = async () => {
@@ -124,7 +127,7 @@ const Cards = () => {
                 showCreate={showCardModal}
                 handleClose={handleClose}
             />
-            <FormControlLabel control={<Checkbox />} label="未學習模式" onClick={() => setMode(prev => !prev)} />
+            {tileMode && <FormControlLabel control={<Checkbox checked={unlearnedMode}/>} label="未學習模式" onClick={() => setMode(prev => !prev)} />}
             {tileMode ?
                 <div className='cardContainer'>
                     {
@@ -181,6 +184,7 @@ const Cards = () => {
                                 spacing={2}
                             >
                                 <Item className='nextCard' onClick={decreaseCardIndex}>上個單字卡</Item>
+                                <Item className='learnCard' onClick={() => updateCardStatus(cards[cardIndex].Japanese, cards[cardIndex].Chinese)}>我學會了</Item>
                                 <Item className='removeCard' onClick={() => handleRemoveCard(
                                         cards[cardIndex].Japanese, 
                                         cards[cardIndex].Chinese
@@ -189,7 +193,11 @@ const Cards = () => {
                             </Stack>
                         </div>
                     }
-                </div> : null
+                </div> : 
+                <div>
+                    🥳恭喜你學完所有單字🥳
+                    <Button onClick={() => setTileMode(true)}>回並排模式</Button>
+                </div>
             }
         </>
         

@@ -1,4 +1,7 @@
 import { createContext, useContext, useState } from "react";
+
+const LOCALSTORAGE_KEY = "save-me";
+const savedMe = localStorage.getItem(LOCALSTORAGE_KEY);
 const UserContext = createContext({
     user: "",
     password: "",
@@ -7,8 +10,27 @@ const UserContext = createContext({
 });
 
 const UserProvider = (props) => {
-    const [user, setUser] = useState("Benny");
+    const [user, setUser] = useState(savedMe || "");
     const [password, setPassword] = useState("");
+    const [signedIn, setSignedIn] = useState(false);
+
+    const handleLogin = async () => {
+        const { data: { msg } } = await instance.get('/login', {param: { name: user, password}});
+        alert(msg);
+        if(msg === 'Login Successfully')
+        	setSignedIn(true);
+    }
+    const handleLogout = () => {
+        setUser("");
+        setPassword("");
+        setSignedIn(false);
+    }
+
+    useEffect(() => {
+        if(signedIn){
+            localStorage.setItem(LOCALSTORAGE_KEY, me);
+        }
+    }, [signedIn]);
     return (
         <UserContext.Provider
           value={{
@@ -16,6 +38,8 @@ const UserProvider = (props) => {
             password,
             setUser,
             setPassword,
+			handleLogin,
+			handleLogout,
           }}
           {...props}
         />
