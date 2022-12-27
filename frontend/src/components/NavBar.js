@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { Box, Stack, Paper } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from "@mui/material/styles";
 import '../css/NavBar.css'
+import { useUserName } from '../container/hook/useUserName';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette
@@ -14,15 +15,19 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const NavBar = () => {
+    const { signedIn } = useUserName();
+
     const navigate = useNavigate();
     const navigateToHome = () => {
         navigate('/');
     }
     const navigateToLearnSets = () => {
-        navigate('/learnSets');
+        if(signedIn) navigate('/learnSets');
+        else alert("Sign in to unlock the area.")
     }
     const navigateToTest = () => {
-        navigate('/test');
+        if(signedIn) navigate('/test');
+        else alert("Sign in to unlock the area.")
     }
 
     return (
