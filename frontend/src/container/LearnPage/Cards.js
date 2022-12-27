@@ -62,11 +62,19 @@ const Cards = () => {
     }
     const findCards = async () => {
         const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: user } });
-        console.log(unlearnedMode);
-        if(unlearnedMode)
-            setCards(contents.filter(ele => ele.Learned === false));
-        else
-            setCards(contents);
+        // console.log(unlearnedMode);
+        const tmpCards = 
+        unlearnedMode ? contents.filter(ele => ele.Learned === false)
+        : contents;
+
+        if(cardIndex.length > 0){
+            const newIndex = tmpCards.findIndex(ele => ele._id === cards[cardIndex]._id);
+            setCardIndex(newIndex === -1 ? 0:newIndex);
+        }
+        else {
+            setCardIndex(0);
+        }
+        setCards(tmpCards);
     }
     const updateCardStatus = async (Japanese, Chinese) => {
         const { data: { msg } } = await instance.post('/learn', { lecture, Japanese, Chinese, userName: user } );
@@ -109,6 +117,7 @@ const Cards = () => {
     //         e.cancelBubble = true;   //ie
     //     }
     // }
+    // console.log(cardIndex)
 
     return (
         <>
@@ -127,7 +136,7 @@ const Cards = () => {
                 showCreate={showCardModal}
                 handleClose={handleClose}
             />
-            {tileMode && <FormControlLabel control={<Checkbox checked={unlearnedMode}/>} label="未學習模式" onClick={() => setMode(prev => !prev)} />}
+            <FormControlLabel control={<Checkbox checked={unlearnedMode}/>} label="未學習模式" onClick={() => setMode(prev => !prev)} />
             {tileMode ?
                 <div className='cardContainer'>
                     {
@@ -176,6 +185,15 @@ const Cards = () => {
                             >
                                 <div className='oneVocab'>{cards[cardIndex].Japanese} | {cards[cardIndex].Chinese}</div>
                                 <div className='index'>{cardIndex}</div>
+                                <Checkbox
+                                    // className='learned'
+                                    icon={cards[cardIndex].Learned ? <BookmarkIcon style={{ color: 'lime' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
+                                    checkedIcon={cards[cardIndex].Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'lime' }}/>}
+                                    onClick={event => {
+                                        updateCardStatus(cards[cardIndex].Japanese, cards[cardIndex].Chinese);
+                                        event.stopPropagation();
+                                    }}
+                                />
                             </Card>
                             <Stack
                                 direction="row"
@@ -184,7 +202,7 @@ const Cards = () => {
                                 spacing={2}
                             >
                                 <Item className='nextCard' onClick={decreaseCardIndex}>上個單字卡</Item>
-                                <Item className='learnCard' onClick={() => updateCardStatus(cards[cardIndex].Japanese, cards[cardIndex].Chinese)}>我學會了</Item>
+                                {/* <Item className='learnCard' onClick={() => updateCardStatus(cards[cardIndex].Japanese, cards[cardIndex].Chinese)}>我學會了</Item> */}
                                 <Item className='removeCard' onClick={() => handleRemoveCard(
                                         cards[cardIndex].Japanese, 
                                         cards[cardIndex].Chinese
