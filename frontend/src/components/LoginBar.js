@@ -7,23 +7,18 @@ import RegisterModal from './modals/RegisterModal';
 const LoginBar = () => {
     const { user, setUser, password, setPassword, 
         signedIn, handleLogin, handleLogout, 
-        handleRegister, showModal, setShowModal } = useUserName();
+        handleRegister, showModal, setShowModal, handleOpen,
+        newUser, setNewUser, newPassword, setNewPassword } = useUserName();
     const [showPassword, setShowPassword] = useState(false);
 
     //Register Modal
-    const handleOpen = () => {
-        setShowModal(true);
-        setUser("");
-        setPassword("");
-    }
     const handleClose = () => setShowModal(false);
-    const changeUserName = e => setUser(e.target.value);
-    const changeUserPassword = e => setPassword(e.target.value);
+    const changeNewUser = e => setNewUser(e.target.value);
+    const changeNewUserPassword = e => setNewPassword(e.target.value);
 
-    // Password
+    // Password switch: seen & unseen
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = event => event.preventDefault();
-    console.log(signedIn)
 	
     return (
         <>
@@ -31,8 +26,8 @@ const LoginBar = () => {
             <Button onClick={() => handleOpen()}>註冊帳號</Button>
             <RegisterModal 
                 showModal={showModal}
-                userName={user} changeUserName={changeUserName}
-                userPassword={password} changeUserPassword={changeUserPassword}
+                userName={newUser} changeUserName={changeNewUser}
+                userPassword={newPassword} changeUserPassword={changeNewUserPassword}
                 handleCreateUser={handleRegister} handleClose={handleClose}
             />
             {!signedIn ? 

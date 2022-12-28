@@ -22,7 +22,11 @@ const UserProvider = (props) => {
     const [user, setUser] = useState(savedMe || "");
     const [password, setPassword] = useState("");
     const [signedIn, setSignedIn] = useState(JSON.parse(saveSignedIn) || false);
+    
+    // For register
     const [showModal, setShowModal] = useState(false);
+    const [newUser, setNewUser] = useState("");
+    const [newPassword, setNewPassword] = useState("");
 
     const handleLogin = async () => {
         const { data: { msg } } = await instance.get('/login', { params: { user, password } });
@@ -36,9 +40,15 @@ const UserProvider = (props) => {
         setSignedIn(false);
     }
     const handleRegister = async () => {
-        const { data: { msg } } = await instance.post('/signup', { user, password });
+        // console.log(newUser)
+        const { data: { msg } } = await instance.post('/signup', { user: newUser, password: newPassword });
         alert(msg);
         setShowModal(false);
+    }
+    const handleOpen = () => {
+        setShowModal(true);
+        setNewUser("");
+        setNewPassword("");
     }
 
     useEffect(() => {
@@ -55,12 +65,13 @@ const UserProvider = (props) => {
             password,
             setUser,
             setPassword,
-			handleLogin,
-			handleLogout,
+			handleLogin, handleLogout,
             handleRegister,
             signedIn,
-            showModal,
-            setShowModal,
+            showModal, setShowModal,
+            handleOpen,
+            newUser, setNewUser,
+            newPassword, setNewPassword,
           }}
           {...props}
         />
