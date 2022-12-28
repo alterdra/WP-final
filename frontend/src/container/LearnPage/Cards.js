@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useUserName } from '../hook/useUserName';
+import Slide from '@mui/material/Slide';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -37,8 +38,14 @@ const Cards = () => {
     const [tileMode, setTileMode] = useState(true);
     const [cardIndex, setCardIndex] = useState(0);
     const [unlearnedMode, setMode] = useState(false);
-    const [isLearned, setIsLearned] = useState(false);
     const { user } = useUserName();
+
+    const [checked, setChecked] = useState(true);
+    const [increaseOrDecrease, setIncreaseOrDecrease] = useState("");
+    const handleChecked = (param) => {
+        setChecked(false);
+        setIncreaseOrDecrease(param);
+    }
     
     const increaseCardIndex = () => {
         if(cardIndex === cards.length - 1) setCardIndex(0);
@@ -99,19 +106,35 @@ const Cards = () => {
     }
 
     useEffect(() => {
-        console.log(cards);
-        console.log(cardIndex);
-        if(cards.length > 0)
-            setIsLearned(cards[cardIndex].Learned === true);
-    }, [cards])
-    useEffect(() => {
-        console.log(isLearned)
-    }, [isLearned])
-
-    useEffect(() => {
         console.log(unlearnedMode);
         findCards();
     }, [unlearnedMode]);
+
+    
+    useEffect(() => {
+        if(checked == true)
+            return;
+        const wait = async() => {
+            const delay = (n) => new Promise( r => setTimeout(r, n*1000));
+            await delay(0.2);
+            setChecked(true);
+            if(increaseOrDecrease === "increase")
+                increaseCardIndex();
+            else if(increaseOrDecrease === "decrease")
+                decreaseCardIndex();
+            else if(increaseOrDecrease === "remove")
+                handleRemoveCard(
+                    cards[cardIndex].Japanese, 
+                    cards[cardIndex].Chinese
+                );
+            else if(increaseOrDecrease === "update")
+                updateCardStatus(
+                    cards[cardIndex].Japanese, 
+                    cards[cardIndex].Chinese
+                );
+        }
+        wait();
+    }, [checked])
 
     const navigate = useNavigate();
     const navigateToLearnSets = () => {
@@ -126,7 +149,7 @@ const Cards = () => {
     //         e.cancelBubble = true;   //ie
     //     }
     // }
-    // console.log(cardIndex)
+    // console.log(checked, increaseOrDecrease);
 
     return (
         <>
@@ -185,30 +208,29 @@ const Cards = () => {
                 <div className='oneCardContainer'>
                     {
                         <div>
-                            <Card 
-                                className='oneCard' 
-                                onClick={() => { 
-                                    setTileMode(!tileMode);
-                                    setCardIndex(prev => 0);
-                                }}
-                            >
-                                <div className='oneVocab'>{cards[cardIndex].Japanese} | {cards[cardIndex].Chinese}</div>
-                                <div className='index'>{cardIndex}</div>
-                            </Card>
+                            <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
+                                <Card 
+                                    className='oneCard' 
+                                    onClick={() => { 
+                                        setTileMode(!tileMode);
+                                        setCardIndex(prev => 0);
+                                    }}
+                                >
+                                    <div className='oneVocab'>{cards[cardIndex].Japanese} | {cards[cardIndex].Chinese}</div>
+                                    <div className='index'>{cardIndex}</div>
+                                </Card>
+                            </Slide>
                             <Stack
                                 direction="row"
                                 divider={<Divider orientation="vertical" flexItem />}
                                 justifyContent="center"
                                 spacing={2}
                             >
-                                <Item className='nextCard' onClick={decreaseCardIndex}>上個單字卡</Item>
+                                <Item className='nextCard' onClick={() => handleChecked("decrease")}>上個單字卡</Item>
 
-                                {unlearnedMode && <Item className='learnCard' onClick={() => updateCardStatus(cards[cardIndex].Japanese, cards[cardIndex].Chinese)}>我學會了</Item>}
-                                <Item className='removeCard' onClick={() => handleRemoveCard(
-                                        cards[cardIndex].Japanese, 
-                                        cards[cardIndex].Chinese
-                                )}>刪除這張單字卡</Item>
-                                <Item className='nextCard' onClick={increaseCardIndex}>下個單字卡</Item>
+                                {unlearnedMode && <Item className='learnCard' onClick={() => handleChecked("update")}>我學會了</Item>}
+                                <Item className='removeCard' onClick={() => handleChecked("remove")}>刪除這張單字卡</Item>
+                                <Item className='nextCard' onClick={() => handleChecked("increase")}>下個單字卡</Item>
                             </Stack>
                         </div>
                     }
