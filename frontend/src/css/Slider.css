@@ -14,7 +14,10 @@ img {
     width: 45vw;
     height: 50vh;
 }
-  
+.reactSlick {
+    padding: 2vmin;
+    background: rgba(107, 49, 2, 0.541);
+}
 .slick-slide > div {
     display: grid;
     place-items: center;
@@ -22,8 +25,6 @@ img {
     height: 50vh;
     /* margin-top: 50px; */
     margin: auto;
-    padding: 1vmin;
-    background: green;
 }
 
 /* ref: https://stackoverflow.com/questions/60440138/centering-slides-with-react-slick */

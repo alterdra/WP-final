@@ -10,12 +10,17 @@ import "../css/Slider.css"
 
 const SliderSlick = () => {
     const {imgList, loading , error} = useImage();
+    
     const settings = {
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 2000,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        pauseOnHover: false,
+        // cssEase: "linear",
     };
     // useEffect(() => {
     //     console.log(imgList)

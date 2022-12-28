@@ -1,0 +1,8 @@
+.SliderWrapper {
+    padding: 3vmin;
+    width: 50vw;
+}
+.container {
+    /* width: 100vw; */
+    direction: rtl !important;
+}
