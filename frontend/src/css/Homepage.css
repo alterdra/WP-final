@@ -1,6 +1,11 @@
 .SliderWrapper {
     padding: 3vmin;
     width: 50vw;
+    transform: translate(-2%, -30%);
+}
+.LoginBarWrapper {
+    /* width: 45vw; */
+    direction: ltr;
 }
 .container {
     /* width: 100vw; */
