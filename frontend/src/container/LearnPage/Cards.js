@@ -173,33 +173,36 @@ const Cards = () => {
                 <div className='cardContainer'>
                     {
                         cards.map((item, index) => (
-                            <Card 
-                                key={uuidv4()} 
-                                className='card'
-                                onClick={() => { 
-                                    setTileMode(!tileMode);
-                                    setCardIndex(prev => index);
-                                }}
-                            >
-                                <div className='vocab'>{item.Japanese} | {item.Chinese}</div>
-                                <div className='index'>{index}</div>
-                                <CloseIcon
-                                    className='close'
-                                    onClick={event => {
-                                        handleRemoveCard(item.Japanese, item.Chinese);
-                                        event.stopPropagation();
+                            <div className='cardWrapper'>
+                                <Card 
+                                    key={uuidv4()} 
+                                    className='card'
+                                    elevation={2}
+                                    onClick={() => { 
+                                        setTileMode(!tileMode);
+                                        setCardIndex(prev => index);
                                     }}
-                                />
-                                <Checkbox
-                                    className='learned'
-                                    icon={item.Learned ? <BookmarkIcon style={{ color: 'lime' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
-                                    checkedIcon={item.Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'lime' }}/>}
-                                    onClick={event => {
-                                        updateCardStatus(item.Japanese, item.Chinese);
-                                        event.stopPropagation();
-                                    }}
-                                />
-                            </Card>
+                                >
+                                    <div className='vocab'>{item.Japanese} | {item.Chinese}</div>
+                                    <div className='index'>{index}</div>
+                                    <CloseIcon
+                                        className='close'
+                                        onClick={event => {
+                                            handleRemoveCard(item.Japanese, item.Chinese);
+                                            event.stopPropagation();
+                                        }}
+                                    />
+                                    <Checkbox
+                                        className='learned'
+                                        icon={item.Learned ? <BookmarkIcon style={{ color: 'lime' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
+                                        checkedIcon={item.Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'lime' }}/>}
+                                        onClick={event => {
+                                            updateCardStatus(item.Japanese, item.Chinese);
+                                            event.stopPropagation();
+                                        }}
+                                    />
+                                </Card>
+                            </div>
                         ))
                     }
                 </div>
@@ -211,6 +214,7 @@ const Cards = () => {
                             <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
                                 <Card 
                                     className='oneCard' 
+                                    elevation={2}
                                     onClick={() => { 
                                         setTileMode(!tileMode);
                                         setCardIndex(prev => 0);

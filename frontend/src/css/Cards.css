@@ -9,6 +9,9 @@
     flex-direction: center;
     justify-content: center;
 }
+.cardWrapper {
+    padding: 1vw;
+}
 
 .card, .oneCard {
     width: 30vh;
