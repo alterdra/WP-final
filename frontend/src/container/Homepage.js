@@ -16,8 +16,6 @@ const Homepage = () => {
 					<Slider />
 				</div>
 			</div>
-			
-				
 		</div>
 	);
 };
