@@ -7,8 +7,9 @@ import FolderSpecialRoundedIcon from '@mui/icons-material/FolderSpecialRounded';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { v4 as uuidv4 } from 'uuid';
-import { useNavigate, useResolvedPath } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useUserName } from '../hook/useUserName';
+import { ListItem, Fab, Paper } from '@mui/material';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
@@ -35,7 +36,7 @@ const LearnSets = () => {
                 User: user,
             }
         )
-        console.log(msg);
+        alert(msg);
     }
     const findLearnSets = async() => {
         const { data: { msg, contents } } = await instance.get('/lectures',
@@ -72,10 +73,12 @@ const LearnSets = () => {
 
     return (
         <>
-            <Button onClick={() => (setShowSetModal(true))}>
-                <CreateNewFolderIcon />
-                建立學習集
-            </Button>
+            <ListItem>
+                <Fab variant="extended"  onClick={() => (setShowSetModal(true))}>
+                    <CreateNewFolderIcon sx={{ mr: 1 }} />
+                    建立學習集
+                </Fab>
+            </ListItem>
             <SetModal 
                 label="學習集名稱" 
                 description="請輸入新學習集名稱"
@@ -88,16 +91,18 @@ const LearnSets = () => {
             <div className='learnsetsContainer'>
                 {
                     learnSets.map(item => (
-                        <div className='learnSet' key={uuidv4()} >
-                            <FolderSpecialRoundedIcon 
-                                className='folderIcon' 
-                                onClick={() => navigateToCards(item.name)}
-                            />
-                            <DeleteIcon 
-                                className='delete'
-                                onClick={() => handleRemoveSet(item.name)} 
-                            />
-                            <Box className='name'>{item.name}</Box>
+                        <div className='learnSetWrapper'>
+                            <Paper elevation={3} className='learnSet' key={uuidv4()} >
+                                <FolderSpecialRoundedIcon 
+                                    className='folderIcon' 
+                                    onClick={() => navigateToCards(item.name)}
+                                />
+                                <DeleteIcon 
+                                    className='delete'
+                                    onClick={() => handleRemoveSet(item.name)} 
+                                />
+                                <Box className='name'>{item.name}</Box>
+                            </Paper>
                         </div>
                     ))
                 }
