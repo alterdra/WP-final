@@ -1,0 +1,16 @@
+.Header {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    background: #73c2e3;
+}
+
+body {
+    text-align: center;
+    font-family: 'cwTeXFangSong', serif;
+    font-size: 30px;
+}

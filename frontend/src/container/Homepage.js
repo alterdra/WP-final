@@ -1,5 +1,5 @@
 import Slider from '../components/ImageSlider'
-import LoginBar from '../components/LoginBar';
+import NavBar from '../components/NavBar';
 import { useState } from 'react';
 import { useUserName } from './hook/useUserName';
 import React from 'react';
@@ -9,9 +9,7 @@ const Homepage = () => {
 	return (
 		<div>
 			<div className='container'>
-				<div className='LoginBarWrapper'>
-					<LoginBar />
-				</div>
+				<NavBar />
 				<div className='SliderWrapper' dir="rtl">
 					<Slider />
 				</div>

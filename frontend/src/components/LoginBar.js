@@ -4,6 +4,7 @@ import { Box, InputAdornment, TextField, IconButton, Button, Fab } from '@mui/ma
 import { AccountCircle, VisibilityOff , Visibility } from '@mui/icons-material'
 import RegisterModal from './modals/RegisterModal';
 
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -13,6 +14,8 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
+
+import '../css/LoginBar.css'
 
 const LoginBar = () => {
     const { user, setUser, password, setPassword, 
@@ -31,13 +34,7 @@ const LoginBar = () => {
 	const handleMouseDownPassword = event => event.preventDefault();
 	
     return (
-        <>
-            <ListItem>
-                <Fab variant="extended"  onClick={() => handleOpen()}>
-                    <HowToRegIcon sx={{ mr: 1 }} />
-                    點選以註冊帳號
-                </Fab>
-            </ListItem>
+        <List className='List'> 
             <RegisterModal 
                 showModal={showModal}
                 userName={newUser} changeUserName={changeNewUser}
@@ -45,68 +42,68 @@ const LoginBar = () => {
                 handleCreateUser={handleRegister} handleClose={handleClose}
             />
             {!signedIn ? 
-            (<>    
-                <ListItem>
+            (<>
+                {/* <ListItem className='ListItem'>
                     <ListItemAvatar>
                     <Avatar>
                         <InputIcon />
                     </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="請登入帳號密碼" />
+                    <ListItemText primary="請輸入帳號密碼" />
+                </ListItem> */}
+                <ListItem>
+                    <TextField
+                        id="input-with-icon-textfield1"
+                        label="Username"
+                        InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                            <AccountCircle />
+                            </InputAdornment>
+                        ),
+                        }}
+                        value={user}
+                        onChange={(e) => setUser(e.target.value)}
+                        variant="standard"
+                    />
                 </ListItem>
                 <ListItem>
-                    <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                        <TextField
-                            id="input-with-icon-textfield1"
-                            label="Username"
-                            InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                <AccountCircle />
-                                </InputAdornment>
-                            ),
-                            }}
-                            value={user}
-                            onChange={(e) => setUser(e.target.value)}
-                            variant="standard"
-                        />
-                        <br></br>
-                        <TextField
-                            type={showPassword ? 'text' : 'password'}
-                            id="input-with-icon-textfield2"
-                            label="Password"
-                            InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                <AccountCircle />
-                                </InputAdornment>
-                            ),
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                                </InputAdornment>
-                            ),
-                            }}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            variant="standard"
-                        />
-                        <br/>
-                        <Fab variant="extended"  onClick={() => handleLogin()}>
-                            <LoginIcon sx={{ mr: 1 }} />
-                            登入
-                        </Fab>
-                    </Box>
+                    <TextField
+                        type={showPassword ? 'text' : 'password'}
+                        id="input-with-icon-textfield2"
+                        label="Password"
+                        InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                            <AccountCircle />
+                            </InputAdornment>
+                        ),
+                        endAdornment: (
+                            <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                            >
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                            </InputAdornment>
+                        ),
+                        }}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        variant="standard"
+                    />
+                </ListItem>
+                <ListItem>
+                    <Fab variant="extended"  onClick={() => handleLogin()}>
+                        <LoginIcon sx={{ mr: 1 }} />
+                        登入
+                    </Fab>
                 </ListItem>
             </>) : 
-            (<div>
+            (<>
                 <ListItem>
                     <ListItemAvatar>
                     <Avatar>
@@ -121,8 +118,14 @@ const LoginBar = () => {
                         登出
                     </Fab>
                 </ListItem>
-            </div>)
-        }</>
+            </>)}
+            <ListItem>
+                <Fab variant="extended"  onClick={() => handleOpen()}>
+                    <HowToRegIcon sx={{ mr: 1 }} />
+                    註冊帳號
+                </Fab>
+            </ListItem>
+        </List>
     );
 }
 

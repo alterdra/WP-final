@@ -1,14 +1,19 @@
-.Header {
-    padding-top: 3vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
 .navIcon {
     border: solid;
-    padding: 1vh;
+    padding: 3vh;
     border-color: antiquewhite !important;
+    background-color: #cfdcd0;
     cursor: pointer;
 }
+
+.navBox  {
+    width: 25vw !important;
+    /* padding: 1vh; */
+}
+
+.text {
+    font-size: 30px;
+
+}
+
+

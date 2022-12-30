@@ -1,13 +1,10 @@
 .SliderWrapper {
     padding: 3vmin;
-    width: 50vw;
+    width: 55vw;
     /* position: relative; */
     position: absolute;
-    transform: translate(80%, 0%);
+    transform: translate(65%, 0%);
 
-}
-.LoginBarWrapper {
-    width: 30vw;
 }
 .container {
     display: flex;

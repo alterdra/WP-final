@@ -1,6 +1,13 @@
+.allWrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
 .learnsetsContainer {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .learnSetWrapper {
@@ -36,4 +43,8 @@
     position: absolute;
     bottom: 5%;
     right: 50%;
+}
+
+.createIcon {
+    width: 15vw !important;
 }

@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import { useUserName } from '../hook/useUserName';
 import { ListItem, Fab, Paper } from '@mui/material';
+import NavBar from '../../components/NavBar';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
@@ -73,39 +74,43 @@ const LearnSets = () => {
 
     return (
         <>
-            <ListItem>
-                <Fab variant="extended"  onClick={() => (setShowSetModal(true))}>
-                    <CreateNewFolderIcon sx={{ mr: 1 }} />
-                    建立學習集
-                </Fab>
-            </ListItem>
-            <SetModal 
-                label="學習集名稱" 
-                description="請輸入新學習集名稱"
-                name={setName}
-                changeName={changeSetName}
-                createFunc={createLearnSet}
-                showCreate={showSetModal}
-                handleClose={handleClose}
-            />
-            <div className='learnsetsContainer'>
-                {
-                    learnSets.map(item => (
-                        <div className='learnSetWrapper'>
-                            <Paper elevation={3} className='learnSet' key={uuidv4()} >
-                                <FolderSpecialRoundedIcon 
-                                    className='folderIcon' 
-                                    onClick={() => navigateToCards(item.name)}
-                                />
-                                <DeleteIcon 
-                                    className='delete'
-                                    onClick={() => handleRemoveSet(item.name)} 
-                                />
-                                <Box className='name'>{item.name}</Box>
-                            </Paper>
-                        </div>
-                    ))
-                }
+            <div className='allWrapper'>
+                <NavBar/>
+                <ListItem className='createIcon'>
+                    <Fab variant="extended"  onClick={() => (setShowSetModal(true))}>
+                        <CreateNewFolderIcon sx={{ mr: 1 }} />
+                        建立學習集
+                    </Fab>
+                </ListItem>
+                <SetModal 
+                    label="學習集名稱" 
+                    description="請輸入新學習集名稱"
+                    name={setName}
+                    changeName={changeSetName}
+                    createFunc={createLearnSet}
+                    showCreate={showSetModal}
+                    handleClose={handleClose}
+                />
+                <ListItem className='learnsetsContainer'>
+                    
+                    {
+                        learnSets.map(item => (
+                            <div className='learnSetWrapper'>
+                                <Paper elevation={3} className='learnSet' key={uuidv4()} >
+                                    <FolderSpecialRoundedIcon 
+                                        className='folderIcon' 
+                                        onClick={() => navigateToCards(item.name)}
+                                    />
+                                    <DeleteIcon 
+                                        className='delete'
+                                        onClick={() => handleRemoveSet(item.name)} 
+                                    />
+                                    <Box className='name'>{item.name}</Box>
+                                </Paper>
+                            </div>
+                        ))
+                    }
+                </ListItem>
             </div>
         </>
     );

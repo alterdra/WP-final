@@ -4,14 +4,14 @@ import LearnSetCards from './container/LearnPage/Cards';
 import Test from './container/TestPage/Test';
 import Choices from './container/TestPage/Choices'
 import Cloze from './container/TestPage/Cloze'
-import NavBar from './components/NavBar';
+import Header from './components/Header';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
-      <NavBar />
+      <Header />
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/learnSets' element={<LearnSets />} />

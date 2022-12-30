@@ -1,0 +1,10 @@
+.List {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-wrap: nowrap !important;
+}
+
+.ListItem {
+    /* width: 15vw; */
+}

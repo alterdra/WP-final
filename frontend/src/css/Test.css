@@ -1,0 +1,29 @@
+.testContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.scores {
+    position: relative;
+    padding-left: 7vw;
+    padding-top: 5vh;
+}
+
+.record {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap !important;
+    padding: 2vw;
+}
+
+.score {
+    width: 15vw !important;
+}
+
+.box {
+    width: 65vw;
+}
+
+.history {
+    transform: translate(29vw, 0vh);
+}

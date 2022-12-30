@@ -1,18 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import { Box, Stack, Paper } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { styled } from "@mui/material/styles";
 import '../css/NavBar.css'
 import { useUserName } from '../container/hook/useUserName';
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette
-        .mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-}));
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import InputIcon from '@mui/icons-material/Input';
 
 const NavBar = () => {
     const { signedIn } = useUserName();
@@ -30,17 +25,36 @@ const NavBar = () => {
         else alert("Sign in to unlock the area.")
     }
 
+    const text = {
+        fontSize: 30,
+    };
     return (
-        <div className='Header'>
-            <Box>
-            Some Logo
-            </Box>
-            <Stack direction="row" className='navIcon' spacing={5}>
-                <Item onClick={navigateToHome}>Home</Item>
-                <Item onClick={navigateToLearnSets}>Vocabulary</Item>
-                <Item onClick={navigateToTest}>Test</Item>
-            </Stack>
-        </div>
+        <List className='navBox'>
+            <ListItem className='navIcon' onClick={navigateToHome}>
+                <ListItemAvatar>
+                <Avatar>
+                    <InputIcon />
+                </Avatar>
+                </ListItemAvatar>
+                <ListItemText primaryTypographyProps={{ style: text }} primary="Home" secondary="主頁" />
+            </ListItem>
+            <ListItem className='navIcon' onClick={navigateToLearnSets}>
+                <ListItemAvatar>
+                <Avatar>
+                    <InputIcon />
+                </Avatar>
+                </ListItemAvatar>
+                <ListItemText primaryTypographyProps={{ style: text }} primary="Vocabulary" secondary="單字卡" />
+            </ListItem>
+            <ListItem className='navIcon' onClick={navigateToTest}>
+                <ListItemAvatar>
+                <Avatar>
+                    <InputIcon />
+                </Avatar>
+                </ListItemAvatar>
+                <ListItemText primaryTypographyProps={{ style: text }} primary="Test" secondary="考試區" />
+            </ListItem>
+        </List>   
     );
 }
 
