@@ -29,32 +29,34 @@ const NavBar = () => {
         fontSize: 30,
     };
     return (
-        <List className='navBox'>
-            <ListItem className='navIcon' onClick={navigateToHome}>
-                <ListItemAvatar>
-                <Avatar>
-                    <InputIcon />
-                </Avatar>
-                </ListItemAvatar>
-                <ListItemText primaryTypographyProps={{ style: text }} primary="Home" secondary="主頁" />
-            </ListItem>
-            <ListItem className='navIcon' onClick={navigateToLearnSets}>
-                <ListItemAvatar>
-                <Avatar>
-                    <InputIcon />
-                </Avatar>
-                </ListItemAvatar>
-                <ListItemText primaryTypographyProps={{ style: text }} primary="Vocabulary" secondary="單字卡" />
-            </ListItem>
-            <ListItem className='navIcon' onClick={navigateToTest}>
-                <ListItemAvatar>
-                <Avatar>
-                    <InputIcon />
-                </Avatar>
-                </ListItemAvatar>
-                <ListItemText primaryTypographyProps={{ style: text }} primary="Test" secondary="考試區" />
-            </ListItem>
-        </List>   
+        <div className='wrapper'>
+            <List className='navBox'>
+                <ListItem className='navIcon' onClick={navigateToHome}>
+                    <ListItemAvatar>
+                    <Avatar>
+                        <InputIcon />
+                    </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primaryTypographyProps={{ style: text }} primary="Home" secondary="主頁" />
+                </ListItem>
+                <ListItem className='navIcon' onClick={navigateToLearnSets}>
+                    <ListItemAvatar>
+                    <Avatar>
+                        <InputIcon />
+                    </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primaryTypographyProps={{ style: text }} primary="Vocabulary" secondary="單字卡" />
+                </ListItem>
+                <ListItem className='navIcon' onClick={navigateToTest}>
+                    <ListItemAvatar>
+                    <Avatar>
+                        <InputIcon />
+                    </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primaryTypographyProps={{ style: text }} primary="Test" secondary="考試區" />
+                </ListItem>
+            </List>
+        </div>
     );
 }
 

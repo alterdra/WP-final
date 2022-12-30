@@ -13,7 +13,10 @@
 
 .text {
     font-size: 30px;
+}
 
+.wrapper {
+    padding: 2vh;
 }
 
 
