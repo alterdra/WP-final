@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <div className='Header'>
             <Box>
-                <div>大家來學日本語 出会いを大切に</div>
+                <div className='text'>大家來學日本語 出会いを大切に</div>
             </Box>
             <div className='LoginBarWrapper'>
 				<LoginBar />

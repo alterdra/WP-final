@@ -1,19 +1,28 @@
 .List {
+    width: 60vw;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     flex-wrap: nowrap !important;
 }
-
+.username {
+    width: 200px !important;
+}
+.password {
+    width: 200px !important;
+}
+.login {
+    width: 150px !important;
+}
 
 .register {
-    width: 300px !important;
+    width: 150px !important;
 }
 
 .logout {
-    width: 250px !important;
+    width: 150px !important;
 }
 
 .welcome {
-    width: 250px !important;
+    width: 210px !important;
 }

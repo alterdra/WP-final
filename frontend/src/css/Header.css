@@ -8,9 +8,16 @@
     flex-wrap: nowrap;
     background: #73c2e3;
 }
+@media screen and (max-width: 1100px){
+    .Header{
+        width: 1100px;
+    }
+}
 
 body {
     text-align: center;
     font-family: 'cwTeXFangSong', serif;
     font-size: 30px;
+    white-space: nowrap;
 }
+

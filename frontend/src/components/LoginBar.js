@@ -51,7 +51,7 @@ const LoginBar = () => {
                     </ListItemAvatar>
                     <ListItemText primary="請輸入帳號密碼" />
                 </ListItem> */}
-                <ListItem>
+                <ListItem className='username'>
                     <TextField
                         id="input-with-icon-textfield1"
                         label="Username"
@@ -67,7 +67,7 @@ const LoginBar = () => {
                         variant="standard"
                     />
                 </ListItem>
-                <ListItem>
+                <ListItem className='password'>
                     <TextField
                         type={showPassword ? 'text' : 'password'}
                         id="input-with-icon-textfield2"
@@ -96,8 +96,8 @@ const LoginBar = () => {
                         variant="standard"
                     />
                 </ListItem>
-                <ListItem>
-                    <Fab variant="extended"  onClick={() => handleLogin()}>
+                <ListItem className='login'>
+                    <Fab className='login' variant="extended"  onClick={() => handleLogin()}>
                         <LoginIcon sx={{ mr: 1 }} />
                         登入
                     </Fab>
@@ -113,14 +113,14 @@ const LoginBar = () => {
                     <ListItemText primary={`歡迎回來, ${user}!`} />
                 </ListItem>
                 <ListItem className='logout'>
-                    <Fab variant="extended"  onClick={() => handleLogout()}>
+                    <Fab className='logout' variant="extended"  onClick={() => handleLogout()}>
                         <LogoutIcon sx={{ mr: 1 }} />
                         登出
                     </Fab>
                 </ListItem>
             </>)}
             <ListItem className='register'>
-                <Fab variant="extended"  onClick={() => handleOpen()}>
+                <Fab className='register' variant="extended"  onClick={() => handleOpen()}>
                     <HowToRegIcon sx={{ mr: 1 }} />
                     註冊帳號
                 </Fab>

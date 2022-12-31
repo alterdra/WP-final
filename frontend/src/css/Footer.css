@@ -9,6 +9,12 @@
     bottom: 0;
 }
 
+@media screen and (max-width: 1100px){
+    .Footer{
+        width: 1100px;
+    }
+}
+
 .Paper {
     text-align: center;
     background-color: burlywood;
