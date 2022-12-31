@@ -5,6 +5,15 @@
     flex-wrap: nowrap !important;
 }
 
-.ListItem {
-    /* width: 15vw; */
+
+.register {
+    width: 300px !important;
+}
+
+.logout {
+    width: 250px !important;
+}
+
+.welcome {
+    width: 250px !important;
 }

@@ -16,8 +16,8 @@
 
 .learnSet {
     position: relative;
-    width: 30vh;
-    height: 20vh;
+    width: 250px;
+    height: 160px;
     border-radius: 10px;
     background: rgb(248, 245, 242) !important;
     display: flex;
@@ -49,6 +49,7 @@
 
 .createIcon {
     width: 180px !important;
+    height: 100px;
 }
 .Icon {
     width: 150px !important;

@@ -1,13 +1,12 @@
 .SliderWrapper {
     padding: 3vmin;
     width: 55vw;
-    /* position: relative; */
-    position: absolute;
-    transform: translate(34vw, 2vh);
+    transform: translate(7vw, 2vh);
 
 }
 .container {
     display: flex;
+    flex-direction: row;
     flex-wrap: nowrap;
 }
 body {

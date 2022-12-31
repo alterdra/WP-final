@@ -104,7 +104,7 @@ const LoginBar = () => {
                 </ListItem>
             </>) : 
             (<>
-                <ListItem>
+                <ListItem className='welcome'>
                     <ListItemAvatar>
                     <Avatar>
                         <ThumbUpAltIcon />
@@ -112,14 +112,14 @@ const LoginBar = () => {
                     </ListItemAvatar>
                     <ListItemText primary={`歡迎回來, ${user}!`} />
                 </ListItem>
-                <ListItem>
+                <ListItem className='logout'>
                     <Fab variant="extended"  onClick={() => handleLogout()}>
                         <LogoutIcon sx={{ mr: 1 }} />
                         登出
                     </Fab>
                 </ListItem>
             </>)}
-            <ListItem>
+            <ListItem className='register'>
                 <Fab variant="extended"  onClick={() => handleOpen()}>
                     <HowToRegIcon sx={{ mr: 1 }} />
                     註冊帳號
