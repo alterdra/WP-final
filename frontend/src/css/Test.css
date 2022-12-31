@@ -22,6 +22,9 @@
 
 .box {
     width: 65vw;
+    display: flex;
+    flex-wrap: wrap !important;
+    justify-content: center;
 }
 
 .history {
