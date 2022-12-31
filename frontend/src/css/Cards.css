@@ -14,14 +14,14 @@
 }
 
 .card, .oneCard {
-    width: 30vh;
-    height: 20vh;
+    width: 250px;
+    height: 160px;
     background-color: antiquewhite !important;
     position: relative;
 }
 .oneCard {
-    width: 75vh;
-    height: 50vh;
+    width: 600px;
+    height: 400px;
 }
 
 .vocab, .oneVocab {
@@ -64,4 +64,9 @@
     top: 70%;
     right: 4%;
     color: lime;
+}
+
+.lectureName {
+    display: flex;
+    justify-content: flex-start;
 }

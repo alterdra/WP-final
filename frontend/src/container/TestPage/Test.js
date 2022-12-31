@@ -9,9 +9,11 @@ import NavBar from '../../components/NavBar';
 import '../../css/Test.css'
 
 import CloseIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/Delete';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import HistoryIcon from '@mui/icons-material/History';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
@@ -83,14 +85,14 @@ const Test = () => {
                     <ListItem className='score' key={uuidv4()}>
                         <ListItemAvatar>
                         <Avatar>
-                            <ThumbUpAltIcon />
+                            <HistoryEduIcon/>
                         </Avatar>
                         </ListItemAvatar>
                         <ListItemText 
                             primary={`課程: ${test.lecture}`} 
                             secondary={`分數: ${test.score}`}/>
                         <Fab variant="extended"  onClick={() => deleteTestRecord(test.id)}>
-                            <CloseIcon sx={{ mr: 1 }} />
+                            <DeleteIcon sx={{ mr: 1 }} />
                             刪除紀錄
                         </Fab>
                     </ListItem>
@@ -172,7 +174,7 @@ const Test = () => {
                     <ListItem >
                         <ListItemAvatar>
                         <Avatar>
-                            <ThumbUpAltIcon />
+                            <HistoryIcon />
                         </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary="歷史成績" />

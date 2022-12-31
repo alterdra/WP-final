@@ -19,7 +19,8 @@
     width: 250px;
     height: 160px;
     border-radius: 10px;
-    background: rgb(248, 245, 242) !important;
+    /* background: rgb(248, 245, 242) !important; */
+    background-color: rgb(251, 241, 228) !important;
     display: flex;
     justify-content: center;
 }

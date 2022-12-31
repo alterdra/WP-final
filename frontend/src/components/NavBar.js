@@ -7,7 +7,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import InputIcon from '@mui/icons-material/Input';
+import HomeIcon from '@mui/icons-material/Home';
+import TranslateIcon from '@mui/icons-material/Translate';
+import QuizIcon from '@mui/icons-material/Quiz';
 
 const NavBar = () => {
     const { signedIn } = useUserName();
@@ -34,7 +36,7 @@ const NavBar = () => {
                 <ListItem className='navIcon' onClick={navigateToHome}>
                     <ListItemAvatar>
                     <Avatar>
-                        <InputIcon />
+                        <HomeIcon />
                     </Avatar>
                     </ListItemAvatar>
                     <ListItemText primaryTypographyProps={{ style: text }} primary="Home" secondary="主頁" />
@@ -42,7 +44,7 @@ const NavBar = () => {
                 <ListItem className='navIcon' onClick={navigateToLearnSets}>
                     <ListItemAvatar>
                     <Avatar>
-                        <InputIcon />
+                        <TranslateIcon />
                     </Avatar>
                     </ListItemAvatar>
                     <ListItemText primaryTypographyProps={{ style: text }} primary="Vocabulary" secondary="單字卡" />
@@ -50,7 +52,7 @@ const NavBar = () => {
                 <ListItem className='navIcon' onClick={navigateToTest}>
                     <ListItemAvatar>
                     <Avatar>
-                        <InputIcon />
+                        <QuizIcon />
                     </Avatar>
                     </ListItemAvatar>
                     <ListItemText primaryTypographyProps={{ style: text }} primary="Test" secondary="考試區" />

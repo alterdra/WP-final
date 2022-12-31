@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Paper, Card, Stack, Divider, styled, Checkbox, FormControlLabel, Switch } from '@mui/material';
+import { Button, Paper, Card, Stack, Divider, styled, Checkbox, FormControlLabel, Switch, List, Fab } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CloseIcon from '@mui/icons-material/Close';
@@ -11,13 +11,30 @@ import axios from 'axios';
 import { useUserName } from '../hook/useUserName';
 import Slide from '@mui/material/Slide';
 
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddIcon from '@mui/icons-material/Add';
+
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    width: '18.5vh',
+    width: '19.5vh',
+}));
+
+const ItemUnlearned = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    width: '13.5vh',
 }));
 
 const instance = axios.create({
@@ -153,12 +170,34 @@ const Cards = () => {
 
     return (
         <>
-            {!tileMode ? <div>註：點選單字卡啟用並排模式</div>
-            :<div>註：點選單字卡啟用單字循環模式</div>}
-            <Paper>{lecture}</Paper>
-            <Button onClick={navigateToLearnSets}>上一頁</Button>
+            {!tileMode ? <div>貼心提醒：點選單字卡後，會啟用並排模式喔~</div>
+            :<div>貼心提醒：點選單字卡後，會啟用單字卡循環模式喔~</div>}
+            <List className='lectureName'>
+                <ListItem >
+                    <ListItemAvatar>
+                    <Avatar>
+                        <LocalLibraryIcon />
+                    </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={`課程：${lecture}`} />
+                </ListItem>
+                <ListItem>
+                    <Fab variant="extended" onClick={navigateToLearnSets}>
+                        <ArrowBackIcon sx={{ mr: 1 }} />
+                        回到上一頁
+                    </Fab>
+                </ListItem>
+                <ListItem>
+                    <Fab variant="extended" onClick={() => (setShowCardModal(true))}>
+                        <AddIcon sx={{ mr: 1 }} />
+                        新增單字組
+                    </Fab>
+                </ListItem>
+                <ListItem>
+                    <FormControlLabel control={<Switch checked={unlearnedMode} onClick={() => setMode(prev => !prev)}/>} label="顯示未學字卡" />
+                </ListItem>
+            </List>
             
-            <Button onClick={() => (setShowCardModal(true))}>新增單字組</Button>
             <CardModal 
                 description="請輸入欲新增單字名稱"
                 label1="單字日文名稱" label2="單字中文名稱"
@@ -168,7 +207,6 @@ const Cards = () => {
                 showCreate={showCardModal}
                 handleClose={handleClose}
             />
-            <FormControlLabel control={<Switch checked={unlearnedMode} onClick={() => setMode(prev => !prev)}/>} label="顯示未學字卡" />
             {tileMode ?
                 <div className='cardContainer'>
                     {
@@ -229,12 +267,24 @@ const Cards = () => {
                                 divider={<Divider orientation="vertical" flexItem />}
                                 justifyContent="center"
                                 spacing={2}
+                                flexWrap="wrap"
                             >
-                                <Item className='nextCard' onClick={() => handleChecked("decrease")}>上個單字卡</Item>
-
-                                {unlearnedMode && <Item className='learnCard' onClick={() => handleChecked("update")}>我學會了</Item>}
-                                <Item className='removeCard' onClick={() => handleChecked("remove")}>刪除這張單字卡</Item>
-                                <Item className='nextCard' onClick={() => handleChecked("increase")}>下個單字卡</Item>
+                                {!unlearnedMode ?
+                                <>
+                                    <Item className='nextCard' onClick={() => handleChecked("decrease")}>上個單字卡</Item>
+                                    <Item className='removeCard' onClick={() => handleChecked("remove")}>刪除這張單字卡</Item>
+                                    <Item className='nextCard' onClick={() => handleChecked("increase")}>下個單字卡</Item>
+                                </>
+                                :<>
+                                    <ItemUnlearned className='nextCard' onClick={() => handleChecked("decrease")}>上個單字卡</ItemUnlearned>
+                                    <ItemUnlearned className='removeCard' onClick={() => handleChecked("remove")}>刪除這張單字卡</ItemUnlearned>
+                                    <ItemUnlearned className='learnCard' onClick={() => handleChecked("update")}>我學會了</ItemUnlearned>
+                                    <ItemUnlearned className='nextCard' onClick={() => handleChecked("increase")}>下個單字卡</ItemUnlearned>
+                                </>}
+                                    
+                                
+                                
+                                
                             </Stack>
                         </div>
                     }

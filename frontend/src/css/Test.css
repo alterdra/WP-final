@@ -18,6 +18,9 @@
 
 .score {
     width: 350px !important;
+    border: solid;
+    border-color: antiquewhite !important;
+    background-color: #cfdcd0;
 }
 
 .box {
