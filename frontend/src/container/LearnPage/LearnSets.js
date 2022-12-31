@@ -75,7 +75,6 @@ const LearnSets = () => {
     return (
         <>
             <div className='allWrapper'>
-                <NavBar/>
                 <ListItem className='createIcon'>
                     <Fab className='Icon' variant="extended"  onClick={() => (setShowSetModal(true))}>
                         <CreateNewFolderIcon sx={{ mr: 1 }} />

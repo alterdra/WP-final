@@ -1,10 +1,11 @@
 .SliderWrapper {
-    padding: 3vmin;
+    position: absolute;
+    left: 40%;
+    padding-top: 10%;
     width: 55vw;
-    transform: translate(7vw, 2vh);
-
 }
 .container {
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;

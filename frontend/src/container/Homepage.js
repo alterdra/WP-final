@@ -9,7 +9,6 @@ const Homepage = () => {
 	return (
 		<div>
 			<div className='container'>
-				<NavBar />
 				<div className='SliderWrapper' dir="rtl">
 					<Slider />
 				</div>

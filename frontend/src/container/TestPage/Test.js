@@ -103,7 +103,6 @@ const Test = () => {
 
     return (
         <div className='testContainer'>
-            <NavBar />
             <div className='scores'>
                 <Box className='box'>
                     <FormControl fullWidth>
