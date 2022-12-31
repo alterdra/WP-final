@@ -8,12 +8,21 @@ import { useUserName } from '../hook/useUserName';
 import NavBar from '../../components/NavBar';
 import '../../css/Test.css'
 
-import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import HistoryIcon from '@mui/icons-material/History';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+
+import { styled } from '@mui/material/styles';
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  }));
 
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
@@ -102,88 +111,94 @@ const Test = () => {
     };
 
     return (
-        <div className='testContainer'>
-            <div className='scores'>
-                <Box className='box'>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">選擇要考試的學習集</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            // defaultValue={learnSets.length > 0 ?learnSets[0]:""}
-                            value={learnSetName}
-                            label="LearnSet"
-                            onChange={handleLearnSetChange}
-                        >
-                            {learnSets.map(option => (
-                                <MenuItem 
-                                    key={uuidv4()} 
-                                    value={option}
+        <Box sx={{ display: 'flex' }}>
+            <NavBar />
+            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                <DrawerHeader />
+                <div className='testContainer'>
+                    <div className='scores'>
+                        <Box className='box'>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">選擇要考試的學習集</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    // defaultValue={learnSets.length > 0 ?learnSets[0]:""}
+                                    value={learnSetName}
+                                    label="LearnSet"
+                                    onChange={handleLearnSetChange}
                                 >
-                                    {option}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">題數</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            defaultValue={1}
-                            value={amount}
-                            label="Amount"
-                            onChange={handleAmountChange}
-                        >
-                            {questionNum.map(item => 
-                                <MenuItem 
-                                    value={item}
-                                    key={uuidv4()} 
+                                    {learnSets.map(option => (
+                                        <MenuItem 
+                                            key={uuidv4()} 
+                                            value={option}
+                                        >
+                                            {option}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">題數</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    defaultValue={1}
+                                    value={amount}
+                                    label="Amount"
+                                    onChange={handleAmountChange}
                                 >
-                                    {item}
-                                </MenuItem>
-                            )}
-                        </Select>
-                    </FormControl>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">考試方式</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            defaultValue="填充題"
-                            value={testType}
-                            label="TestType"
-                            onChange={handleTestType}
-                        >
-                            <MenuItem value="選擇題">選擇題</MenuItem>
-                            <MenuItem value="填充題">填充題</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <Button onClick={() => {
-                        if(learnSetName === "")
-                            return;
-                        if(testType === "選擇題")
-                            navigateToChoice(learnSets[selectedIndex], amount);
-                        else
-                            navigateToCloze(learnSets[selectedIndex], amount);
-                    }}>確定</Button>
-                </Box>
-                <br></br>
-                <List className='history'>
-                    <ListItem >
-                        <ListItemAvatar>
-                        <Avatar>
-                            <HistoryIcon />
-                        </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="歷史成績" />
-                    </ListItem>
-                </List>
-                
-                {testRecords.length !== 0 ? displayTest()
-                : <Typography>目前還沒有成績喔...</Typography>}
-            </div>
-        </div>
+                                    {questionNum.map(item => 
+                                        <MenuItem 
+                                            value={item}
+                                            key={uuidv4()} 
+                                        >
+                                            {item}
+                                        </MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">考試方式</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    defaultValue="填充題"
+                                    value={testType}
+                                    label="TestType"
+                                    onChange={handleTestType}
+                                >
+                                    <MenuItem value="選擇題">選擇題</MenuItem>
+                                    <MenuItem value="填充題">填充題</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <Button onClick={() => {
+                                if(learnSetName === "")
+                                    return;
+                                if(testType === "選擇題")
+                                    navigateToChoice(learnSets[selectedIndex], amount);
+                                else
+                                    navigateToCloze(learnSets[selectedIndex], amount);
+                            }}>確定</Button>
+                        </Box>
+                        <br></br>
+                        <List className='history'>
+                            <ListItem >
+                                <ListItemAvatar>
+                                <Avatar>
+                                    <HistoryIcon />
+                                </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary="歷史成績" />
+                            </ListItem>
+                        </List>
+                        
+                        {testRecords.length !== 0 ? displayTest()
+                        : <Typography>目前還沒有成績喔...</Typography>}
+                    </div>
+                </div>
+            </Box>
+        </Box> 
     );
 }
 

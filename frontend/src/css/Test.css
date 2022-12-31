@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    padding-top: 2%;
 }
 .scores {
     position: relative;
@@ -24,10 +25,10 @@
 }
 
 .box {
-    width: 65vw;
+    width: 75vw;
     display: flex;
-    flex-wrap: wrap !important;
-    justify-content: center;
+    /* flex-wrap: wrap !important; */
+    justify-content: center !important;
 }
 
 .history {

@@ -12,9 +12,20 @@ import { useUserName } from '../hook/useUserName';
 import { ListItem, Fab, Paper } from '@mui/material';
 import NavBar from '../../components/NavBar';
 
+import { styled } from '@mui/material/styles';
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  }));
+
 const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
 })
+
 
 const LearnSets = () => {
     const [setName, setSetName] = useState('');
@@ -73,46 +84,50 @@ const LearnSets = () => {
     }, []);
 
     return (
-        <>
-            <div className='allWrapper'>
-                <ListItem className='createIcon'>
-                    <Fab className='Icon' variant="extended"  onClick={() => (setShowSetModal(true))}>
-                        <CreateNewFolderIcon sx={{ mr: 1 }} />
-                        建立學習集
-                    </Fab>
-                </ListItem>
-                <SetModal 
-                    label="學習集名稱" 
-                    description="請輸入新學習集名稱"
-                    name={setName}
-                    changeName={changeSetName}
-                    createFunc={createLearnSet}
-                    showCreate={showSetModal}
-                    handleClose={handleClose}
-                />
-                <ListItem className='learnsetsContainer'>
-                    
-                    {
-                        learnSets.map(item => (
-                            <div className='learnSetWrapper'>
-                                <Paper elevation={3} className='learnSet' key={uuidv4()} >
-                                    <FolderSpecialRoundedIcon 
-                                        className='folderIcon' 
-                                        onClick={() => navigateToCards(item.name)}
-                                    />
-                                    <DeleteIcon 
-                                        className='delete'
-                                        onClick={() => handleRemoveSet(item.name)} 
-                                    />
-                                    
-                                    <Box className='name'><div>{item.name}</div></Box>
-                                </Paper>
-                            </div>
-                        ))
-                    }
-                </ListItem>
-            </div>
-        </>
+        <Box sx={{ display: 'flex' }}>
+            <NavBar />
+            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                <DrawerHeader />
+                <div className='allWrapper'>
+                    <ListItem className='createIcon'>
+                        <Fab className='Icon' variant="extended"  onClick={() => (setShowSetModal(true))}>
+                            <CreateNewFolderIcon sx={{ mr: 1 }} />
+                            建立學習集
+                        </Fab>
+                    </ListItem>
+                    <SetModal 
+                        label="學習集名稱" 
+                        description="請輸入新學習集名稱"
+                        name={setName}
+                        changeName={changeSetName}
+                        createFunc={createLearnSet}
+                        showCreate={showSetModal}
+                        handleClose={handleClose}
+                    />
+                    <ListItem className='learnsetsContainer'>
+                        
+                        {
+                            learnSets.map(item => (
+                                <div className='learnSetWrapper'>
+                                    <Paper elevation={3} className='learnSet' key={uuidv4()} >
+                                        <FolderSpecialRoundedIcon 
+                                            className='folderIcon' 
+                                            onClick={() => navigateToCards(item.name)}
+                                        />
+                                        <DeleteIcon 
+                                            className='delete'
+                                            onClick={() => handleRemoveSet(item.name)} 
+                                        />
+                                        
+                                        <Box className='name'><div>{item.name}</div></Box>
+                                    </Paper>
+                                </div>
+                            ))
+                        }
+                    </ListItem>
+                </div>
+            </Box>
+        </Box>
     );
 }
 
