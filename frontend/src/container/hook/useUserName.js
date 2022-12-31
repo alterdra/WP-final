@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { WindowSharp } from "@mui/icons-material";
 
 const LOCALSTORAGE_KEY_ME = "save-me";
 const LOCALSTORAGE_KEY_SIGNEDIN = "save-login";
@@ -22,12 +23,10 @@ const UserProvider = (props) => {
     const [user, setUser] = useState(savedMe || "");
     const [password, setPassword] = useState("");
     const [signedIn, setSignedIn] = useState(JSON.parse(saveSignedIn) || false);
-    
     // For register
     const [showModal, setShowModal] = useState(false);
     const [newUser, setNewUser] = useState("");
     const [newPassword, setNewPassword] = useState("");
-
     const handleLogin = async () => {
         const { data: { msg } } = await instance.get('/login', { params: { user, password } });
         alert(msg);
@@ -38,6 +37,7 @@ const UserProvider = (props) => {
         // setUser("");
         setPassword("");
         setSignedIn(false);
+		window.location.href = '/';
     }
     const handleRegister = async () => {
         // console.log(newUser)

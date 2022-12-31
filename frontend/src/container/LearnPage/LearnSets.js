@@ -77,7 +77,7 @@ const LearnSets = () => {
             <div className='allWrapper'>
                 <NavBar/>
                 <ListItem className='createIcon'>
-                    <Fab variant="extended"  onClick={() => (setShowSetModal(true))}>
+                    <Fab className='Icon' variant="extended"  onClick={() => (setShowSetModal(true))}>
                         <CreateNewFolderIcon sx={{ mr: 1 }} />
                         建立學習集
                     </Fab>
@@ -105,7 +105,8 @@ const LearnSets = () => {
                                         className='delete'
                                         onClick={() => handleRemoveSet(item.name)} 
                                     />
-                                    <Box className='name'>{item.name}</Box>
+                                    
+                                    <Box className='name'><div>{item.name}</div></Box>
                                 </Paper>
                             </div>
                         ))

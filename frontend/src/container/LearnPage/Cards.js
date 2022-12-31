@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Paper, Card, Stack, Divider, styled, Checkbox, FormControlLabel } from '@mui/material';
+import { Button, Paper, Card, Stack, Divider, styled, Checkbox, FormControlLabel, Switch } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CloseIcon from '@mui/icons-material/Close';
@@ -168,7 +168,7 @@ const Cards = () => {
                 showCreate={showCardModal}
                 handleClose={handleClose}
             />
-            <FormControlLabel control={<Checkbox checked={unlearnedMode}/>} label="未學習模式" onClick={() => setMode(prev => !prev)} />
+            <FormControlLabel control={<Switch checked={unlearnedMode} onClick={() => setMode(prev => !prev)}/>} label="顯示未學字卡" />
             {tileMode ?
                 <div className='cardContainer'>
                     {

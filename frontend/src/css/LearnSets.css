@@ -20,6 +20,8 @@
     height: 20vh;
     border-radius: 10px;
     background: rgb(248, 245, 242) !important;
+    display: flex;
+    justify-content: center;
 }
 
 .folderIcon {
@@ -41,10 +43,13 @@
 
 .name {
     position: absolute;
-    bottom: 5%;
-    right: 50%;
+    font-size: 2.5vmin;
+    bottom: 8%;
 }
 
 .createIcon {
-    width: 15vw !important;
+    width: 180px !important;
+}
+.Icon {
+    width: 150px !important;
 }
