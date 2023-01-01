@@ -26,6 +26,7 @@ const RegisterModal = ( {
                         請輸入使用者資訊
                     </Typography>
                     <TextField 
+                        className='username'
                         id="outlined-basic" 
                         label="使用者名稱"
                         variant="outlined" 
@@ -35,6 +36,7 @@ const RegisterModal = ( {
                     />
                     <TextField 
                         type={showPassword ? 'text' : 'password'}
+                        className='password'
                         id="outlined-basic" 
                         label="密碼"
                         variant="outlined" 
@@ -42,11 +44,6 @@ const RegisterModal = ( {
                         onChange={changeUserPassword} 
                         autoFocus={focusElement==="newPassword"}
                         InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                <AccountCircle />
-                                </InputAdornment>
-                            ),
                             endAdornment: (
                                 <InputAdornment position="end">
                                 <IconButton
@@ -55,7 +52,7 @@ const RegisterModal = ( {
                                     onMouseDown={handleMouseDownPassword}
                                     edge="end"
                                 >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
                                 </IconButton>
                                 </InputAdornment>
                             ),
