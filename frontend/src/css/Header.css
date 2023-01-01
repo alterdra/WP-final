@@ -1,6 +1,6 @@
 .Header {
-    padding-top: 2vh;
-    padding-bottom: 2vh;
+    /* padding-top: 2vh;
+    padding-bottom: 2vh; */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
