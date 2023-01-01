@@ -1,11 +1,11 @@
-import { Box, Stack, Paper } from '@mui/material';
+import { Typography, Stack, Paper } from '@mui/material';
 import '../css/Footer.css'
 
 const Footer = () => {
     return (
         <Stack direction='row' className='Footer'>
-            <Paper className='Paper'>Contact Information:</Paper>
-            <Paper className='Paper'>Web programming Team:</Paper>
+            <Typography className='contact'>聯絡資訊：jim20010112@gmail.com</Typography>
+            <Typography className='team'>組別：1</Typography>
         </Stack>
     );
 }
