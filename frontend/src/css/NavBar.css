@@ -1,22 +1,8 @@
-.navIcon {
-    border: solid;
-    padding: 3vh;
-    border-color: antiquewhite !important;
-    background-color: #cfdcd0;
-    cursor: pointer;
-}
-
-.navBox  {
-    width: 400px !important;
-    /* padding: 1vh; */
-}
-
-.text {
-    font-size: 30px;
-}
-
-.wrapper {
-    padding: 2vh;
+.icon{
+    margin-top: 10px !important;
+    margin-right: 10px !important;
+    width: 90px !important;
+    height: 90px !important;
 }
 
 

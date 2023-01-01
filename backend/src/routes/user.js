@@ -1,5 +1,6 @@
 import { Router } from "express";
 import User from "../models/user";
+import dataInit from "../upload";
 
 const router = Router();
 
@@ -51,6 +52,7 @@ const verifyAccount = async (req, res) => {
             msg: "Add account fails.",
         });
     }
+    dataInit({userName: name});
 }
 
 router.post("/signup", (req,  res) => {

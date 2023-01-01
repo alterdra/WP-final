@@ -1,0 +1,113 @@
+[
+    {
+        "name": "飲食",
+        "cards": [
+            {
+                "Chinese": "蛋", 
+                "Japanese": "たまご",
+                "Learned": false
+            },
+            {
+                "Chinese": "牛肉", 
+                "Japanese": "ぎゅうにく",
+                "Learned": false
+            },
+            {
+                "Chinese": "蔬菜", 
+                "Japanese": "やさい",
+                "Learned": false
+            },
+            {
+                "Chinese": "麵包", 
+                "Japanese": "パン",
+                "Learned": false
+            },
+            {
+                "Chinese": "雞肉", 
+                "Japanese": "とりにく",
+                "Learned": false
+            },
+            {
+                "Chinese": "拉麵", 
+                "Japanese": "らーめん",
+                "Learned": false
+            },
+            {
+                "Chinese": "炸豬排", 
+                "Japanese": "とんかつ",
+                "Learned": false
+            },
+            {
+                "Chinese": "水餃", 
+                "Japanese": "ギョーザ",
+                "Learned": false
+            },
+            {
+                "Chinese": "生魚片", 
+                "Japanese": "さしみ",
+                "Learned": false
+            },
+            {
+                "Chinese": "冷凍食品", 
+                "Japanese": "れいとうしょくひん",
+                "Learned": false
+            }
+        ]
+    },
+    {
+        "name": "服裝",
+        "cards": [
+            {
+                "Chinese": "和服", 
+                "Japanese": "わふく",
+                "Learned": false
+            },
+            {
+                "Chinese": "西服", 
+                "Japanese": "ようふく",
+                "Learned": false
+            },
+            {
+                "Chinese": "白襯衫", 
+                "Japanese": "ワイシャツ",
+                "Learned": false
+            },
+            {
+                "Chinese": "背心", 
+                "Japanese": "ベスト ",
+                "Learned": false
+            },
+            {
+                "Chinese": "女裝襯衫", 
+                "Japanese": "ブラウス",
+                "Learned": false
+            },
+            {
+                "Chinese": "外套", 
+                "Japanese": "ジャケット",
+                "Learned": false
+            },
+            {
+                "Chinese": "運動鞋", 
+                "Japanese": "スニーカー",
+                "Learned": false
+            },
+            {
+                "Chinese": "涼鞋", 
+                "Japanese": "サンダル",
+                "Learned": false
+            },
+            {
+                "Chinese": "靴子", 
+                "Japanese": "ブーツ",
+                "Learned": false
+            },
+            {
+                "Chinese": "襪子", 
+                "Japanese": "ソックス",
+                "Learned": false
+            }
+        ]
+    }
+    
+]

@@ -23,6 +23,8 @@ import GTranslateIcon from '@mui/icons-material/GTranslate';
 import QuizIcon from '@mui/icons-material/Quiz';
 import HomeIcon from '@mui/icons-material/Home';
 import { useAlert } from 'react-alert';
+import Logo from './Japan.svg';
+import '../css/NavBar.css';
 
 const MiniDrawer = () => {
     const drawerWidth = 200;
@@ -62,7 +64,7 @@ const MiniDrawer = () => {
     });
     
     const DrawerHeader = styled('div')(({ theme }) => ({
-        marginTop: '34px',
+        marginBottom: '10px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
@@ -139,6 +141,9 @@ const MiniDrawer = () => {
         </AppBar>
         <Drawer variant="permanent" open={open}>
             <DrawerHeader>
+                <div className='icon-container'>
+                    <img className='icon' src={Logo} alt='logo'/>
+                </div>
                 <IconButton onClick={handleDrawerClose}>
                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                 </IconButton>
