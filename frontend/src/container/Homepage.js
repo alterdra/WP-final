@@ -23,7 +23,7 @@ const Homepage = () => {
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
 				<div className='container'>
-					<div className='SliderWrapper' dir="rtl">
+					<div className='SliderWrapper'>
 						<Slider />
 					</div>
 				</div>
