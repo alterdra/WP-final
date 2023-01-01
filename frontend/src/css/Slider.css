@@ -13,12 +13,12 @@ img {
     /* height: 10%; */
     width: 50vw;
     height: 60vh;
-    border-radius: 5%;
+    border-radius: 15px;
 }
 .reactSlick {
     padding: 2vmin;
     background: #bccdbe;;
-    border-radius: 5%;
+    border-radius: 15px;
 }
 .slick-slide > div {
     display: grid;

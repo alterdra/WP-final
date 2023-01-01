@@ -7,11 +7,18 @@
     align-items: center;
     flex-wrap: nowrap;
     background: #73c2e3;
+    height: 124px;
 }
 @media screen and (max-width: 1100px){
     .Header{
         width: 1100px;
     }
+}
+
+.text {
+    font-size: 26px !important;
+    font-style: 'italic' !important;
+    font-weight: 500 !important;
 }
 
 body {
@@ -20,4 +27,3 @@ body {
     font-size: 30px;
     white-space: nowrap;
 }
-
