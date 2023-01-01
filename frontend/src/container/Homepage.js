@@ -1,10 +1,9 @@
+import { useEffect, useState } from 'react';
+import { Box, Paper } from '@mui/material';
 import Slider from '../components/ImageSlider'
 import NavBar from '../components/NavBar';
-import { useEffect, useState } from 'react';
-import React from 'react';
-import '../css/Homepage.css';
-import { Button, Box, Paper } from '@mui/material';
 import Data from '../mottos.json'
+import '../css/Homepage.css';
 
 import { styled } from '@mui/material/styles';
 const DrawerHeader = styled('div')(({ theme }) => ({

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Button, Paper, Card, Stack, Divider, styled, TextField, Typography } from '@mui/material';
-import ResultModal from '../../components/modals/ResultModal'
-import '../../css/Cards.css'
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
+import { Button, Paper, Stack, Divider, styled, Typography } from '@mui/material';
+import ResultModal from '../../components/modals/ResultModal'
 import { useUserName } from '../hook/useUserName';
+import '../../css/Cards.css'
 
 const IndexItem = styled(Paper)(({ theme }) => ({
     // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
