@@ -50,9 +50,9 @@ const LearnSets = () => {
             }
         )
         if(msg ===  "The set already exists.")
-            alert.error(<div style={{ padding: '5px' }}>{msg}</div>);
+            alert.error(<div style={{ padding: '5px' }}>此學習集已存在</div>);
         else
-            alert.success(<div style={{ padding: '5px' }}>{msg}</div>);
+            alert.success(<div style={{ padding: '5px' }}>新增成功</div>);
     }
     const findLearnSets = async() => {
         const { data: { msg, contents } } = await instance.get('/lectures',

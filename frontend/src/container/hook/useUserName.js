@@ -32,11 +32,11 @@ const UserProvider = (props) => {
     const handleLogin = async () => {
         const { data: { msg } } = await instance.get('/login', { params: { user, password } });
         if(msg === 'Login Successfully'){
-			alert.show(<div style={{ padding: '5px' }}>{msg}</div>);
+			alert.show(<div style={{ padding: '5px' }}>登入成功</div>);
 			setSignedIn(true);
 		}
 		else{
-			alert.error(<div style={{ padding: '5px' }}>{msg}</div>);
+			alert.error(<div style={{ padding: '5px' }}>帳號/密碼錯誤</div>);
 		}
     }
     const handleLogout = () => {
@@ -49,11 +49,11 @@ const UserProvider = (props) => {
         // console.log(newUser)
         const { data: { msg } } = await instance.post('/signup', { user: newUser, password: newPassword });
 		if(msg === "Sign up succeeded"){
-			alert.show(<div style={{ padding: '5px' }}>{msg}</div>);
+			alert.show(<div style={{ padding: '5px' }}>註冊成功</div>);
 			setShowModal(false);
 		}
         else
-			alert.error(<div style={{ padding: '5px' }}>ID already in used</div>);
+			alert.error(<div style={{ padding: '5px' }}>此帳號已被使用</div>);
         
     }
     const handleOpen = () => {

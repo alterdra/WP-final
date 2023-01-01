@@ -13,7 +13,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import HistoryIcon from '@mui/icons-material/History';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
-
+import { useAlert } from 'react-alert'
 import { styled } from '@mui/material/styles';
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -36,7 +36,7 @@ const Test = () => {
     const [amount, setAmount] = useState(5);
     const [testType, setTestType] = useState("選擇題");
     const { user } = useUserName();
-    
+    const alert = useAlert();
     const questionNum = [1, 5, 10, 15, 20];
 
     const handleLearnSetChange = (e) => {
@@ -125,6 +125,7 @@ const Test = () => {
                                     id="demo-simple-select"
                                     // defaultValue={learnSets.length > 0 ?learnSets[0]:""}
                                     value={learnSetName}
+                                    sx={{ backgroundColor: '#eeeee4' }}
                                     label="LearnSet"
                                     onChange={handleLearnSetChange}
                                 >
@@ -145,6 +146,7 @@ const Test = () => {
                                     id="demo-simple-select"
                                     defaultValue={1}
                                     value={amount}
+                                    sx={{ backgroundColor: '#eeeee4' }}
                                     label="Amount"
                                     onChange={handleAmountChange}
                                 >
@@ -165,6 +167,7 @@ const Test = () => {
                                     id="demo-simple-select"
                                     defaultValue="填充題"
                                     value={testType}
+                                    sx={{ backgroundColor: '#eeeee4' }}
                                     label="TestType"
                                     onChange={handleTestType}
                                 >
@@ -172,9 +175,11 @@ const Test = () => {
                                     <MenuItem value="填充題">填充題</MenuItem>
                                 </Select>
                             </FormControl>
-                            <Button onClick={() => {
-                                if(learnSetName === "")
+                            <Button className="submit" onClick={() => {
+                                if(learnSetName === ""){
+                                    alert.error(<div style={{ padding: '5px' }}>請選擇學習集</div>);
                                     return;
+                                }
                                 if(testType === "選擇題")
                                     navigateToChoice(learnSets[selectedIndex], amount);
                                 else

@@ -34,11 +34,11 @@ const MiniDrawer = () => {
     }
     const navigateToLearnSets = () => {
         if(signedIn) navigate('/learnSets');
-        else alert.info(<div style={{ padding: '5px'}}>Sign in to unlock!</div>);
+        else alert.info(<div style={{ padding: '5px'}}>請先登入來解鎖</div>);
     }
     const navigateToTest = () => {
         if(signedIn) navigate('/test');
-        else alert.info(<div style={{ padding: '5px'}}>Sign in to unlock!</div>);
+        else alert.info(<div style={{ padding: '5px'}}>請先登入來解鎖</div>);
     }
     const openedMixin = (theme) => ({
         width: drawerWidth,

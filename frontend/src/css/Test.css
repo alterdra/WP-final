@@ -31,6 +31,8 @@
     justify-content: center !important;
 }
 
-.history {
-    /* padding-left:29vw; */
+.submit {
+    background-color: #9dda9a !important;
+    color: rgba(0, 0, 0, 0.648) !important;
+    border: solid rgb(188, 190, 184) !important;
 }
