@@ -1,4 +1,6 @@
-import { TextField, Button, Modal, Typography, Stack, Box } from '@mui/material';
+import { useState } from 'react';
+import { IconButton, TextField, Button, Modal, Typography, Stack, Box, InputAdornment } from '@mui/material';
+import { AccountCircle, VisibilityOff , Visibility } from '@mui/icons-material'
 import '../../css/Modal.css';
 
 const RegisterModal = ( { 
@@ -8,6 +10,10 @@ const RegisterModal = ( {
     handleCreateUser, handleClose,
     focusElement,
 } ) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+	const handleMouseDownPassword = event => event.preventDefault();
     return (
         <Modal
             open={showModal}
@@ -28,12 +34,32 @@ const RegisterModal = ( {
                         autoFocus={focusElement==="newUser"}
                     />
                     <TextField 
+                        type={showPassword ? 'text' : 'password'}
                         id="outlined-basic" 
                         label="密碼"
                         variant="outlined" 
                         value={userPassword} 
                         onChange={changeUserPassword} 
                         autoFocus={focusElement==="newPassword"}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                <AccountCircle />
+                                </InputAdornment>
+                            ),
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <Stack direction='row'>
                         <Button onClick={handleCreateUser} >確定</Button>

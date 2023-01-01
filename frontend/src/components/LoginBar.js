@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useUserName } from '../container/hook/useUserName';
-import { Box, InputAdornment, TextField, IconButton, Button, Fab } from '@mui/material'
+import { InputAdornment, TextField, IconButton, Fab } from '@mui/material'
 import { AccountCircle, VisibilityOff , Visibility } from '@mui/icons-material'
 import RegisterModal from './modals/RegisterModal';
 
@@ -9,7 +9,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import InputIcon from '@mui/icons-material/Input';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -23,6 +22,7 @@ const LoginBar = () => {
         handleRegister, showModal, setShowModal, handleOpen,
         newUser, setNewUser, newPassword, setNewPassword,
         focusElement, setFocusElement } = useUserName();
+
     const [showPassword, setShowPassword] = useState(false);
     // const [focusElement, setFocusElement] = useState();
     console.log(focusElement);
@@ -41,7 +41,6 @@ const LoginBar = () => {
     // Password switch: seen & unseen
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = event => event.preventDefault();
-
 
     return (
         <List className='List'> 
@@ -76,7 +75,7 @@ const LoginBar = () => {
                         }}
                         value={user}
                         onChange={(e) => {
-                            setFocusElement(prev=>"user")
+                            setFocusElement("user")
                             setUser(e.target.value);
                         }}
                         variant="standard"
