@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import '../css/Header.css'
 import LoginBar from './LoginBar';
+import Logo from './Japan.svg';
 
 const Header = () => {
     return (

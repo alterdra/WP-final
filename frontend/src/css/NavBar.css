@@ -1,8 +1,14 @@
-.icon{
-    margin-top: 10px !important;
-    margin-right: 10px !important;
-    width: 90px !important;
-    height: 90px !important;
+.icon-container {
+    position: relative;
 }
 
 
+
+
+.header-icon {
+    position: absolute;
+    bottom: -60%;
+    right: 160%;
+    height: 180% !important;
+    width: 180% !important;
+}

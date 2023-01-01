@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserName } from '../container/hook/useUserName';
 import { styled, useTheme } from '@mui/material/styles';
 import Header from './Header';
-import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -68,11 +68,10 @@ const MiniDrawer = () => {
     });
     
     const DrawerHeader = styled('div')(({ theme }) => ({
-        marginBottom: '10px',
+        marginBottom: '8px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        padding: theme.spacing(0, 1),
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
     }));
@@ -145,12 +144,12 @@ const MiniDrawer = () => {
         </AppBar>
         <Drawer variant="permanent" open={open}>
             <DrawerHeader>
-                <div className='icon-container'>
-                    <img className='icon' src={Logo} alt='logo'/>
-                </div>
-                <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                </IconButton>
+                <Stack direction='row' className='icon-container'>
+                    <img className='header-icon' src={Logo} />
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    </IconButton>
+                </Stack>
             </DrawerHeader>
             <List>
                 {buttons.map((item, index) => (

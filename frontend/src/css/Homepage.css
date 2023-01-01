@@ -4,7 +4,7 @@
     padding-top: 5%; */
     width: 55vw;
     padding-left: 1.8%;
-    padding-top:0.5%;
+    padding-top: 0.5%;
 }
 .container {
     position: relative;
@@ -13,6 +13,7 @@
     flex-wrap: nowrap;
     justify-content: center;
     /* align-items: center; */
+    margin-left: 16%;
     margin-top: 6%;
 }
 body {
