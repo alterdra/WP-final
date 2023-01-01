@@ -240,7 +240,7 @@ const Cards = () => {
                                 elevation={2}
                                 onClick={() => { 
                                     setTileMode(!tileMode);
-                                    setCardIndex(prev => index);
+                                    setCardIndex(index);
                                 }}
                             >
                                 <div className='vocab'>
@@ -257,6 +257,7 @@ const Cards = () => {
                                 />
                                 <Checkbox
                                     className='learned'
+                                    sx={{bottom:'5px'}}
                                     icon={item.Learned ? <BookmarkIcon style={{ color: 'lime' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
                                     checkedIcon={item.Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'lime' }}/>}
                                     onClick={event => {
