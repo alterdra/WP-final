@@ -117,7 +117,7 @@ const Test = () => {
                 <DrawerHeader />
                 <div className='testContainer'>
                     <div className='scores'>
-                        <Box className='box'>
+                        <Box className='box' sx={{ mb: 3 }}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">選擇要考試的學習集</InputLabel>
                                 <Select
@@ -186,7 +186,6 @@ const Test = () => {
                                     navigateToCloze(learnSets[selectedIndex], amount);
                             }}>確定</Button>
                         </Box>
-                        <br></br>
                         <List className='history'>
                             <ListItem >
                                 <ListItemAvatar>

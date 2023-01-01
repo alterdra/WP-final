@@ -42,6 +42,10 @@ const MiniDrawer = () => {
         if(signedIn) navigate('/test');
         else alert.info(<div style={{ padding: '5px'}}>請先登入來解鎖</div>);
     }
+    
+    const buttons = [{name: '首頁', func: navigateToHome}, {name: '單字區', func: navigateToLearnSets}, {name: '考試區', func: navigateToTest}]
+    const icons = [<HomeIcon />, <GTranslateIcon />, <QuizIcon />]
+
     const openedMixin = (theme) => ({
         width: drawerWidth,
         transition: theme.transitions.create('width', {
@@ -149,8 +153,7 @@ const MiniDrawer = () => {
                 </IconButton>
             </DrawerHeader>
             <List>
-                {[{name: '首頁', func: navigateToHome}, {name: '單字區', func: navigateToLearnSets}, 
-                    {name: '考試區', func: navigateToTest}].map((item, index) => (
+                {buttons.map((item, index) => (
                 <ListItem key={item.name} disablePadding sx={{ display: 'block' }} onClick={item.func}>
                     <Divider />
                     <ListItemButton
@@ -167,7 +170,7 @@ const MiniDrawer = () => {
                                 justifyContent: 'center',
                             }}
                         >
-                            {index === 0 ? <HomeIcon /> : index === 1 ? <GTranslateIcon /> : <QuizIcon />}
+                            {icons[index]}
                         </ListItemIcon>
                         <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
                     </ListItemButton>
