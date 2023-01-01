@@ -4,13 +4,14 @@ import '../../css/Modal.css';
 const SetModal = ( { label, description, createFunc, name, changeName, showCreate, handleClose } ) => {
     return (
         <Modal
+            className='model-container'
             open={showCreate}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
         >
             <Box className='modal'>
                 <Box className='content'>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <Typography sx={{paddingLeft: '6px'}} id="modal-modal-title" variant="h6" component="h2">
                         {description}
                     </Typography>
                     <TextField 
@@ -20,9 +21,9 @@ const SetModal = ( { label, description, createFunc, name, changeName, showCreat
                         value={name} 
                         onChange={changeName} 
                     />
-                    <Stack direction='row'>
-                        <Button onClick={createFunc} >確定</Button>
-                        <Button onClick={handleClose} >取消</Button>
+                    <Stack direction='row' className='button-container'>
+                        <Button variant="contained" color="success" onClick={createFunc} >確定</Button>
+                        <Button variant="contained" color="error" onClick={handleClose} >取消</Button>
                     </Stack>
                 </Box>
             </Box>

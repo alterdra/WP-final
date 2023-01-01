@@ -12,7 +12,20 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-40%, -48%);
     display: flex;
     flex-wrap: wrap;
+}
+.model-container {
+    position: relative;
+}
+
+.button-container {
+    width: 180px;
+    padding: 10px;
+    margin-left: 3px;
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-evenly !important;
+    flex-wrap: nowrap !important;
 }

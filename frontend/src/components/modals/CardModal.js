@@ -33,9 +33,9 @@ const CardModal = ( {
                         value={name2} 
                         onChange={changeName2} 
                     />
-                    <Stack direction='row'>
-                        <Button onClick={handleAddCard} >確定</Button>
-                        <Button onClick={handleClose} >取消</Button>
+                    <Stack direction='row' className='button-container'>
+                        <Button variant="contained" color="success" onClick={handleAddCard} >確定</Button>
+                        <Button variant="contained" color="error" onClick={handleClose} >取消</Button>
                     </Stack>
                 </Box>
             </Box>

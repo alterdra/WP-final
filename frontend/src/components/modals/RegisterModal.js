@@ -22,7 +22,7 @@ const RegisterModal = ( {
         >
             <Box className='modal'>
                 <Box className='content'>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                    <Typography sx={{paddingLeft: '16px'}} id="modal-modal-title" variant="h6" component="h2">
                         請輸入使用者資訊
                     </Typography>
                     <TextField 
@@ -58,9 +58,9 @@ const RegisterModal = ( {
                             ),
                         }}
                     />
-                    <Stack direction='row'>
-                        <Button onClick={handleCreateUser} >確定</Button>
-                        <Button onClick={handleClose} >取消</Button>
+                    <Stack direction='row' className='button-container'>
+                        <Button variant="contained" color="success" onClick={handleCreateUser} >確定</Button>
+                        <Button variant="contained" color="error" onClick={handleClose} >取消</Button>
                     </Stack>
                 </Box>
             </Box>
