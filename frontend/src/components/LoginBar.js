@@ -1,4 +1,4 @@
-import { useState, useNavigate } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useUserName } from '../container/hook/useUserName';
 import { Box, InputAdornment, TextField, IconButton, Button, Fab } from '@mui/material'
 import { AccountCircle, VisibilityOff , Visibility } from '@mui/icons-material'
@@ -21,17 +21,27 @@ const LoginBar = () => {
     const { user, setUser, password, setPassword, 
         signedIn, handleLogin, handleLogout, 
         handleRegister, showModal, setShowModal, handleOpen,
-        newUser, setNewUser, newPassword, setNewPassword } = useUserName();
+        newUser, setNewUser, newPassword, setNewPassword,
+        focusElement, setFocusElement } = useUserName();
     const [showPassword, setShowPassword] = useState(false);
+    // const [focusElement, setFocusElement] = useState();
+    console.log(focusElement);
 
     //Register Modal
     const handleClose = () => setShowModal(false);
-    const changeNewUser = e => setNewUser(e.target.value);
-    const changeNewUserPassword = e => setNewPassword(e.target.value);
-
+    const changeNewUser = e => {
+        setFocusElement("newUser");
+        setNewUser(e.target.value);
+    }
+    const changeNewUserPassword = e => {
+        setFocusElement("newPassword");
+        setNewPassword(e.target.value);
+    }
+        
     // Password switch: seen & unseen
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = event => event.preventDefault();
+
 
     return (
         <List className='List'> 
@@ -40,6 +50,7 @@ const LoginBar = () => {
                 userName={newUser} changeUserName={changeNewUser}
                 userPassword={newPassword} changeUserPassword={changeNewUserPassword}
                 handleCreateUser={handleRegister} handleClose={handleClose}
+                focusElement={focusElement}
             />
             {!signedIn ? 
             (<>
@@ -55,7 +66,7 @@ const LoginBar = () => {
                     <TextField
                         id="input-with-icon-textfield1"
                         label="Username"
-                        autoFocus
+                        autoFocus={focusElement==="user"}
                         InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
@@ -64,7 +75,10 @@ const LoginBar = () => {
                         ),
                         }}
                         value={user}
-                        onChange={(e) => setUser(e.target.value)}
+                        onChange={(e) => {
+                            setFocusElement(prev=>"user")
+                            setUser(e.target.value);
+                        }}
                         variant="standard"
                     />
                 </ListItem>
@@ -73,7 +87,7 @@ const LoginBar = () => {
                         type={showPassword ? 'text' : 'password'}
                         id="input-with-icon-textfield2"
                         label="Password"
-                        autoFocus
+                        autoFocus={focusElement==="password"}
                         InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
@@ -94,7 +108,10 @@ const LoginBar = () => {
                         ),
                         }}
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => {
+                            setFocusElement(prev=>"password");
+                            setPassword(e.target.value);
+                        }}
                         variant="standard"
                     />
                 </ListItem>

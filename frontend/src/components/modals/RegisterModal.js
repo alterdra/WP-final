@@ -5,7 +5,8 @@ const RegisterModal = ( {
     showModal, 
     userName, changeUserName, 
     userPassword, changeUserPassword,
-    handleCreateUser, handleClose 
+    handleCreateUser, handleClose,
+    focusElement,
 } ) => {
     return (
         <Modal
@@ -24,6 +25,7 @@ const RegisterModal = ( {
                         variant="outlined" 
                         value={userName} 
                         onChange={changeUserName} 
+                        autoFocus={focusElement==="newUser"}
                     />
                     <TextField 
                         id="outlined-basic" 
@@ -31,6 +33,7 @@ const RegisterModal = ( {
                         variant="outlined" 
                         value={userPassword} 
                         onChange={changeUserPassword} 
+                        autoFocus={focusElement==="newPassword"}
                     />
                     <Stack direction='row'>
                         <Button onClick={handleCreateUser} >確定</Button>

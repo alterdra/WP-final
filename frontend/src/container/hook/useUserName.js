@@ -21,6 +21,7 @@ const UserContext = createContext({
 });
 
 const UserProvider = (props) => {
+    const [focusElement, setFocusElement] = useState("");
     const [user, setUser] = useState(savedMe || "");
     const [password, setPassword] = useState("");
     const [signedIn, setSignedIn] = useState(JSON.parse(saveSignedIn) || false);
@@ -83,6 +84,7 @@ const UserProvider = (props) => {
             handleOpen,
             newUser, setNewUser,
             newPassword, setNewPassword,
+            focusElement, setFocusElement,
           }}
           {...props}
         />
