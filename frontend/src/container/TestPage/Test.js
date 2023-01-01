@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAlert } from 'react-alert'
-import axios from 'axios'
+import { useAlert } from 'react-alert';
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { Box, Button, Fab, MenuItem, Typography, List, ListItem, ListItemText, Select, FormControl, InputLabel } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Box, Button, Fab, MenuItem, Typography, List, ListItem, ListItemText, Select, FormControl, InputLabel, styled } from '@mui/material';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import DeleteIcon from '@mui/icons-material/Delete';
 import HistoryIcon from '@mui/icons-material/History';
 import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
-import { styled } from '@mui/material/styles';
 import { useUserName } from '../hook/useUserName';
 import NavBar from '../../components/NavBar';
-import '../../css/Test.css'
-import '../../css/LearnSets.css'
+import '../../css/Test.css';
+import '../../css/LearnSets.css';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -123,20 +122,14 @@ const Test = () => {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    // defaultValue={learnSets.length > 0 ?learnSets[0]:""}
                                     value={learnSetName}
                                     sx={{ backgroundColor: '#eeeee4' }}
                                     label="LearnSet"
                                     onChange={handleLearnSetChange}
                                 >
-                                    {learnSets.map(option => (
-                                        <MenuItem 
-                                            key={uuidv4()} 
-                                            value={option}
-                                        >
-                                            {option}
-                                        </MenuItem>
-                                    ))}
+                                    {learnSets.map(option => 
+                                        <MenuItem key={uuidv4()} value={option}>{option}</MenuItem>
+                                    )}
                                 </Select>
                             </FormControl>
                             <FormControl fullWidth>
@@ -151,12 +144,7 @@ const Test = () => {
                                     onChange={handleAmountChange}
                                 >
                                     {questionNum.map(item => 
-                                        <MenuItem 
-                                            value={item}
-                                            key={uuidv4()} 
-                                        >
-                                            {item}
-                                        </MenuItem>
+                                        <MenuItem value={item}mkey={uuidv4()}>{item}</MenuItem>
                                     )}
                                 </Select>
                             </FormControl>
@@ -196,7 +184,6 @@ const Test = () => {
                                 <ListItemText primary="歷史成績" />
                             </ListItem>
                         </List>
-                        
                         {testRecords.length !== 0 ? displayTest()
                         : <Typography>目前還沒有成績喔...</Typography>}
                     </div>

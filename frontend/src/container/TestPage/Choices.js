@@ -3,12 +3,11 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { Button, Paper, Stack, Divider, styled, Typography } from '@mui/material';
-import ResultModal from '../../components/modals/ResultModal'
+import ResultModal from '../../components/modals/ResultModal';
 import { useUserName } from '../hook/useUserName';
-import '../../css/Cards.css'
+import '../../css/Cards.css';
 
 const IndexItem = styled(Paper)(({ theme }) => ({
-    // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -70,7 +69,7 @@ const Cards = () => {
 
     const randomSubarray = (arr, size) => {
         let shuffled = arr.slice(0), i = arr.length, temp, index;
-        while (i--) {
+        while(i--){
             index = Math.floor((i + 1) * Math.random());
             temp = shuffled[index];
             shuffled[index] = shuffled[i];
@@ -89,7 +88,6 @@ const Cards = () => {
         }
         for(let i = 0; i < amount; i++){
             let slice = randomSubarray(contents, 4);
-            // console.log(slice)
             const range = slice.length >= 4 ? 4: slice.length;
             const answerIndex = getRandomInt(range);
             const question = slice[answerIndex].Chinese;
@@ -102,14 +100,12 @@ const Cards = () => {
         }
         setQuestionList(questionArr);
         setAnswers(answersArr);
-        // console.log(questionArr);
-        // console.log(answersArr)
     }
-
 
     useEffect(() => {
         findCards();
     }, []);
+
     useEffect(() => {
         setSelected(
             prev => {
@@ -118,7 +114,6 @@ const Cards = () => {
                 return prev;
             }
         )
-        // console.log(selected);
     }, [cardIndex]);
 
     const navigate = useNavigate();
@@ -161,28 +156,22 @@ const Cards = () => {
             <div className='oneCardContainer'>
                 {
                     <div>     
-                        <Stack 
-                            spacing={2} 
-                            justifyContent="center"
-                        >
+                        <Stack spacing={2} justifyContent="center" marginBottom={5}>
                             <ChoiceItem>
                                 Q{cardIndex + 1}: {questionList[cardIndex].question}
                             </ChoiceItem>
                             {questionIndexs.map((ele, index) => 
                                 <Button 
                                     className='choice'
-                                    // variant={myChoices[cardIndex] === index ? "contained":"outlined"}
-                                    // color={myChoices[cardIndex] === index ? "success":"secondary"}
                                     variant={selected[index] ? "contained":"outlined"}
                                     color={selected[index] ? "success":"secondary"}
                                     onClick={() => changeMyChoices(index)}
                                     key={uuidv4()} 
                                 >
-                                    {index}: {questionList[cardIndex].choices[index]}
+                                    {index + 1}: {questionList[cardIndex].choices[index]}
                                 </Button>
                             )}
                         </Stack>
-                        <br></br>
                         <Stack
                             direction="row"
                             divider={<Divider orientation="vertical" flexItem />}
@@ -197,7 +186,7 @@ const Cards = () => {
                                     console.log(score)
                                     event.stopPropagation();
                                 }}>確定</IndexItem>
-                                :<IndexItem className='nextCard' onClick={increaseCardIndex}>下一題</IndexItem>
+                                : <IndexItem className='nextCard' onClick={increaseCardIndex}>下一題</IndexItem>
                             }
                         </Stack>
                     </div>

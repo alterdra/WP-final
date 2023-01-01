@@ -1,24 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Button, Paper, Card, Stack, Divider, styled, Checkbox, FormControlLabel, Switch, List, Fab } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+import { Paper, Card, Stack, Divider, styled, Checkbox, FormControlLabel, Switch, List,
+    Fab, Slide, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CloseIcon from '@mui/icons-material/Close';
-import CardModal from '../../components/modals/CardModal';
-import '../../css/Cards.css'
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { useUserName } from '../hook/useUserName';
-import Slide from '@mui/material/Slide';
-
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AddIcon from '@mui/icons-material/Add';
-import { textAlign } from '@mui/system';
+import { useUserName } from '../hook/useUserName';
+import CardModal from '../../components/modals/CardModal';
+import '../../css/Cards.css';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -43,10 +37,8 @@ const instance = axios.create({
 })
 
 const Cards = () => {
-
     const { name } = useParams();
     const lecture = name;
-    // console.log("Lecture name: " + lecture)
 
     const [vocabChinese, setVocabChinese] = useState("");
     const [vocabJapanese, setVocabJapanese] = useState("");
@@ -89,19 +81,15 @@ const Cards = () => {
     }
     const findCards = async () => {
         const { data: { msg, contents } } = await instance.get('/cards', { params:  { lecture, userName: user } });
-        // console.log(unlearnedMode);
-        const tmpCards = 
-        unlearnedMode ? contents.filter(ele => ele.Learned === false)
-        : contents;
+        const tmpCards = unlearnedMode ? contents.filter(ele => ele.Learned === false) : contents;
 
         if(cards.length > 0){
             let newIndex = tmpCards.findIndex(ele => ele._id === cards[cardIndex]._id);
             newIndex =  newIndex === -1 ? cardIndex >= tmpCards.length ? 0 : cardIndex : newIndex;
             setCardIndex(newIndex);
         }
-        else {
+        else 
             setCardIndex(0);
-        }
         setCards(tmpCards);
     }
     const updateCardStatus = async (Japanese, Chinese) => {
@@ -117,11 +105,9 @@ const Cards = () => {
     }
     const handleRemoveCard = async ( Japanese, Chinese ) => {
         const {data: { msg }} = await instance.delete("/cards", { data:  { lecture, Japanese, Chinese, userName: user }});
-        // console.log(msg);
         await findCards();
         if(cardIndex === cards.length - 1) // Last card is removed;
-            setCardIndex(prev => 0);
-        // console.log(cardIndex)
+            setCardIndex(0);
     }
 
     useEffect(() => {
@@ -134,7 +120,7 @@ const Cards = () => {
         if(checked == true)
             return;
         const wait = async() => {
-            const delay = (n) => new Promise( r => setTimeout(r, n*1000));
+            const delay = (n) => new Promise(r => setTimeout(r, n*1000));
             await delay(0.2);
             setChecked(true);
             if(increaseOrDecrease === "increase")
@@ -160,14 +146,13 @@ const Cards = () => {
             setDisabled(true);
         else setDisabled(false);
         const wait = async() => {
-            const delay = (n) => new Promise( r => setTimeout(r, n*1000));
+            const delay = (n) => new Promise(r => setTimeout(r, n*1000));
             await delay(2);
             setTileMode(true);
             setMode(false);
         }
-        if(cards.length === 0){
+        if(cards.length === 0)
             wait();
-        }
     }, [cards])
 
     const navigate = useNavigate();
@@ -175,20 +160,10 @@ const Cards = () => {
         navigate('/learnSets');
     }
 
-    // function stopBubbling(e) {
-    //     e = window.event || e;
-    //     if (e.stopPropagation) {
-    //         e.stopPropagation();
-    //     } else {
-    //         e.cancelBubble = true;   //ie
-    //     }
-    // }
-    // console.log(checked, increaseOrDecrease);
-
     return (
         <>
-            {!tileMode ? <div>貼心提醒：點選單字卡後，會啟用並排模式喔~</div>
-            :<div>貼心提醒：點選單字卡後，會啟用單字卡循環模式喔~</div>}
+            {!tileMode ? <div style={{ marginTop: '18px' }}>貼心提醒：點選單字卡後，會啟用字卡並排模式喔~</div>
+            : <div style={{ marginTop: '18px' }}>貼心提醒：點選單字卡後，會啟用字卡循環模式喔~</div>}
             <List className='lectureName'>
                 <ListItem >
                     <ListItemAvatar>
@@ -280,7 +255,7 @@ const Cards = () => {
                                     elevation={2}
                                     onClick={() => { 
                                         setTileMode(!tileMode);
-                                        setCardIndex(prev => 0);
+                                        setCardIndex(0);
                                     }}
                                 >
                                     <div className='oneVocab'>
@@ -314,14 +289,9 @@ const Cards = () => {
                         </div>
                     }
                 </div> : 
-                <div style={{
-                    'font-size': '100px'
-                }}>
-                    🥳恭喜你學完所有單字🥳
-                </div>
+                <div style={{ fontSize: '100px' }}>🥳恭喜你學完所有單字🥳</div>
             }
         </>
-        
     )
 }
 

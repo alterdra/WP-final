@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
 const useImage = () => {
     const [loading, setLoading] = useState(true)
@@ -9,7 +9,6 @@ const useImage = () => {
         const fetchImage = async () => {
             try {
                 for (let i = 0; i < imgList.length; i++) {
-                    // console.log(i);
                     const img = await import(`../../Japan-photo/${i + 1}.jpg`);
                     setImgList(prev => {
                         prev[i] = img.default;

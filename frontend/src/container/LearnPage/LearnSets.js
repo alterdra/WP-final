@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Button, Box } from '@mui/material';
-import SetModal from '../../components/modals/SetModal';
-import '../../css/LearnSets.css'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import { useAlert } from 'react-alert';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+import { Box, ListItem, Fab, Paper, styled } from '@mui/material';
 import FolderSpecialRoundedIcon from '@mui/icons-material/FolderSpecialRounded';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
 import { useUserName } from '../hook/useUserName';
-import { ListItem, Fab, Paper } from '@mui/material';
+import SetModal from '../../components/modals/SetModal';
 import NavBar from '../../components/NavBar';
-import { useAlert } from 'react-alert'
+import '../../css/LearnSets.css';
 
-import { styled } from '@mui/material/styles';
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -120,8 +118,7 @@ const LearnSets = () => {
                                         className='deleteIcon'
                                         onClick={() => handleRemoveSet(item.name)} 
                                     />
-                                    
-                                    <Box className='name'><div>{item.name}</div></Box>
+                                    <Box className='name'>{item.name}</Box>
                                 </Paper>
                             </div>
                         ))}

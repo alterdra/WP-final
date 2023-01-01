@@ -4,8 +4,8 @@ import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { Button, Paper, Card, Stack, Divider, styled, TextField, Typography } from '@mui/material';
 import { useUserName } from '../hook/useUserName';
-import ResultModal from '../../components/modals/ResultModal'
-import '../../css/Cards.css'
+import ResultModal from '../../components/modals/ResultModal';
+import '../../css/Cards.css';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -35,6 +35,7 @@ const Cards = () => {
     const [showResultModal, setShowResultModal] = useState(false);
     const [score, setScore] = useState(0);
     const { user } = useUserName();
+
     const handleClose = () => {
         setShowResultModal(false);
     };
@@ -103,7 +104,6 @@ const Cards = () => {
         }
         score /= cards.length;
         score *= 100;
-        // console.log(score);
         score = parseInt(score,10);
         setScore(score);
         saveResult(lecture, score);
@@ -124,7 +124,7 @@ const Cards = () => {
             <div className='oneCardContainer'>
                 {
                     <div>
-                        <Card className='oneCard' >
+                        <Card className='oneCard'>
                             <div className='oneVocab'>
                                 <TextField 
                                     id="standard-basic" 
@@ -134,7 +134,7 @@ const Cards = () => {
                                     onChange={changeInputAnswer}
                                 /> | {cards[cardIndex].Chinese}
                             </div>
-                            <div className='index'>{cardIndex}</div>
+                            <div className='index'>Q{cardIndex + 1}</div>
                         </Card>
                         <Stack
                             direction="row"

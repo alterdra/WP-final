@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useAlert } from 'react-alert';
 import axios from "axios";
-import { useAlert } from 'react-alert'
-import { WindowSharp } from "@mui/icons-material";
 
 const LOCALSTORAGE_KEY_ME = "save-me";
 const LOCALSTORAGE_KEY_SIGNEDIN = "save-login";
@@ -41,13 +40,11 @@ const UserProvider = (props) => {
 		}
     }
     const handleLogout = () => {
-        // setUser("");
         setPassword("");
         setSignedIn(false);
 		window.location.href = '/';
     }
     const handleRegister = async () => {
-        // console.log(newUser)
         const { data: { msg } } = await instance.post('/signup', { user: newUser, password: newPassword });
 		if(msg === "Sign up succeeded"){
 			alert.show(<div style={{ padding: '5px' }}>註冊成功</div>);

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Box, Paper } from '@mui/material';
-import Slider from '../components/ImageSlider'
+import Slider from '../components/ImageSlider';
 import NavBar from '../components/NavBar';
-import Data from '../mottos.json'
+import Data from '../mottos.json';
 import '../css/Homepage.css';
 
 import { styled } from '@mui/material/styles';
@@ -15,22 +15,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
 }));
 
-const newData = Data.filter(ele => ele['中文'].length <= 8 &&
-			ele['日文'].length <= 8);
+const newData = Data.filter(e => e['中文'].length <= 8 && e['日文'].length <= 8);
 
 const Homepage = () => {
 	const [mottoIndex, setMottoIndex] = useState(0);
 	useEffect(() => {
 		setInterval(() => {	
-			setMottoIndex(prev => prev + 1);
+			setMottoIndex(prev => (prev + 1) % newData.length);
 		}, 5000);
 	}, []);
-
-	useEffect(() =>{
-		if(mottoIndex == newData.length - 1)
-			setMottoIndex(0);
-	}, [mottoIndex]);
-	console.log(mottoIndex, newData.length);
 	
 	return (
 		<Box sx={{ display: 'flex' }}>
