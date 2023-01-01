@@ -22,9 +22,11 @@ import ListItemText from '@mui/material/ListItemText';
 import GTranslateIcon from '@mui/icons-material/GTranslate';
 import QuizIcon from '@mui/icons-material/Quiz';
 import HomeIcon from '@mui/icons-material/Home';
+import { useAlert } from 'react-alert';
 
 const MiniDrawer = () => {
     const drawerWidth = 200;
+    const alert = useAlert();
     const { signedIn } = useUserName();
     const navigate = useNavigate();
     const navigateToHome = () => {
@@ -32,11 +34,11 @@ const MiniDrawer = () => {
     }
     const navigateToLearnSets = () => {
         if(signedIn) navigate('/learnSets');
-        else alert("Sign in to unlock the area.")
+        else alert.info(<div style={{ padding: '5px'}}>Sign in to unlock!</div>);
     }
     const navigateToTest = () => {
         if(signedIn) navigate('/test');
-        else alert("Sign in to unlock the area.")
+        else alert.info(<div style={{ padding: '5px'}}>Sign in to unlock!</div>);
     }
     const openedMixin = (theme) => ({
         width: drawerWidth,

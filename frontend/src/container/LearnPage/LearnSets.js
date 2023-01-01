@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUserName } from '../hook/useUserName';
 import { ListItem, Fab, Paper } from '@mui/material';
 import NavBar from '../../components/NavBar';
+import { useAlert } from 'react-alert'
 
 import { styled } from '@mui/material/styles';
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -32,7 +33,7 @@ const LearnSets = () => {
     const [learnSets, setlearnSets] = useState([]);
     const [showSetModal, setShowSetModal] = useState(false);
     const { user } = useUserName();
-
+    const alert = useAlert();
     const changeSetName = (event) => { setSetName(event.target.value) };
     
     const handleClose = () => {
@@ -48,7 +49,10 @@ const LearnSets = () => {
                 User: user,
             }
         )
-        alert(msg);
+        if(msg ===  "The set already exists.")
+            alert.error(<div style={{ padding: '5px' }}>{msg}</div>);
+        else
+            alert.success(<div style={{ padding: '5px' }}>{msg}</div>);
     }
     const findLearnSets = async() => {
         const { data: { msg, contents } } = await instance.get('/lectures',

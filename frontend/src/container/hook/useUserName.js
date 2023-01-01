@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { useAlert } from 'react-alert'
 import { WindowSharp } from "@mui/icons-material";
 
 const LOCALSTORAGE_KEY_ME = "save-me";
@@ -27,11 +28,16 @@ const UserProvider = (props) => {
     const [showModal, setShowModal] = useState(false);
     const [newUser, setNewUser] = useState("");
     const [newPassword, setNewPassword] = useState("");
+	const alert = useAlert();
     const handleLogin = async () => {
         const { data: { msg } } = await instance.get('/login', { params: { user, password } });
-        alert(msg);
-        if(msg === 'Login Successfully')
-        	setSignedIn(true);
+        if(msg === 'Login Successfully'){
+			alert.show(<div style={{ padding: '5px' }}>{msg}</div>);
+			setSignedIn(true);
+		}
+		else{
+			alert.error(<div style={{ padding: '5px' }}>{msg}</div>);
+		}
     }
     const handleLogout = () => {
         // setUser("");
@@ -42,8 +48,13 @@ const UserProvider = (props) => {
     const handleRegister = async () => {
         // console.log(newUser)
         const { data: { msg } } = await instance.post('/signup', { user: newUser, password: newPassword });
-        alert(msg);
-        setShowModal(false);
+		if(msg === "Sign up succeeded"){
+			alert.show(<div style={{ padding: '5px' }}>{msg}</div>);
+			setShowModal(false);
+		}
+        else
+			alert.error(<div style={{ padding: '5px' }}>ID already in used</div>);
+        
     }
     const handleOpen = () => {
         setShowModal(true);

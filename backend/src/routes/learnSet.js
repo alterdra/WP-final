@@ -65,11 +65,13 @@ const deleteLearnSet = async (req, res) => {
         // const cards = await WordCard.deleteMany({ lecture });
         const user = await validateUser(userName);
         console.log(user.learnSets);
-        const _id = user.learnSets.find(ele => ele.name === lecture);
-        const learnset = await LearnSet.deleteOne({ _id });
-        user.learnSets = user.learnSets.filter(ele => ele._id === _id);
+        const _id = user.learnSets.find(ele => ele.name === lecture)._id;
+        const learnset = await LearnSet.findOne({ _id });
+        const success = await LearnSet.deleteOne({ _id });
+        console.log(learnset);
+        user.learnSets = user.learnSets.filter(ele => ele._id !== _id);
         await user.save();
-        if (!learnset) {
+        if (!success) {
             res.status(500).send({ msg: "Fail to delete cards in the lecture" });
             return;
         }
