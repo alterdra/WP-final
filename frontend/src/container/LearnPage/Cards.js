@@ -18,6 +18,7 @@ import Avatar from '@mui/material/Avatar';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AddIcon from '@mui/icons-material/Add';
+import { textAlign } from '@mui/system';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -56,6 +57,7 @@ const Cards = () => {
     const [cardIndex, setCardIndex] = useState(0);
     const [unlearnedMode, setMode] = useState(false);
     const { user } = useUserName();
+    const [disabled, setDisabled] = useState(false);
 
     const [checked, setChecked] = useState(true);
     const [increaseOrDecrease, setIncreaseOrDecrease] = useState("");
@@ -153,6 +155,21 @@ const Cards = () => {
         wait();
     }, [checked])
 
+    useEffect(() => {
+        if(!unlearnedMode && cards.filter(ele => ele.Learned === false).length === 0)
+            setDisabled(true);
+        else setDisabled(false);
+        const wait = async() => {
+            const delay = (n) => new Promise( r => setTimeout(r, n*1000));
+            await delay(2);
+            setTileMode(true);
+            setMode(false);
+        }
+        if(cards.length === 0){
+            wait();
+        }
+    }, [cards])
+
     const navigate = useNavigate();
     const navigateToLearnSets = () => {
         navigate('/learnSets');
@@ -198,7 +215,7 @@ const Cards = () => {
                         <Switch 
                             checked={unlearnedMode} 
                             onClick={() => setMode(prev => !prev)}
-                            disabled={cards.filter(ele => ele.Learned === false).length === 0}
+                            disabled={disabled}
                         />
                     } label="顯示尚未學習的單字卡" />
                 </ListItem>
@@ -295,16 +312,14 @@ const Cards = () => {
                                     <ItemUnlearned className='nextCard' onClick={() => handleChecked("increase")}>下個單字卡</ItemUnlearned>
                                 </>}
                                     
-                                
-                                
-                                
                             </Stack>
                         </div>
                     }
                 </div> : 
-                <div>
+                <div style={{
+                    'font-size': '100px'
+                }}>
                     🥳恭喜你學完所有單字🥳
-                    <Button onClick={() => setTileMode(true)}>回並排模式</Button>
                 </div>
             }
         </>
