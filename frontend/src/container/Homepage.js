@@ -16,6 +16,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
 }));
 
+const newData = Data.filter(ele => ele['中文'].length <= 8 &&
+			ele['日文'].length <= 8);
 
 const Homepage = () => {
 	const [mottoIndex, setMottoIndex] = useState(0);
@@ -26,10 +28,10 @@ const Homepage = () => {
 	}, []);
 
 	useEffect(() =>{
-		if(mottoIndex == Data.length - 1)
+		if(mottoIndex == newData.length - 1)
 			setMottoIndex(0);
 	}, [mottoIndex]);
-	console.log(mottoIndex, Data.length);
+	console.log(mottoIndex, newData.length);
 	
 	return (
 		<Box sx={{ display: 'flex' }}>
@@ -39,7 +41,7 @@ const Homepage = () => {
 				<div className='container'>
 					<div className='Text'>
 						<Paper className='chinese' variant="outlined" elevation={2}>	
-							{Data[mottoIndex]['中文']}
+							{newData[mottoIndex]['中文']}
 						</Paper>
 					</div>
 					<div className='SliderWrapper'>
@@ -47,7 +49,7 @@ const Homepage = () => {
 					</div>
 					<div className='Text'>
 						<Paper className='japanese' variant="outlined" elevation={2}>
-							{Data[mottoIndex]['日文']}
+							{newData[mottoIndex]['日文']}
 						</Paper>
 					</div>
 				</div>
