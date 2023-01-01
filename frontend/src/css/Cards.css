@@ -20,8 +20,8 @@
     position: relative;
 }
 .oneCard {
-    width: 600px;
-    height: 400px;
+    width: 900px;
+    height: 600px;
 }
 
 .vocab, .oneVocab {
@@ -29,11 +29,16 @@
     font-style: normal;
     font-family: 'Courier New', Courier, monospace !important;
     font-size: 30px;
-    top: 35%;
-    left: 5%; 
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.vocab1{
+    font-size: 20px;
 }
 .oneVocab {
-    font-size: 75px;
+    font-size: 85px;
 }
 
 .close {
@@ -60,9 +65,9 @@
 
 .learned{
     cursor: pointer;
-    position: absolute;
+    /* position: absolute; */
     top: 70%;
-    right: 4%;
+    right: 0%;
     color: lime;
 }
 

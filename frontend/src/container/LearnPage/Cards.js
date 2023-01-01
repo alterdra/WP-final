@@ -194,7 +194,13 @@ const Cards = () => {
                     </Fab>
                 </ListItem>
                 <ListItem>
-                    <FormControlLabel control={<Switch checked={unlearnedMode} onClick={() => setMode(prev => !prev)}/>} label="顯示未學字卡" />
+                    <FormControlLabel control={
+                        <Switch 
+                            checked={unlearnedMode} 
+                            onClick={() => setMode(prev => !prev)}
+                            disabled={cards.filter(ele => ele.Learned === false).length === 0}
+                        />
+                    } label="顯示尚未學習的單字卡" />
                 </ListItem>
             </List>
             
@@ -221,8 +227,12 @@ const Cards = () => {
                                         setCardIndex(prev => index);
                                     }}
                                 >
-                                    <div className='vocab'>{item.Japanese} | {item.Chinese}</div>
+                                    <div className='vocab'>
+                                        <div className='vocab1'>{item.Japanese}</div>
+                                        <div className='vocab2'>{item.Chinese}</div>
+                                    </div>
                                     <div className='index'>{index}</div>
+                                    
                                     <CloseIcon
                                         className='close'
                                         onClick={event => {
@@ -258,7 +268,10 @@ const Cards = () => {
                                         setCardIndex(prev => 0);
                                     }}
                                 >
-                                    <div className='oneVocab'>{cards[cardIndex].Japanese} | {cards[cardIndex].Chinese}</div>
+                                    <div className='oneVocab'>
+                                        <div>{cards[cardIndex].Japanese}</div>
+                                        <div>{cards[cardIndex].Chinese}</div>
+                                    </div>
                                     <div className='index'>{cardIndex}</div>
                                 </Card>
                             </Slide>
