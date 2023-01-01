@@ -1,16 +1,5 @@
-/* .App {
-    font-family: sans-serif;
-    text-align: center;
-}
-.mainSlider {
-    background: #eca;
-}
-h3 {
-    text-align: center;
-} */
 img {
     margin: auto;
-    /* height: 10%; */
     width: 50vw;
     height: 60vh;
     border-radius: 15px;
@@ -26,7 +15,6 @@ img {
     place-items: center;
     width: 50vw;
     height: 60vh;
-    /* margin-top: 50px; */
     margin: auto;
 }
 

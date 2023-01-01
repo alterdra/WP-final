@@ -162,8 +162,8 @@ const Cards = () => {
 
     return (
         <>
-            {!tileMode ? <div style={{ marginTop: '18px' }}>貼心提醒：點選單字卡後，會啟用字卡並排模式喔~</div>
-            : <div style={{ marginTop: '18px' }}>貼心提醒：點選單字卡後，會啟用字卡循環模式喔~</div>}
+            {tileMode ? <div style={{ marginTop: '18px' }}>貼心提醒：點選單字卡後，會啟用字卡循環模式喔~</div>
+            : <div style={{ marginTop: '18px' }}>貼心提醒：點選單字卡後，會啟用字卡並排模式喔~</div>}
             <List className='lectureName'>
                 <ListItem >
                     <ListItemAvatar>
@@ -208,40 +208,38 @@ const Cards = () => {
             {tileMode ?
                 <div className='cardContainer'>
                     {cards.map((item, index) => (
-                        <div className='cardWrapper'>
-                            <Card 
-                                key={uuidv4()} 
-                                className='card'
-                                elevation={2}
-                                onClick={() => { 
-                                    setTileMode(!tileMode);
-                                    setCardIndex(index);
+                        <Card 
+                            key={uuidv4()} 
+                            className='card'
+                            elevation={2}
+                            onClick={() => { 
+                                setTileMode(!tileMode);
+                                setCardIndex(index);
+                            }}
+                        >
+                            <div className='vocab'>
+                                <div className='vocab1'>{item.Japanese}</div>
+                                <div className='vocab2'>{item.Chinese}</div>
+                            </div>
+                            <div className='index'>{index}</div>
+                            <CloseIcon
+                                className='close'
+                                onClick={event => {
+                                    handleRemoveCard(item.Japanese, item.Chinese);
+                                    event.stopPropagation();
                                 }}
-                            >
-                                <div className='vocab'>
-                                    <div className='vocab1'>{item.Japanese}</div>
-                                    <div className='vocab2'>{item.Chinese}</div>
-                                </div>
-                                <div className='index'>{index}</div>
-                                <CloseIcon
-                                    className='close'
-                                    onClick={event => {
-                                        handleRemoveCard(item.Japanese, item.Chinese);
-                                        event.stopPropagation();
-                                    }}
-                                />
-                                <Checkbox
-                                    className='learned'
-                                    sx={{bottom:'5px'}}
-                                    icon={item.Learned ? <BookmarkIcon style={{ color: 'lime' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
-                                    checkedIcon={item.Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'lime' }}/>}
-                                    onClick={event => {
-                                        updateCardStatus(item.Japanese, item.Chinese);
-                                        event.stopPropagation();
-                                    }}
-                                />
-                            </Card>
-                        </div>
+                            />
+                            <Checkbox
+                                className='learned'
+                                sx={{bottom:'5px'}}
+                                icon={item.Learned ? <BookmarkIcon style={{ color: 'rgba(75, 140, 201, 0.75)' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
+                                checkedIcon={item.Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'rgba(75, 140, 201, 0.75)' }}/>}
+                                onClick={event => {
+                                    updateCardStatus(item.Japanese, item.Chinese);
+                                    event.stopPropagation();
+                                }}
+                            />
+                        </Card>
                     ))}
                 </div>
             : 

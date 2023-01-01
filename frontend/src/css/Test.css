@@ -27,7 +27,6 @@
 .box {
     width: 75vw;
     display: flex;
-    /* flex-wrap: wrap !important; */
     justify-content: center !important;
 }
 
