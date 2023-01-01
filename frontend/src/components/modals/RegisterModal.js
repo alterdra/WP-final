@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import { IconButton, TextField, Button, Modal, Typography, Stack, Box, InputAdornment } from '@mui/material';
-import { AccountCircle, VisibilityOff , Visibility } from '@mui/icons-material'
+import { VisibilityOff , Visibility } from '@mui/icons-material';
 import '../../css/Modal.css';
 
-const RegisterModal = ( { 
+const RegisterModal = ({ 
     showModal, 
     userName, changeUserName, 
     userPassword, changeUserPassword,
     handleCreateUser, handleClose,
     focusElement,
-} ) => {
+}) => {
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-	const handleMouseDownPassword = event => event.preventDefault();
+    const handleClickShowPassword = () => { setShowPassword((show) => !show) };
+	const handleMouseDownPassword = (event) => { event.preventDefault() };
     return (
         <Modal
             open={showModal}
@@ -22,7 +22,7 @@ const RegisterModal = ( {
         >
             <Box className='modal'>
                 <Box className='content'>
-                    <Typography sx={{paddingLeft: '16px'}} id="modal-modal-title" variant="h6" component="h2">
+                    <Typography sx={{ paddingLeft: '16px' }} id="modal-modal-title" variant="h6" component="h2">
                         請輸入使用者資訊
                     </Typography>
                     <TextField 

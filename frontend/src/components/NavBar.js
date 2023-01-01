@@ -1,32 +1,22 @@
-import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUserName } from '../container/hook/useUserName';
+import { useAlert } from 'react-alert';
+import { Stack, Toolbar, List, CssBaseline, Divider, IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
-import Header from './Header';
-import Stack from '@mui/material/Stack';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import GTranslateIcon from '@mui/icons-material/GTranslate';
 import QuizIcon from '@mui/icons-material/Quiz';
 import HomeIcon from '@mui/icons-material/Home';
-import { useAlert } from 'react-alert';
+import Header from './Header';
+import { useUserName } from '../container/hook/useUserName';
 import Logo from './Japan.svg';
 import '../css/NavBar.css';
 
-const MiniDrawer = () => {
+const NavBar = () => {
     const drawerWidth = 200;
     const alert = useAlert();
     const { signedIn } = useUserName();
@@ -182,4 +172,4 @@ const MiniDrawer = () => {
     );
 }
 
-export default MiniDrawer;
+export default NavBar;

@@ -1,13 +1,13 @@
 import { TextField, Button, Modal, Typography, Stack, Box } from '@mui/material';
 import '../../css/Modal.css';
 
-const CardModal = ( { 
+const CardModal = ({ 
     handleAddCard, description,
     label1, label2, 
     name1, name2,
     changeName1, changeName2, 
     showCreate, handleClose 
-} ) => {
+}) => {
     return (
         <Modal
             open={showCreate}
@@ -34,8 +34,8 @@ const CardModal = ( {
                         onChange={changeName2} 
                     />
                     <Stack direction='row' className='button-container'>
-                        <Button variant="contained" color="success" onClick={handleAddCard} >確定</Button>
-                        <Button variant="contained" color="error" onClick={handleClose} >取消</Button>
+                        <Button variant="contained" color="success" onClick={handleAddCard}>確定</Button>
+                        <Button variant="contained" color="error" onClick={handleClose}>取消</Button>
                     </Stack>
                 </Box>
             </Box>

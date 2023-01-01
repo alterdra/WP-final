@@ -1,15 +1,13 @@
-import React, { lazy, useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import img1 from '../Japan-photo/1.jpg';
-import { v4 as uuidv4 } from 'uuid';
 import useImage from '../container/hook/useImage';
-import "../css/Slider.css"
-
+import "../css/Slider.css";
 
 const SliderSlick = () => {
-    const {imgList, loading , error} = useImage();
+    const { imgList, loading } = useImage();
     
     const settings = {
         dots: true,
@@ -20,20 +18,16 @@ const SliderSlick = () => {
         autoplay: true,
         autoplaySpeed: 5000,
         pauseOnHover: false,
-        // cssEase: "linear",
     };
-    // useEffect(() => {
-    //     console.log(imgList)
-    // })
     
     return (
         <div className="reactSlick">
             <Slider {...settings}>
-                {imgList.map((ele, index) =>
+                {imgList.map((ele) =>
                     <div key={uuidv4()}>
                         <img 
                             width={'50%'}
-                            src={loading?img1:ele}
+                            src={loading ? img1 : ele}
                         />
                     </div>
                 )}

@@ -1,20 +1,13 @@
 import { useState } from 'react';
 import { useUserName } from '../container/hook/useUserName';
-import { InputAdornment, TextField, IconButton, Fab } from '@mui/material'
-import { AccountCircle, VisibilityOff , Visibility } from '@mui/icons-material'
-import RegisterModal from './modals/RegisterModal';
-
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
+import { InputAdornment, TextField, IconButton, Fab, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
+import { AccountCircle, VisibilityOff , Visibility } from '@mui/icons-material';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
-
-import '../css/LoginBar.css'
+import RegisterModal from './modals/RegisterModal';
+import '../css/LoginBar.css';
 
 const LoginBar = () => {
     const { user, setUser, password, setPassword, 
@@ -24,7 +17,6 @@ const LoginBar = () => {
         focusElement, setFocusElement } = useUserName();
 
     const [showPassword, setShowPassword] = useState(false);
-    // const [focusElement, setFocusElement] = useState();
     console.log(focusElement);
 
     //Register Modal
@@ -53,14 +45,6 @@ const LoginBar = () => {
             />
             {!signedIn ? 
             (<>
-                {/* <ListItem className='ListItem'>
-                    <ListItemAvatar>
-                    <Avatar>
-                        <InputIcon />
-                    </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary="請輸入帳號密碼" />
-                </ListItem> */}
                 <ListItem className='username'>
                     <TextField
                         id="input-with-icon-textfield1"

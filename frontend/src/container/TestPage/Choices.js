@@ -24,7 +24,7 @@ const instance = axios.create({
     baseURL: 'http://localhost:4000/api'
 })
 
-const Cards = () => {
+const Choices = () => {
     const { name } = useParams();
     const lecture = name;
     const location = useLocation();
@@ -196,4 +196,4 @@ const Cards = () => {
     )
 }
 
-export default Cards;
+export default Choices;

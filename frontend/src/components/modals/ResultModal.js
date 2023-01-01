@@ -1,7 +1,7 @@
-import { TextField, Button, Modal, Typography, Stack, Box } from '@mui/material';
+import { Button, Modal, Typography, Stack, Box } from '@mui/material';
 import '../../css/Modal.css';
 
-const ResultModal = ( { score, showCreate, handleClose, back, reset } ) => {
+const ResultModal = ({ score, showCreate, handleClose, back, reset }) => {
     return (
         <Modal
             open={showCreate}

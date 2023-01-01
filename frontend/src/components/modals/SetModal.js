@@ -1,7 +1,7 @@
 import { TextField, Button, Modal, Typography, Stack, Box } from '@mui/material';
 import '../../css/Modal.css';
 
-const SetModal = ( { label, description, createFunc, name, changeName, showCreate, handleClose } ) => {
+const SetModal = ({ label, description, createFunc, name, changeName, showCreate, handleClose }) => {
     return (
         <Modal
             className='model-container'

@@ -1,7 +1,7 @@
-import { Typography, Stack, Button, Box } from '@mui/material';
-import '../css/Footer.css'
-import Logo from './Footer.svg'
+import { Typography, Stack, Button } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
+import Logo from './Footer.svg';
+import '../css/Footer.css';
 
 const Footer = () => {
     return (
