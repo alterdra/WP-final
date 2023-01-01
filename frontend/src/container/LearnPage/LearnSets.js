@@ -94,7 +94,7 @@ const LearnSets = () => {
                 <DrawerHeader />
                 <div className='allWrapper'>
                     <ListItem className='createIcon'>
-                        <Fab className='Icon' variant="extended"  onClick={() => (setShowSetModal(true))}>
+                        <Fab className='Icon' color='primary' variant="extended"  onClick={() => (setShowSetModal(true))}>
                             <CreateNewFolderIcon sx={{ mr: 1 }} />
                             建立學習集
                         </Fab>
@@ -109,25 +109,22 @@ const LearnSets = () => {
                         handleClose={handleClose}
                     />
                     <ListItem className='learnsetsContainer'>
-                        
-                        {
-                            learnSets.map(item => (
-                                <div className='learnSetWrapper'>
-                                    <Paper elevation={3} className='learnSet' key={uuidv4()} >
-                                        <FolderSpecialRoundedIcon 
-                                            className='folderIcon' 
-                                            onClick={() => navigateToCards(item.name)}
-                                        />
-                                        <DeleteIcon 
-                                            className='delete'
-                                            onClick={() => handleRemoveSet(item.name)} 
-                                        />
-                                        
-                                        <Box className='name'><div>{item.name}</div></Box>
-                                    </Paper>
-                                </div>
-                            ))
-                        }
+                        {learnSets.map(item => (
+                            <div className='learnSetWrapper'>
+                                <Paper elevation={3} className='learnSet' key={uuidv4()} >
+                                    <FolderSpecialRoundedIcon 
+                                        className='folderIcon' 
+                                        onClick={() => navigateToCards(item.name)}
+                                    />
+                                    <DeleteIcon 
+                                        className='deleteIcon'
+                                        onClick={() => handleRemoveSet(item.name)} 
+                                    />
+                                    
+                                    <Box className='name'><div>{item.name}</div></Box>
+                                </Paper>
+                            </div>
+                        ))}
                     </ListItem>
                 </div>
             </Box>

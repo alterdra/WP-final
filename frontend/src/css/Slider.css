@@ -19,6 +19,7 @@ img {
     padding: 2vmin;
     background: #bccdbe;;
     border-radius: 15px;
+    width: 52vw;
 }
 .slick-slide > div {
     display: grid;

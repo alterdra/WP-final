@@ -36,11 +36,16 @@
     font-size: 100px !important;
 }
 
-.delete {
+.deleteIcon {
     position: absolute;
-    top: 2%;
-    right: 5%;
+    top: 5px;
+    right: 7px;
     cursor: pointer;
+    opacity: 60%;
+}
+
+.deleteIcon:hover{
+    opacity: 1;
 }
 
 .name {
@@ -53,6 +58,7 @@
     width: 180px !important;
     height: 100px;
 }
+
 .Icon {
     width: 150px !important;
 }

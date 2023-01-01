@@ -232,44 +232,41 @@ const Cards = () => {
             />
             {tileMode ?
                 <div className='cardContainer'>
-                    {
-                        cards.map((item, index) => (
-                            <div className='cardWrapper'>
-                                <Card 
-                                    key={uuidv4()} 
-                                    className='card'
-                                    elevation={2}
-                                    onClick={() => { 
-                                        setTileMode(!tileMode);
-                                        setCardIndex(prev => index);
+                    {cards.map((item, index) => (
+                        <div className='cardWrapper'>
+                            <Card 
+                                key={uuidv4()} 
+                                className='card'
+                                elevation={2}
+                                onClick={() => { 
+                                    setTileMode(!tileMode);
+                                    setCardIndex(prev => index);
+                                }}
+                            >
+                                <div className='vocab'>
+                                    <div className='vocab1'>{item.Japanese}</div>
+                                    <div className='vocab2'>{item.Chinese}</div>
+                                </div>
+                                <div className='index'>{index}</div>
+                                <CloseIcon
+                                    className='close'
+                                    onClick={event => {
+                                        handleRemoveCard(item.Japanese, item.Chinese);
+                                        event.stopPropagation();
                                     }}
-                                >
-                                    <div className='vocab'>
-                                        <div className='vocab1'>{item.Japanese}</div>
-                                        <div className='vocab2'>{item.Chinese}</div>
-                                    </div>
-                                    <div className='index'>{index}</div>
-                                    
-                                    <CloseIcon
-                                        className='close'
-                                        onClick={event => {
-                                            handleRemoveCard(item.Japanese, item.Chinese);
-                                            event.stopPropagation();
-                                        }}
-                                    />
-                                    <Checkbox
-                                        className='learned'
-                                        icon={item.Learned ? <BookmarkIcon style={{ color: 'lime' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
-                                        checkedIcon={item.Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'lime' }}/>}
-                                        onClick={event => {
-                                            updateCardStatus(item.Japanese, item.Chinese);
-                                            event.stopPropagation();
-                                        }}
-                                    />
-                                </Card>
-                            </div>
-                        ))
-                    }
+                                />
+                                <Checkbox
+                                    className='learned'
+                                    icon={item.Learned ? <BookmarkIcon style={{ color: 'lime' }}/> : <BookmarkBorderIcon style={{ color: 'gray' }}/>}
+                                    checkedIcon={item.Learned ? <BookmarkBorderIcon style={{ color: 'gray' }} /> : <BookmarkIcon style={{ color: 'lime' }}/>}
+                                    onClick={event => {
+                                        updateCardStatus(item.Japanese, item.Chinese);
+                                        event.stopPropagation();
+                                    }}
+                                />
+                            </Card>
+                        </div>
+                    ))}
                 </div>
             : 
                 cards.length > 0 ? 

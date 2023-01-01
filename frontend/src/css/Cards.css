@@ -47,8 +47,12 @@
     top: 2%;
     right: 2%;
     color: brown;
+    opacity: 60%;
 }
 
+.close:hover{
+    opacity: 1;
+}
 
 .index {
     position: absolute;
