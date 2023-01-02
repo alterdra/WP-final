@@ -9,6 +9,7 @@ import '../css/Homepage.css';
 import { styled } from '@mui/material/styles';
 import { Stack } from '@mui/system';
 import LoginBar from '../components/LoginBar';
+import icon from './icon.svg'
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -76,7 +77,7 @@ const Homepage = () => {
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
 				<Stack direction='row' position='relative'>
-					<div onClick={() => handleFlip()}>
+					<div className='fortuneContainer' onClick={() => handleFlip()}>
 						<animated.div className='fortune' style={{ opacity, transform }}>
 							<Typography sx={{ fontSize: '30px' }}>{result}</Typography>
 						</animated.div>
@@ -85,6 +86,7 @@ const Homepage = () => {
 							transform: transform.to(t => `${t} rotateY(180deg)`)
 						}}>
 							<Typography sx={{ fontSize: '30px' }}>今日の運勢</Typography>
+							<img className='icon1' src={icon} alt='icon'/>
 						</animated.div>
 					</div>
 					<div className='container'>
