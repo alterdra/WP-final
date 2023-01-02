@@ -1,19 +1,19 @@
 .modal {
-    width: 40%;
-    height: 40%;
+    width: 38%;
+    height: 38%;
     border-radius: 20px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
+    background-color: #e6dfdf;
 }
 
 .content {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-40%, -48%);
+    transform: translate(-36%, -48%);
     display: flex;
     flex-wrap: wrap;
 }

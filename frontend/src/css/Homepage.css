@@ -10,7 +10,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    margin-left: 16%;
+    margin-left: 18%;
     margin-top: 6%;
 }
 
@@ -46,4 +46,15 @@ body {
     text-orientation: upright;
     padding-right: 1vmin;
     padding-left: 1vmin;
+}
+
+.fortune {
+    background-image: linear-gradient(to bottom, rgb(165, 56, 165), rgb(223, 161, 223)) ;
+    border-radius: 10px;
+    width: 200px !important;
+    height: 200px !important;
+    position: absolute;
+    left: 0%;
+    bottom: 10%;
+    text-shadow: 0.1em 0.1em 0.2em rgb(225, 220, 220);
 }
