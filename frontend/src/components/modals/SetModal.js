@@ -8,6 +8,7 @@ const SetModal = ({ label, description, createFunc, name, changeName, showCreate
             open={showCreate}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
+            hideBackdrop
         >
             <Box className='modal'>
                 <Box className='content'>

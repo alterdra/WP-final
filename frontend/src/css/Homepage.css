@@ -16,7 +16,7 @@
 
 .loginBar {
     position: absolute;
-    transform: translate(20vw, -0vh) !important;
+    transform: translate(20vw, 0.5vh) !important;
     z-index: 1500 !important;
 }
 

@@ -7,6 +7,7 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import RegisterModal from './modals/RegisterModal';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import '../css/LoginBar.css';
 
 const LoginBar = () => {
@@ -109,7 +110,7 @@ const LoginBar = () => {
                 <ListItem className='welcome'>
                     <ListItemAvatar>
                     <Avatar>
-                        <ThumbUpAltIcon />
+                        <VerifiedUserIcon />
                     </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={`歡迎回來, ${user}!`} />

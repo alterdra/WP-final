@@ -12,6 +12,7 @@
 
 .appbar {
     /* background-image: linear-gradient(to right, #A7BFE8, #5286e7); */
-    background-image: linear-gradient(to right, #5286e7, #90b0e8);
-    opacity: 90%;
+    /* background-image: linear-gradient(to right, #5286e7, #90b0e8);*/
+    background: #6997eb !important;
+    /* opacity: 90%; */
 }
