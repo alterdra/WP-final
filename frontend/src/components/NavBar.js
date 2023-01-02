@@ -58,7 +58,7 @@ const NavBar = () => {
     });
     
     const DrawerHeader = styled('div')(({ theme }) => ({
-        marginBottom: '8px',
+        // marginBottom: '8px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',

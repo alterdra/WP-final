@@ -14,6 +14,12 @@
     margin-top: 6%;
 }
 
+.loginBar {
+    position: absolute;
+    transform: translate(40vw, -1vh) !important;
+    z-index: 10000 !important;
+}
+
 
 body {
     --stripe: #cfdcd0;

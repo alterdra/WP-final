@@ -32,7 +32,7 @@ const RegisterModal = ({
                         variant="outlined" 
                         value={userName} 
                         onChange={changeUserName} 
-                        autoFocus={focusElement==="newUser"}
+                        // autoFocus={focusElement==="newUser"}
                     />
                     <TextField 
                         type={showPassword ? 'text' : 'password'}
@@ -42,7 +42,7 @@ const RegisterModal = ({
                         variant="outlined" 
                         value={userPassword} 
                         onChange={changeUserPassword} 
-                        autoFocus={focusElement==="newPassword"}
+                        // autoFocus={focusElement==="newPassword"}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">

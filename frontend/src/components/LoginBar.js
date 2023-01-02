@@ -49,7 +49,7 @@ const LoginBar = () => {
                     <TextField
                         id="input-with-icon-textfield1"
                         label="Username"
-                        autoFocus={focusElement==="user"}
+                        // autoFocus={focusElement==="user"}
                         InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
@@ -70,7 +70,7 @@ const LoginBar = () => {
                         type={showPassword ? 'text' : 'password'}
                         id="input-with-icon-textfield2"
                         label="Password"
-                        autoFocus={focusElement==="password"}
+                        // autoFocus={focusElement==="password"}
                         InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">

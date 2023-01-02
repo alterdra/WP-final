@@ -8,6 +8,7 @@ import '../css/Homepage.css';
 
 import { styled } from '@mui/material/styles';
 import { Stack } from '@mui/system';
+import LoginBar from '../components/LoginBar';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -69,6 +70,9 @@ const Homepage = () => {
 	return (
 		<Box sx={{ display: 'flex' }}>
 			<NavBar />
+			<div className="loginBar">
+				<LoginBar />
+			</div>	
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
 				<Stack direction='row' position='relative'>
