@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 import { Paper, Card, Stack, Divider, styled, Checkbox, FormControlLabel, Switch, List,
-    Fab, Slide, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
+    Fab, Slide, ListItem, ListItemText, ListItemAvatar, Avatar, Typography } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CloseIcon from '@mui/icons-material/Close';
@@ -287,7 +287,7 @@ const Cards = () => {
                         </div>
                     }
                 </div> : 
-                <div style={{ fontSize: '100px' }}>🥳恭喜你學完所有單字🥳</div>
+                <Typography style={{ fontSize: '60px', marginTop: '30px' }}>🥳恭喜你學完所有單字🥳</Typography>
             }
         </>
     )
