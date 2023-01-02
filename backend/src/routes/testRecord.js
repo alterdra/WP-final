@@ -56,7 +56,6 @@ const findTestRecord = async (req, res) => {
 const deleteTestRecord = async (req, res) => {
     const id = req.body.id;
     const userName = req.body.User;
-    // console.log(req)
     try {
         const tests = await TestRecord.deleteOne({ id });
         const user = await validateUser(userName);

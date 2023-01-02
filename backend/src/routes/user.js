@@ -32,8 +32,6 @@ const addAccount = async (req, res) => {
 const verifyAccount = async (req, res) => {
     const name = req.query.user;
     const password = req.query.password;
-    // console.log(name, password)
-    // console.log(req.query)
     let user = await User.findOne({ name, password });
     try{
         if(!user){

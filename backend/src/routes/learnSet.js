@@ -35,11 +35,9 @@ const addLearnSet = async (req, res) => {
     }
 }
 const findLearnSet = async (req, res) => {
-    // console.log('in findLearnSet');
     const userName = req.query.User;
     try {
         const user = await validateUser(userName);
-        // console.log(user.learnSets)
         const allLearnSets = user.learnSets;
         if(!allLearnSets){
             res.status(200).send({ 
@@ -60,9 +58,7 @@ const findLearnSet = async (req, res) => {
 const deleteLearnSet = async (req, res) => {
     const lecture = req.body.Name;
     const userName = req.body.User;
-    // console.log(req)
     try {
-        // const cards = await WordCard.deleteMany({ lecture });
         const user = await validateUser(userName);
         console.log(user.learnSets);
         const _id = user.learnSets.find(ele => ele.name === lecture)._id;

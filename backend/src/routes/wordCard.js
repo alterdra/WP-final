@@ -59,7 +59,6 @@ const addCard = async (req, res) => {
 const findCards = async (req, res) => {
     const lectureName = req.query.lecture;
     const userName = req.query.userName;
-    // console.log(lecture)
     try {
         const user = await validateUser(userName);
         let learnSet = user.learnSets.find(ele => ele.name === lectureName);
