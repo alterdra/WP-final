@@ -50,9 +50,7 @@ const Test = () => {
     const findLearnSets = async () => {
         const { data: { msg, contents } } = await instance.get('/lectures',
         {
-            params: {
-                User: user,
-            }
+            params: { User: user }
         });
         setlearnSets(contents.map((item) => item.name));
     };
@@ -60,9 +58,7 @@ const Test = () => {
     const findTestRecords = async () => {
         const { data: { msg, contents } } = await instance.get('/tests', 
         {
-            params: {
-                User: user,
-            }
+            params: { User: user }
         });
         setTestRecords(contents);
     }
@@ -168,7 +164,7 @@ const Test = () => {
                                     <MenuItem value="填充題">填充題</MenuItem>
                                 </Select>
                             </FormControl>
-                            <Button className="submit" onClick={() => {
+                            <Button variant='contained' onClick={() => {
                                 if(learnSetName === ""){
                                     alert.error(<div style={{ padding: '5px' }}>請選擇學習集</div>);
                                     return;

@@ -165,7 +165,11 @@ const Cards = () => {
             {tileMode ? <div style={{ marginTop: '18px' }}>貼心提醒：點選單字卡後，會啟用字卡循環模式喔~</div>
             : <div style={{ marginTop: '18px' }}>貼心提醒：點選單字卡後，會啟用字卡並排模式喔~</div>}
             <List className='lectureName'>
-                <ListItem >
+                <ListItem>
+                    <Fab sx={{ mr: 2, ml: 2, boxShadow: 1 }} variant="extended" onClick={navigateToLearnSets}>
+                        <ArrowBackIcon sx={{ mr: 1 }} />
+                        回到上一頁
+                    </Fab>
                     <ListItemAvatar>
                     <Avatar>
                         <LocalLibraryIcon />
@@ -174,13 +178,7 @@ const Cards = () => {
                     <ListItemText primary={`課程：${lecture}`} />
                 </ListItem>
                 <ListItem>
-                    <Fab variant="extended" onClick={navigateToLearnSets}>
-                        <ArrowBackIcon sx={{ mr: 1 }} />
-                        回到上一頁
-                    </Fab>
-                </ListItem>
-                <ListItem>
-                    <Fab variant="extended" onClick={() => (setShowCardModal(true))}>
+                    <Fab sx={{ width: 180 }} color='primary' variant="extended" onClick={() => (setShowCardModal(true))}>
                         <AddIcon sx={{ mr: 1 }} />
                         新增單字組
                     </Fab>
