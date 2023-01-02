@@ -19,12 +19,17 @@
     background-color: #555; 
 } */
 
-.oneCardContainer {
+.oneCardContainerTest {
     display: flex;
     justify-content: center;
     align-content: center;
     flex-direction: column;
     height: 90vh;
+}
+.oneCardContainer {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
 }
 
 .card {
@@ -35,12 +40,14 @@
     position: relative;
 }
 
-.oneCard {
+.oneCard, .oneCardTest {
     width: 50vw;
     height: 60vh;
     margin-bottom: 2vh;
     background-color: antiquewhite !important;
-    position: relative;
+    position: relative; 
+}
+.oneCardTest {
     top: 0%;
     left: 50%;
     transform: translate(-50%, 0%);

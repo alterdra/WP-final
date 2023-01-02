@@ -110,7 +110,7 @@ const Cloze = () => {
     }
 
     return (
-        <div className='oneCardContainer'>
+        <div className='oneCardContainerTest'>
             <Button onClick={navigateToTest}>回到測驗首頁</Button>
             <ResultModal 
                 lecture={lecture}
@@ -122,7 +122,7 @@ const Cloze = () => {
             />
             {cards.length > 0 ?
                 <div>
-                    <Card className='oneCard'>
+                    <Card className='oneCardTest'>
                         <div className='oneVocab'>
                             <TextField 
                                 id="standard-basic" 
