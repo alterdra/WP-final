@@ -15,6 +15,9 @@
     flex-direction: row;
     flex-wrap: wrap !important;
     padding: 2vw;
+
+    max-height: 50vh;
+    overflow-y: scroll;
 }
 
 .score {

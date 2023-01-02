@@ -9,6 +9,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+
+    max-height: 70vh;
+    overflow-y: scroll;
 }
 
 .learnSetWrapper {
