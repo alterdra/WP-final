@@ -19,6 +19,7 @@ const RegisterModal = ({
             open={showModal}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
+            hideBackdrop
         >
             <Box className='modal'>
                 <Box className='content'>

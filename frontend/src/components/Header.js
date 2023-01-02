@@ -8,9 +8,9 @@ const Header = () => {
             <Box>
                 <Typography className='text'>BJK 大家來學日本語</Typography>
             </Box>
-            {/* <div className='LoginBarWrapper'>
+            <div className='LoginBarWrapper'>
 				<LoginBar />
-			</div> */}
+			</div>
         </div>
     );
 }

@@ -74,7 +74,7 @@ const NavBar = () => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      background: '#73c2e3',
+    //   background: '#73c2e3',
       ...(open && {
         marginLeft: drawerWidth,
         width: `calc(100% - ${drawerWidth}px)`,
@@ -115,7 +115,7 @@ const NavBar = () => {
     return (
     <>
         <CssBaseline />
-        <AppBar position="fixed" open={open}>
+        <AppBar className="appbar" position="fixed" open={open}>
             <Toolbar>
                 <IconButton
                     color="inherit"
@@ -129,7 +129,7 @@ const NavBar = () => {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Header />
+                {/* <Header /> */}
             </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

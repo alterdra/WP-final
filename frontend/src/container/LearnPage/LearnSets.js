@@ -10,7 +10,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useUserName } from '../hook/useUserName';
 import SetModal from '../../components/modals/SetModal';
 import NavBar from '../../components/NavBar';
+import Header from '../../components/Header';
 import '../../css/LearnSets.css';
+import '../../css/Homepage.css';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -87,6 +89,9 @@ const LearnSets = () => {
 
     return (
         <Box sx={{ display: 'flex' }}>
+            <div className="loginBar">
+				<Header />
+			</div>	
             <NavBar />
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />

@@ -5,8 +5,13 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: nowrap;
-    background: #73c2e3;
-    height: 10% !important;
+    /* background: #73c2e3; */
+    height: 6.5vh !important;
+
+    /* background: #73c2e3; */
+    /* background-image: linear-gradient(to right, #A7BFE8, #6997eb); */
+    background-image: linear-gradient(to right, #6997eb, #90b0e8);
+    opacity: 70%;
 }
 
 @media screen and (max-width: 1100px){
@@ -20,7 +25,8 @@
     font-weight: 500 !important;
 }
 
-body {
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+.text, body {
     text-align: center;
     font-family: 'cwTeXFangSong', serif;
     font-size: 30px;

@@ -5,8 +5,10 @@ import Test from './container/TestPage/Test';
 import Choices from './container/TestPage/Choices';
 import Cloze from './container/TestPage/Cloze';
 import NavBar from './components/NavBar';
+import Header from './components/Header';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 
 import { styled } from '@mui/material/styles';
 const DrawerHeader = styled('div')(({ theme }) => ({

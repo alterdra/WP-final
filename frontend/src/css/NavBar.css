@@ -9,3 +9,9 @@
     height: 180% !important;
     width: 180% !important;
 }
+
+.appbar {
+    /* background-image: linear-gradient(to right, #A7BFE8, #5286e7); */
+    background-image: linear-gradient(to right, #5286e7, #90b0e8);
+    opacity: 90%;
+}

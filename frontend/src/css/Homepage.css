@@ -10,16 +10,15 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    margin-left: 18%;
-    margin-top: 6%;
+    margin-left: 19vw;
+    margin-top: 5vh;
 }
 
 .loginBar {
     position: absolute;
-    transform: translate(40vw, -1vh) !important;
-    z-index: 10000 !important;
+    transform: translate(20vw, -0vh) !important;
+    z-index: 1500 !important;
 }
-
 
 body {
     --stripe: #cfdcd0;
@@ -79,4 +78,6 @@ body {
     width: 30vw;
     height: 40vh;
     bottom: 0%;
+    margin-left: 2vw;
+    top: 18vh;
 }
