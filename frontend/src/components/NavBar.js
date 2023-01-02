@@ -88,6 +88,7 @@ const NavBar = () => {
         ({ theme, open }) => ({
           opacity: '75%',
           width: drawerWidth,
+          zIndex: 1,
           flexShrink: 0,
           whiteSpace: 'nowrap',
           boxSizing: 'border-box',

@@ -6,7 +6,7 @@
     align-items: center;
     flex-wrap: nowrap;
     height: 6.5vh !important;
-
+    width: 60vw;
     background: #6997eb;
     /* background-image: linear-gradient(to right, #A7BFE8, #6997eb); */
     /* background-image: linear-gradient(to right, #6997eb, #90b0e8); */
@@ -20,8 +20,8 @@
 }
 
 .text {
-    font-size: 26px !important;
-    font-weight: 500 !important;
+    font-size: 30px !important;
+    font-weight: 1000 !important;
 }
 
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
