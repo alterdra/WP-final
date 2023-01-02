@@ -5,7 +5,9 @@
     flex-wrap: wrap;
     overflow-y: scroll;
 }
-
+.choicesWrapper {
+    padding-top: 5vh;
+}
 /* .cardContainer::-webkit-scrollbar {
     width: 30px;
 } */
@@ -19,6 +21,7 @@
     background-color: #555; 
 } */
 
+
 .oneCardContainerTest {
     display: flex;
     justify-content: center;
@@ -26,10 +29,19 @@
     flex-direction: column;
     height: 90vh;
 }
+
 .oneCardContainer {
     display: flex;
     flex-direction: center;
     justify-content: center;
+}
+
+.oneCardContainerChoice {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    height: 85vh;
+    margin-top: 2vh;
 }
 
 .card {
@@ -48,6 +60,17 @@
     position: relative; 
 }
 .oneCardTest {
+    margin-top: 2vh;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+.oneCardChoices {
+    height: 12vh;
+}
+
+.backIcon {
+    width: 200px !important;
     top: 0%;
     left: 50%;
     transform: translate(-50%, 0%);

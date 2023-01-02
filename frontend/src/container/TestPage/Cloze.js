@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { Button, Paper, Card, Stack, Divider, styled, TextField, Typography } from '@mui/material';
+import { Button, Paper, Card, Stack, Divider, styled, TextField, Typography, ListItem, Fab } from '@mui/material';
 import { useUserName } from '../hook/useUserName';
 import ResultModal from '../../components/modals/ResultModal';
 import '../../css/Cards.css';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -111,7 +112,12 @@ const Cloze = () => {
 
     return (
         <div className='oneCardContainerTest'>
-            <Button onClick={navigateToTest}>回到測驗首頁</Button>
+            <ListItem >
+                <Fab className='backIcon' variant="extended" onClick={navigateToTest}>
+                    <ArrowBackIcon sx={{ mr: 1 }} />
+                    回到測驗首頁
+                </Fab>
+            </ListItem>
             <ResultModal 
                 lecture={lecture}
                 score={score}
@@ -130,7 +136,10 @@ const Cloze = () => {
                                 variant="standard" 
                                 value={inputAnswer}
                                 onChange={changeInputAnswer}
-                            /> | {cards[cardIndex].Chinese}
+                            />
+                            <div>
+                                {cards[cardIndex].Chinese}
+                            </div>
                         </div>
                         <div className='index'>Q{cardIndex + 1}</div>
                     </Card>

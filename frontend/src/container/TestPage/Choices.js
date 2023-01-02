@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { Button, Paper, Stack, Divider, styled, Typography } from '@mui/material';
+import { Button, Paper, Stack, Divider, styled, Typography, ListItem, Fab } from '@mui/material';
 import ResultModal from '../../components/modals/ResultModal';
 import { useUserName } from '../hook/useUserName';
 import '../../css/Cards.css';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const IndexItem = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -16,7 +17,10 @@ const IndexItem = styled(Paper)(({ theme }) => ({
 }));
 
 const ChoiceItem = styled(IndexItem)(({ theme }) => ({
-    width: '60vh',
+    // background: theme.palette.info.main,
+    background: '#5286e7',
+    color: 'white',
+    width: '45vw',
     height: '5vh'
 }));
 
@@ -142,8 +146,7 @@ const Choices = () => {
 
     const questionIndexs = [0, 1, 2, 3];
     return (
-        <>
-            <Button onClick={navigateToTest}>回到測驗首頁</Button>
+        <div className='choicesWrapper'>
             <ResultModal 
                 lecture={lecture}
                 score={score}
@@ -152,21 +155,31 @@ const Choices = () => {
                 reset={navigateToCur}
                 handleClose={handleClose}
             />
+            <ListItem >
+                <Fab className='backIcon' variant="extended" onClick={navigateToTest}>
+                    <ArrowBackIcon sx={{ mr: 1 }} />
+                    回到測驗首頁
+                </Fab>
+            </ListItem>
             {questionList.length > 0 ?
-            <div className='oneCardContainer'>
+            <div className='oneCardContainerChoice'>
+                
                 {
                     <div>     
                         <Stack spacing={2} justifyContent="center" marginBottom={5}>
-                            <ChoiceItem>
-                                Q{cardIndex + 1}: {questionList[cardIndex].question}
+                            <ChoiceItem textAlign="center">
+                                <div style={{"font-size": "4vmin", "vertical-align": "middle"}} >
+                                    Q{cardIndex + 1}: {questionList[cardIndex].question}
+                                </div>  
                             </ChoiceItem>
                             {questionIndexs.map((ele, index) => 
                                 <Button 
-                                    className='choice'
+                                    className="oneCardChoices"
                                     variant={selected[index] ? "contained":"outlined"}
                                     color={selected[index] ? "success":"secondary"}
                                     onClick={() => changeMyChoices(index)}
                                     key={uuidv4()} 
+                                    style={{"font-size": "4vmin"}}
                                 >
                                     {index + 1}: {questionList[cardIndex].choices[index]}
                                 </Button>
@@ -192,7 +205,7 @@ const Choices = () => {
                     </div>
                 }
             </div> : <Typography>你還沒新增題目誒...</Typography>}
-        </>
+        </div>
     )
 }
 
