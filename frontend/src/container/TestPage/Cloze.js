@@ -110,7 +110,7 @@ const Cloze = () => {
     }
 
     return (
-        <>
+        <div className='oneCardContainer'>
             <Button onClick={navigateToTest}>回到測驗首頁</Button>
             <ResultModal 
                 lecture={lecture}
@@ -121,42 +121,39 @@ const Cloze = () => {
                 handleClose={handleClose}
             />
             {cards.length > 0 ?
-            <div className='oneCardContainer'>
-                {
-                    <div>
-                        <Card className='oneCard'>
-                            <div className='oneVocab'>
-                                <TextField 
-                                    id="standard-basic" 
-                                    label="" 
-                                    variant="standard" 
-                                    value={inputAnswer}
-                                    onChange={changeInputAnswer}
-                                /> | {cards[cardIndex].Chinese}
-                            </div>
-                            <div className='index'>Q{cardIndex + 1}</div>
-                        </Card>
-                        <Stack
-                            direction="row"
-                            divider={<Divider orientation="vertical" flexItem />}
-                            justifyContent="center"
-                            spacing={2}
-                        >
-                            <Item className='removeCard' onClick={decreaseCardIndex}>上一題</Item>
-                            {cardIndex === cards.length - 1 ?
-                                <Item className='nextCard' onClick={event => {
-                                    calScore();
-                                    setShowResultModal(true);
-                                    console.log(score)
-                                    event.stopPropagation();
-                                }}>確定</Item>
-                                :<Item className='nextCard' onClick={increaseCardIndex}>下一題</Item>
-                            }
-                        </Stack>
-                    </div>
-                }
-            </div> : <Typography>你還沒新增題目誒...</Typography>}
-        </>
+                <div>
+                    <Card className='oneCard'>
+                        <div className='oneVocab'>
+                            <TextField 
+                                id="standard-basic" 
+                                label="" 
+                                variant="standard" 
+                                value={inputAnswer}
+                                onChange={changeInputAnswer}
+                            /> | {cards[cardIndex].Chinese}
+                        </div>
+                        <div className='index'>Q{cardIndex + 1}</div>
+                    </Card>
+                    <Stack
+                        direction="row"
+                        divider={<Divider orientation="vertical" flexItem />}
+                        justifyContent="center"
+                        spacing={2}
+                    >
+                        <Item className='removeCard' onClick={decreaseCardIndex}>上一題</Item>
+                        {cardIndex === cards.length - 1 ?
+                            <Item className='nextCard' onClick={event => {
+                                calScore();
+                                setShowResultModal(true);
+                                console.log(score)
+                                event.stopPropagation();
+                            }}>確定</Item>
+                            :<Item className='nextCard' onClick={increaseCardIndex}>下一題</Item>
+                        }
+                    </Stack>
+                </div>
+                : <Typography>你還沒新增題目誒...</Typography>}
+        </div>
     )
 }
 

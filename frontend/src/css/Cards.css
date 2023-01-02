@@ -21,8 +21,10 @@
 
 .oneCardContainer {
     display: flex;
-    flex-direction: center;
     justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    height: 90vh;
 }
 
 .card {
@@ -39,6 +41,9 @@
     margin-bottom: 2vh;
     background-color: antiquewhite !important;
     position: relative;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
 
 .vocab, .oneVocab {
