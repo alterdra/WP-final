@@ -24,7 +24,6 @@
     background-color: #555; 
 } */
 
-
 .oneCardContainerTest {
     display: flex;
     justify-content: center;
@@ -69,7 +68,7 @@
     transform: translate(-50%, 0%);
 }
 .oneCardChoices {
-    height: 12vh;
+    height: 10vh;
 }
 
 .backIcon {

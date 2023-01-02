@@ -56,9 +56,15 @@ const Homepage = () => {
 	
 	useEffect(() => {
 		setInterval(() => {	
-			setMottoIndex(prev => (prev + 1) % newData.length);
+			setMottoIndex(prev => prev + 1);
 		}, 5000);
 	}, []);
+
+	useEffect(() => {
+		if(mottoIndex >= newData.length - 1 )	
+			setMottoIndex(0);
+	}, [mottoIndex]);
+	console.log(mottoIndex)
 
 	return (
 		<Box sx={{ display: 'flex' }}>
