@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import instance from '../../api';
 import { v4 as uuidv4 } from 'uuid';
 import { Button, Paper, Stack, Divider, styled, Typography, ListItem, Fab } from '@mui/material';
 import ResultModal from '../../components/modals/ResultModal';
@@ -24,9 +24,6 @@ const ChoiceItem = styled(IndexItem)(({ theme }) => ({
     height: '5vh'
 }));
 
-const instance = axios.create({
-    baseURL: 'http://localhost:4000/api'
-})
 
 const Choices = () => {
     const { name } = useParams();

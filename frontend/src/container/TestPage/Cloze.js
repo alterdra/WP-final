@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import instance from '../../api';
 import { v4 as uuidv4 } from 'uuid';
 import { Button, Paper, Card, Stack, Divider, styled, TextField, Typography, ListItem, Fab } from '@mui/material';
 import { useUserName } from '../hook/useUserName';
@@ -16,10 +16,6 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
     width: '31.5vh',
 }));
-
-const instance = axios.create({
-    baseURL: 'http://localhost:4000/api'
-})
 
 const Cloze = () => {
     const { name } = useParams();

@@ -1,15 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useAlert } from 'react-alert';
-import axios from "axios";
+import instance from '../../api';
 
 const LOCALSTORAGE_KEY_ME = "save-me";
 const LOCALSTORAGE_KEY_SIGNEDIN = "save-login";
 const savedMe = localStorage.getItem(LOCALSTORAGE_KEY_ME);
 const saveSignedIn = localStorage.getItem(LOCALSTORAGE_KEY_SIGNEDIN);
-
-const instance = axios.create({
-    baseURL: 'http://localhost:4000/api'
-})
 
 const UserContext = createContext({
     user: "",

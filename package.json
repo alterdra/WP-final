@@ -5,7 +5,11 @@
   "license": "MIT",
   "scripts": {
     "start": "cd ./frontend && yarn start",
-    "server": "cd ./backend && yarn server"
+    "server": "cd ./backend && yarn server",
+    "install:all": "cd frontend && yarn install && cd ../backend && yarn install",
+    "install:prod": "cd frontend && yarn install --freeze-lockfile && cd ../backend && yarn install",
+    "build": "cd frontend && yarn build",
+    "deploy": "cd backend && yarn deploy"
   },
   "dependencies": {
     "react-slick": "^0.29.0"

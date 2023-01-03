@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAlert } from 'react-alert';
-import axios from 'axios';
+import instance from '../../api';
 import { v4 as uuidv4 } from 'uuid';
 import { Box, Button, Fab, MenuItem, Typography, List, ListItem, ListItemText, Select, FormControl, InputLabel, styled } from '@mui/material';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
@@ -24,10 +24,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   }));
-
-const instance = axios.create({
-    baseURL: 'http://localhost:4000/api'
-})
 
 const Test = () => {
     const [learnSets, setlearnSets] = useState([]);

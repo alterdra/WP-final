@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import instance from '../../api';
 import { v4 as uuidv4 } from 'uuid';
 import { Paper, Card, Stack, Divider, styled, Checkbox, FormControlLabel, Switch, List,
     Fab, Slide, ListItem, ListItemText, ListItemAvatar, Avatar, Typography } from '@mui/material';
@@ -31,10 +31,6 @@ const ItemUnlearned = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
     width: '13.5vh',
 }));
-
-const instance = axios.create({
-    baseURL: 'http://localhost:4000/api'
-})
 
 const Cards = () => {
     const { name } = useParams();
