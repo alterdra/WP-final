@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mongo from './mongo';
 import routes from './routes';
+import path from "path";
 
 const app = express();
 // console.log(process.env.NODE_ENV);
