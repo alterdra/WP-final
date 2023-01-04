@@ -1,12 +1,14 @@
 import { Router } from "express";
 import User from "../models/user";
 import dataInit from "../upload";
+import bcrypt from 'bcrypt';
 
 const router = Router();
 
 const addAccount = async (req, res) => {
     const name = req.body.user;
-    const password = req.body.password;
+    let password = req.body.password;
+    password = await bcrypt.hash(password, 12);
     try{
         let user = await User.findOne({ name });
         if(!user){
@@ -31,10 +33,12 @@ const addAccount = async (req, res) => {
 
 const verifyAccount = async (req, res) => {
     const name = req.query.user;
-    const password = req.query.password;
-    let user = await User.findOne({ name, password });
+    let password = req.query.password;
     try{
-        if(!user){
+        let user = await User.findOne({ name });
+        const valid = await bcrypt.compare(password, user.password);
+        console.log(valid);
+        if(!valid){
             res.status(200).send({
                 msg: "Wrong ID or Password",
             });
@@ -47,7 +51,7 @@ const verifyAccount = async (req, res) => {
     }
     catch {
         res.status(500).send({
-            msg: "Add account fails.",
+            msg: "Verify account fails.",
         });
     }
     dataInit({userName: name});
