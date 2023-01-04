@@ -36,6 +36,12 @@ const verifyAccount = async (req, res) => {
     let password = req.query.password;
     try{
         let user = await User.findOne({ name });
+        if(!user){
+            res.status(200).send({
+                msg: "Wrong ID or Password",
+            });
+            return;
+        }
         const valid = await bcrypt.compare(password, user.password);
         console.log(valid);
         if(!valid){
