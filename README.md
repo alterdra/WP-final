@@ -3,7 +3,7 @@
 
 Localhost 安裝與使用
 * 使用前步驟：
-    1. 安裝：在wp1111/final下輸入``` yarn install:all ```
+    1. 安裝：在WP-final下輸入``` yarn install:all ```
     2. 運行前端：```yarn start```
     3. 運行後端：```yarn server```
     4. 將前後端運行後，在 http://localhost:3000 下為app主頁，點選右上角註冊帳號按鍵，輸入帳號密碼後，以此帳密在右上角登入
